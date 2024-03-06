@@ -1,0 +1,5 @@
+default_roles:
+  - git
+  - neovim
+
+git_user_name: "AlejandroSuero"
