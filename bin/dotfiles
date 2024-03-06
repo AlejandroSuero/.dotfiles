@@ -110,10 +110,6 @@ function ubuntu_setup() {
     _task "Installing Python3 Pip"
     _cmd "sudo apt-get install -y python3-pip"
   fi
-  if ! pip3 list | grep watchdog >/dev/null 2>&1; then
-    _task "Installing Python3 Watchdog"
-    _cmd "pip3 install watchdog"
-  fi
 }
 
 function manjaro_setup() {
@@ -132,11 +128,6 @@ function manjaro_setup() {
     _task "Installing Python3 Pip"
     _cmd "sudo pacman -S --noconfirm python-pip"
   fi
-  if ! pip3 list | grep watchdog >/dev/null 2>&1; then
-    _task "Installing Python3 Watchdog"
-    _cmd "sudo pacman -S --noconfirm python-watchdog"
-  fi
-
   if ! pacman -Q openssh >/dev/null 2>&1; then
     _task "Installing OpenSSH"
     _cmd "sudo pacman -S --noconfirm openssh"
@@ -158,15 +149,6 @@ function mac_setup() {
   _task "Installing python dependencies"
   _cmd "brew install python-argcomplete"
 
-  _task "Creating .venv"
-  _cmd "python3 -m venv .venv"
-  _cmd "source .venv/bin/activate"
-
-  _task "Upgrade pip3"
-  _cmd "python3 -m pip install --upgrade pip"
-
-  _task "Installing python-watchdog"
-  _cmd "python3 -m pip install watchdog"
 }
 
 update_ansible_galaxy() {
