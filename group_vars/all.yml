@@ -8,5 +8,6 @@ default_roles:
   - npm
   - zoxide
   # - winget
+  - starship
 
 git_user_name: "AlejandroSuero"
