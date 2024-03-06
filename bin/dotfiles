@@ -214,7 +214,11 @@ _task "Running playbook"; _task_done
 if [[ -f $VAULT_SECRET ]]; then
   ansible-playbook --vault-password-file $VAULT_SECRET "$DOTFILES_DIR/main.yml" "$@"
 else
-  ansible-playbook "$DOTFILES_DIR/main.yml" "$@"
+  if ! [[ $ID == "mac" ]]; then
+    ansible-playbook "$DOTFILES_DIR/main.yml" "$@" -K
+  else
+    ansible-playbook "$DOTFILES_DIR/main.yml" "$@"
+  fi
 fi
 
 popd 2>&1 > /dev/null
