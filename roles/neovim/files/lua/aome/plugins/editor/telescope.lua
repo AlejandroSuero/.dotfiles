@@ -11,6 +11,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",
+    "nvim-telescope/telescope-file-browser.nvim",
     { -- If encountering errors, see telescope-fzf-native README for install instructions
       "nvim-telescope/telescope-fzf-native.nvim",
 
@@ -65,16 +66,38 @@ return {
       "<cmd>Telescope diagnostics<cr>",
       desc = "[Telescope] Show diagnostics",
     },
+    {
+      "<leader>fb",
+      function()
+        local telescope = require "telescope"
+        local telescope_buffer_dir = function()
+          return vim.fn.expand "%:p:h"
+        end
+        telescope.extensions.file_browser.file_browser {
+          path = "%:p:h",
+          cwd = telescope_buffer_dir(),
+          respect_gitignore = false,
+          hidden = true,
+          grouped = true,
+          previewer = false,
+          initial_mode = "normal",
+          layout_config = {
+            height = math.floor(vim.o.lines / 2),
+            width = math.floor(vim.o.columns / 2),
+          },
+        }
+      end,
+      desc = "[Telescope] file browser",
+    },
   },
   config = function()
     local telescope = require "telescope"
 
     local actions = require "telescope.actions"
     local action_state = require "telescope.actions.state"
+    local fb_actions = telescope.extensions.file_browser.actions
 
     local replace = require("aome.core.utils").replace_word
-
-    pcall(require("telescope").load_extension, "fzf")
 
     telescope.setup {
       defaults = {
@@ -252,6 +275,34 @@ return {
           override_file_sorter = true, -- override the file sorter
           case_mode = "smart_case", -- or "ignore_case" or "respect_case"
         },
+        file_browser = {
+          theme = "dropdown",
+          -- disables netrw and use telescope-file-browser in its place
+          hijack_netrw = false,
+          mappings = {
+            -- your custom insert mode mappings
+            ["n"] = {
+              -- your custom normal mode mappings
+              ["%"] = fb_actions.create,
+              ["-"] = fb_actions.goto_parent_dir,
+              ["/"] = function()
+                vim.cmd "startinsert"
+              end,
+              ["<C-u>"] = function(prompt_bufnr)
+                for i = 1, 10 do
+                  actions.move_selection_previous(prompt_bufnr)
+                end
+              end,
+              ["<C-d>"] = function(prompt_bufnr)
+                for i = 1, 10 do
+                  actions.move_selection_next(prompt_bufnr)
+                end
+              end,
+              ["<PageUp>"] = actions.preview_scrolling_up,
+              ["<PageDown>"] = actions.preview_scrolling_down,
+            },
+          },
+        },
       },
     }
 
@@ -272,5 +323,8 @@ return {
     }
 
     require("aome.core.utils").map_keys(mappings)
+
+    pcall(require("telescope").load_extension, "fzf")
+    pcall(require("telescope").load_extension, "file_browser")
   end,
 }
