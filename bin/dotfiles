@@ -155,6 +155,12 @@ function mac_setup() {
     _task "Installing ansible"
     _cmd "brew install ansible"
   fi
+  _task "Installing python dependencies"
+  _cmd "brew install python-argcomplete"
+  _cmd "brew install pipx"
+
+  _task "Installing python-watchdog"
+  _cmd "pipx install watchdog"
 }
 
 update_ansible_galaxy() {
