@@ -10,12 +10,11 @@
 
 - name: "System | Set hosts"
   ansible.builtin.template:
-    debug: var=ansible_host_enviroment_is_wsl
     dest: "/etc/hosts"
     src: hosts.j2
     mode: "0644"
   become: true
-  when: ansible_host_environment_is_wsl == true and ansible_distribution != "MacOSX"
+  when: not ansible_host_environment_is_wsl
 
 - name: System | Detecting win32yank
   ansible.builtin.stat:
