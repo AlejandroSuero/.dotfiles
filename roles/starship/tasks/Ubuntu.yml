@@ -1,5 +1,4 @@
 ---
 - name: "Starship | {{ ansible_distribution }} | Install starship"
-  ansible.builtin.shell:
-    cmd: "curl -sS https://starship.rs/install.sh | sh"
-    stdin: "y"
+  ansible.builtin.command:
+    cmd: "cargo install {{ role_path }}"
