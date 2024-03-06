@@ -5,5 +5,8 @@ default_roles:
   - nvm
   - system
   - fzf
+  - npm
+  - zoxide
+  - winget
 
 git_user_name: "AlejandroSuero"
