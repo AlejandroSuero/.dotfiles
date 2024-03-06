@@ -1,6 +1,6 @@
 ---
 - name: "Git | {{ ansible_distribution }} | Install git"
-  communty.general.homebrew:
+  community.general.homebrew:
     name:
       - git
     state: present
