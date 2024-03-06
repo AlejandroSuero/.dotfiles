@@ -65,6 +65,7 @@ import os
 import re
 import textwrap
 import yaml
+import platform
 
 from ansible import constants as C
 from ansible import context
@@ -84,7 +85,10 @@ except:
     from collections import Sequence
 from numbers import Number
 from os.path import basename, isdir
-from watchdog.observers import Observer
+if platform.system() == "Darwin":
+    from watchdog.observers.fsevents2 import FSEventsObserver2 as Observer
+else
+    from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler, EVENT_TYPE_CREATED
 
 _symbol = {
