@@ -7,6 +7,6 @@ default_roles:
   - fzf
   - npm
   - zoxide
-  - winget
+  # - winget
 
 git_user_name: "AlejandroSuero"
