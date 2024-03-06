@@ -10,6 +10,7 @@
 
 - name: "System | Set hosts"
   ansible.builtin.template:
+    debug: var=ansible_host_enviroment_is_wsl
     dest: "/etc/hosts"
     src: hosts.j2
     mode: "0644"
