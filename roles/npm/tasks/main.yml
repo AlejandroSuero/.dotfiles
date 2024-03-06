@@ -93,8 +93,7 @@
     state: absent
   with_items:
     - bun
-    - pnpm
-    - yarn
+    - blitz
 
 - name: "NPM | Install NPM Packages"
   community.general.npm:
@@ -103,5 +102,4 @@
     state: present
   with_items:
     - bun
-    - pnpm
-    - yarn
+    - blitz
