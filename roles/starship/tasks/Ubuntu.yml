@@ -1,4 +1,4 @@
 ---
 - name: "Starship | {{ ansible_distribution }} | Install starship"
   ansible.builtin.command:
-    cmd: "cargo install {{ role_path }}"
+    cmd: "cargo install starship"
