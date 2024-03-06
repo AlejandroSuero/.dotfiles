@@ -1,0 +1,3 @@
+---
+- name: "FZF | Run Tasks: {{ ansible_distribution }}"
+  ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"

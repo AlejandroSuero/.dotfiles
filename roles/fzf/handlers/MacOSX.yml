@@ -1,0 +1,6 @@
+---
+- name: "FZF | {{ ansible_distribution }} | Install"
+  community.general.homebrew:
+    name:
+      - fzf
+    state: present

@@ -1,0 +1,6 @@
+---
+- name: "System | {{ ansible_distribution }} | Install jq"
+  community.general.homebrew:
+    name:
+      - jq
+    state: present
