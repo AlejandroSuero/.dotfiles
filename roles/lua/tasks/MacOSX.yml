@@ -2,7 +2,7 @@
 - name: "Lua | {{ ansible_distribution }} | Install lua@5.1 luarocks luajit"
   community.general.homebrew:
     name:
-      - lua@5.1
+      - lua
       - luarocks
       - luajit
     state: present
