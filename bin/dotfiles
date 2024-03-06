@@ -157,10 +157,16 @@ function mac_setup() {
   fi
   _task "Installing python dependencies"
   _cmd "brew install python-argcomplete"
-  _cmd "brew install pipx"
+
+  _task "Creating .venv"
+  _cmd "python3 -m venv .venv"
+  _cmd "source .venv/bin/activate"
+
+  _task "Upgrade pip3"
+  _cmd "python3 -m pip install --upgrade pip"
 
   _task "Installing python-watchdog"
-  _cmd "pipx install watchdog"
+  _cmd "python3 -m pip install watchdog"
 }
 
 update_ansible_galaxy() {
