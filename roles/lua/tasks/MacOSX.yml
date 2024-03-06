@@ -1,8 +1,7 @@
 ---
-- name: "Lua | {{ ansible_distribution }} | Install git"
+- name: "Lua | {{ ansible_distribution }} | Install lua@5.1 luarocks luajit"
   community.general.homebrew:
-    name: "{{ item }}"
-    loop:
+    name:
       - lua@5.1
       - luarocks
       - luajit
