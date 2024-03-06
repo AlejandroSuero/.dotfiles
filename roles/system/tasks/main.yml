@@ -14,7 +14,7 @@
     src: hosts.j2
     mode: "0644"
   become: true
-  when: not ansible_host_environment_is_wsl
+  when: ansible_host_environment_is_wsl == true and ansible_distribution != "MacOSX"
 
 - name: System | Detecting win32yank
   ansible.builtin.stat:
