@@ -86,15 +86,6 @@
         remote_src: true
         mode: "0644"
 
-- name: "NPM | Uninstall NPM Packages"
-  community.general.npm:
-    name: "{{ item }}"
-    global: true
-    state: absent
-  with_items:
-    - bun
-    - blitz
-
 - name: "NPM | Install NPM Packages"
   community.general.npm:
     name: "{{ item }}"
