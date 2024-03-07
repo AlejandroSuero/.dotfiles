@@ -1,6 +1,6 @@
 ---
 - name: "FZF | {{ ansible_distribution }} | Install fzf"
-  ansible.builtin.pacman:
+  community.general.pacman:
     name:
       - fzf
     state: present

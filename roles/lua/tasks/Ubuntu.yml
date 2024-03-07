@@ -1,6 +1,6 @@
 ---
 - name: Lua | Update APT cache
-  apt:
+  ansible.builtin.apt:
     update_cache: true
   become: true
 

@@ -1,6 +1,6 @@
 ---
 - name: "Rust | {{ ansible_distribution }} | Install rustc cargo"
-  ansible.builtin.pacman:
+  community.general.pacman:
     name: "{{ item }}"
     state: present
     update_cache: true

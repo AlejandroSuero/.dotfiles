@@ -1,6 +1,6 @@
 ---
 - name: Lua | Install Lua
-  ansible.builtin.pacman:
+  community.general.pacman:
     name:
       - lua5.1
       - luarocks

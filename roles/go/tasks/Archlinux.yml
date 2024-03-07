@@ -1,6 +1,6 @@
 ---
 - name: "Go-Lang | Install dependencies"
-  ansible.builtin.pacman:
+  community.general.pacman:
     pkg:
       - 'curl'
       - 'git'
