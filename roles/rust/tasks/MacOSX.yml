@@ -1,9 +1,6 @@
 ---
-- name: "Rust | Install rustup"
+- name: "Rust | Install rust"
   community.general.homebrew:
     name:
-      - rustup
-
-- name: "Rust | rustup-init"
-  ansible.builtin.command:
-    cmd: rustup-init
+      - rust
+    state: present
