@@ -13,6 +13,7 @@ default_roles:
   - go
   - gh
   - spotify
+  - lazygit
   - starship
 
 git_user_name: "AlejandroSuero"
