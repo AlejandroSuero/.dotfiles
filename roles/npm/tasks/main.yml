@@ -86,6 +86,23 @@
         remote_src: true
         mode: "0644"
 
+- name: "NPM | Detecting Installed npm"
+  ansible.builtin.command:
+    cmd: which nala
+  changed_when: false
+  register: npm_cmd
+  failed_when: false
+
+- name: "NPM | Register npm status installed"
+  ansible.builtin.set_fact:
+    npm_is_installed: true
+  when: npm_cmd.stdout|length > 0
+
+- name: "NPM | Register npm status not installed"
+  ansible.builtin.set_fact:
+    npm_is_installed: false
+  when: npm_cmd.stdout|length == 0
+
 - name: "NPM | Install NPM Packages"
   community.general.npm:
     name: "{{ item }}"
@@ -94,3 +111,4 @@
   with_items:
     - bun
     - blitz
+  when: npm_is_installed
