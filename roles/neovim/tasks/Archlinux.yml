@@ -1,5 +1,8 @@
 ---
 - name: "Neovim | {{ ansible_distribution }} | Install Neovim Nightly"
-  kewlfft.aur.aur:
-    name: neovim-git
+  community.general.pacman:
+    name:
+      - neovim
+      - python-pynvim
     state: present
+  become: true
