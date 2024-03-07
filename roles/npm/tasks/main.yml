@@ -88,7 +88,7 @@
 
 - name: "NPM | Detecting Installed npm"
   ansible.builtin.command:
-    cmd: which nala
+    cmd: which npm
   changed_when: false
   register: npm_cmd
   failed_when: false
