@@ -1,6 +1,6 @@
 ---
 - name: Install GitHub CLI tool
-  ansible.builtin.apt:
+  community.general.pacman:
     name: github-cli
     state: present
   become: true
