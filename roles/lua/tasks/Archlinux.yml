@@ -1,0 +1,14 @@
+---
+- name: Lua | Install Lua
+  ansible.builtin.pacman:
+    name:
+      - lua5.1
+      - luarocks
+      - luajit
+  become: true
+
+- name: Lua | Gather installed lua rocks
+  ansible.builtin.command: luarocks list
+  register: rocks
+  changed_when: false
+  check_mode: false

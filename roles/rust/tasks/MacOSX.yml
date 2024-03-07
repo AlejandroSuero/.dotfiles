@@ -1,0 +1,9 @@
+---
+- name: "Rust | Install rustup"
+  community.general.homebrew:
+    name:
+      - rustup
+
+- name: "Rust | rustup-init"
+  ansible.builtin.command:
+    cmd: rustup-init
