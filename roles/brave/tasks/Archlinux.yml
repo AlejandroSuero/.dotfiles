@@ -1,0 +1,48 @@
+---
+- name: "Pamac | Detecting Installed pamac"
+  ansible.builtin.command:
+    cmd: which pamac
+  changed_when: false
+  register: pamac_cmd
+  failed_when: false
+
+- name: "Pamac | Register pamac status installed"
+  ansible.builtin.set_fact:
+    pamac_is_installed: true
+  when: pamac_cmd.stdout|length > 0
+
+- name: "Pamac | Register pamac status not installed"
+  ansible.builtin.set_fact:
+    pamac_is_installed: false
+  when: pamac_cmd.stdout|length == 0
+
+- name: "Pamac | Install"
+  community.general.pacman:
+    name:
+      - pamac-gtk
+    state: present
+  become: true
+  when: not pamac_is_installed
+
+- name: "BRAVE_BROWSER | Detecting Installed brave"
+  ansible.builtin.command:
+    cmd: which brave
+  changed_when: false
+  register: brave_cmd
+  failed_when: false
+
+- name: "BRAVE_BROWSER | Register brave status installed"
+  ansible.builtin.set_fact:
+    brave_is_installed: true
+  when: brave_cmd.stdout|length > 0
+
+- name: "BRAVE_BROWSER | Register brave status not installed"
+  ansible.builtin.set_fact:
+    brave_is_installed: false
+  when: brave_cmd.stdout|length == 0
+
+- name: "BRAVE_BROWSER | Install pamac"
+  ansible.builtin.command:
+    cmd: pamac install brave-bin
+  become: true
+  when: pamac_is_installed and not brave_is_installed

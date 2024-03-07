@@ -1,0 +1,41 @@
+---
+---
+- name: "BRAVE_BROWSER | Detecting Installed brave"
+  ansible.builtin.command:
+    cmd: which brave
+  changed_when: false
+  register: brave_cmd
+  failed_when: false
+
+- name: "BRAVE_BROWSER | Register brave status installed"
+  ansible.builtin.set_fact:
+    brave_is_installed: true
+  when: brave_cmd.stdout|length > 0
+
+- name: "BRAVE_BROWSER | Register brave status not installed"
+  ansible.builtin.set_fact:
+    brave_is_installed: false
+  when: brave_cmd.stdout|length == 0
+
+- name: "BRAVE_BROWSER | Install APT Repo"
+  block:
+    - name: "BRAVE_BROWSER | Add repo gpg key"
+      community.general.apt_key:
+        url: "https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg"
+        keyring: /usr/share/keyrings/brave-browser-archive-keyring.gpg
+        state: present
+
+    - name: "BRAVE_BROWSER | Add repo source"
+      community.general.apt_repository:
+        repo: deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main |sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+        state: present
+
+  become: true
+  when: not brave_is_installed
+
+- name: "BRAVE_BROWSER | Install"
+  ansible.builtin.apt:
+    name:
+      - "brave-browser"
+    state: present
+  become: true

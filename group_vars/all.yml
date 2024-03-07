@@ -15,5 +15,6 @@ default_roles:
   - spotify
   - lazygit
   - starship
+  - brave
 
 git_user_name: "AlejandroSuero"

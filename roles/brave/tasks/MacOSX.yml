@@ -1,0 +1,6 @@
+---
+- name: "BRAVE_BROWSER | Install cask"
+  community.general.homebrew_cask:
+    name:
+      - "brave_browser"
+    state: present
