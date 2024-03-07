@@ -1,10 +1,11 @@
 ---
-- name: "Rust | {{ ansible_distribution }} | Install rustc cargo"
+- name: "Rust | {{ ansible_distribution }} | Install rustup"
   community.general.pacman:
-    name: "{{ item }}"
+    name: rustup
+    extra_args: "--noconfirm"
     state: present
-    update_cache: true
   become: true
-  loop:
-    - rustc
-    - cargo
+
+- name: "Rust | {{ ansible_distribution }} | Rustup stable"
+  ansible.builtin.command:
+    cmd: rustup default stable
