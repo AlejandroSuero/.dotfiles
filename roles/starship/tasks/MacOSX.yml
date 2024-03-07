@@ -1,5 +1,5 @@
 ---
 - name: "Starship | {{ ansible_distribution }} | Install starship"
-  ansible.builtin.shell:
-    cmd: "curl -sS https://starship.rs/install.sh | sh"
-    stdin: "y"
+  community.general.homebrew:
+    name: starship
+    state: present
