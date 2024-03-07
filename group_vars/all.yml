@@ -18,8 +18,4 @@ default_roles:
   - starship
   - brave
 
-user_fonts:
-  - "Iosevka"
-  - "JetBrainsMono"
-
 git_user_name: "AlejandroSuero"
