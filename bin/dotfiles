@@ -135,6 +135,15 @@ function manjaro_setup() {
 
   _task "Setting Locale"
   _cmd "sudo localectl set-locale LANG=en_US.UTF-8"
+
+  if ! [ -x "$(command -v yay)" ]; then
+    _task "Installing yay"
+    _cmd "sudo pacman -S --needed base-devel git"
+    _cmd "git clone https://aur.archlinux.org/yay.git '$HOME/yay'"
+    _cmd "cd '$HOME/yay'"
+    _cmd "makepkg -si"
+    _cmd "cd $DOTFILES_DIR"
+  fi
 }
 
 function mac_setup() {
