@@ -1,4 +1,5 @@
 default_roles:
+  - fonts
   - git
   - neovim
   - lua
