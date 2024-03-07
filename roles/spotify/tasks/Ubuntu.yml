@@ -1,0 +1,6 @@
+---
+- name: "Spotify | Install snap"
+  community.general.snap:
+    name: spotify
+    state: present
+  when: not ansible_host_environment_is_wsl

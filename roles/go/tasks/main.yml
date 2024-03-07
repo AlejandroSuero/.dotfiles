@@ -1,0 +1,9 @@
+---
+- name: "Golang | Checking for Distribution Config: {{ ansible_distribution }}"
+  ansible.builtin.stat:
+    path: "{{ role_path }}/tasks/{{ ansible_distribution }}.yml"
+  register: go_distribution_config
+
+- name: "Golang | Run Tasks: {{ ansible_distribution }}"
+  ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
+  when: go_distribution_config.stat.exists

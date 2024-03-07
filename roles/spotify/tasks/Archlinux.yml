@@ -1,0 +1,6 @@
+---
+- name: "Spotify | Install"
+  community.general.pacman:
+    name: spotify-launcher
+    state: present
+  become: true

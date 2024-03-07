@@ -1,0 +1,14 @@
+---
+- name: Cleanup go downloaded tar
+  ansible.builtin.file:
+    path: "/tmp/{{ go_file }}.tar.gz"
+    state: absent
+  become: true
+  when: ansible_distribution == ["Ubuntu", "Archlinux"]
+
+- name: Remove extracted go directory
+  ansible.builtin.file:
+    path: /tmp/go
+    state: absent
+  become: true
+  when: ansible_distribution == ["Ubuntu", "Archlinux"]

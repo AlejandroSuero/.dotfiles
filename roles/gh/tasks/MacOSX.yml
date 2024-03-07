@@ -1,0 +1,8 @@
+---
+- name: Install GitHub CLI tool
+  community.general.homebrew:
+    name: gh
+    state: present
+
+# - name: Authenticate with GitHub using SSH key
+#   command: gh auth login --hostname github.com --method ssh

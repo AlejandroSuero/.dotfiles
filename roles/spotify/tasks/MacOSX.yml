@@ -1,0 +1,6 @@
+---
+- name: "SPOTIFY | Install cask"
+  community.general.homebrew_cask:
+    name:
+      - spotify
+    state: present

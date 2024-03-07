@@ -1,0 +1,34 @@
+---
+- name: "Go-Lang | Install dependencies"
+  community.general.homebrew:
+    name:
+      - 'curl'
+      - 'gcc'
+      - 'git'
+      - 'findutils'
+      - 'make'
+      - 'rsync'
+      - 'tar'
+      - 'jq'
+      - 'go'
+    state: present
+  register: apt_result
+  until: apt_result is success
+  retries: 1
+  delay: 2
+
+- name: "Go-Lang | Define GOARCH"
+  ansible.builtin.set_fact:
+    goarch: "{{ ansible_machine | replace('x86_64', 'amd64') | replace('aarch64', 'arm64') }}"
+
+- name: "Go-Lang | Define GOOS"
+  ansible.builtin.set_fact:
+    goos: "{{ ansible_system | lower }}"
+
+- name: "Go-Lang | GOARCH Value"
+  ansible.builtin.debug:
+    var: goarch
+
+- name: "Go-Lang | GOOS Value"
+  ansible.builtin.debug:
+    var: goos
