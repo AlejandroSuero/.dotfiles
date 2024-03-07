@@ -2,7 +2,7 @@
 - name: Lua | Install Lua
   community.general.pacman:
     name:
-      - lua5.1
+      - lua
       - luarocks
       - luajit
   become: true
