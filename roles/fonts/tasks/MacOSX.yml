@@ -2,4 +2,5 @@
 - name: "FONTS | {{ ansible_distribution }} | Git clone nerdfonts"
   ansible.builtin.git:
     repo: "https://github.com/ryanoasis/nerd-fonts.git"
+    depth: 1
     dest: "{{ ansible_user_dir }}/.nerd_fonts"
