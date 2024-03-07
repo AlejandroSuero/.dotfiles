@@ -11,4 +11,4 @@
   loop_control:
     loop_var: user_fonts_item
   with_items:
-    - user_fonts
+    - "{{ user_fonts }}"
