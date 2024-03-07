@@ -4,3 +4,10 @@
     repo: "https://github.com/ryanoasis/nerd-fonts.git"
     depth: 1
     dest: "{{ ansible_user_dir }}/.nerd_fonts"
+
+- name: "FONTS | {{ ansible_distribution }} | Install fonts: {{ user_fonts }}"
+  ansible.builtin.command:
+    cmd: "/{{ ansible_user_dir }}/.nerd_fonts/install.sh {{ user_fonts_item.value }}"
+  loop_control:
+    loop_var: user_fonts_item
+  with_items: "{{ user_fonts | default({}) | dict2items }}"

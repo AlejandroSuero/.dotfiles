@@ -1,4 +1,6 @@
 ---
 - name: "Starship | {{ ansible_distribution }} | Install starship"
-  ansible.builtin.command:
-    cmd: "cargo install starship"
+  community.general.cargo:
+    name:
+      - starship
+    state: present
