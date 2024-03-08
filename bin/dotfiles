@@ -44,7 +44,7 @@ DOTFILES_REPO="https://github.com/AlejandroSuero/.dotfiles.git"
 function _task {
   # if _task is called while a task was set, complete the previous
   if [[ $TASK != "" ]]; then
-    printf "${OVERWRITE}${LGREEN} [✓]  ${LGREEN}${TASK}\n"
+    printf "${OVERWRITE}${LGREEN} [OK]  ${LGREEN}${TASK}\n"
   fi
   # set new task title and print
   TASK=$1
@@ -80,7 +80,7 @@ function _clear_task {
 }
 
 function _task_done {
-  printf "${OVERWRITE}${LGREEN} [✓]  ${LGREEN}${TASK}\n"
+  printf "${OVERWRITE}${LGREEN} [OK]  ${LGREEN}${TASK}\n"
   _clear_task
 }
 

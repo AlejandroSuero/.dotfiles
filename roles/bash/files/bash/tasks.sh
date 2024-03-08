@@ -19,7 +19,7 @@ generate_log() {
 function _task {
     # if _task is called while a task was set, complete the previous
     if [[ $TASK != "" ]]; then
-        printf "${OVERWRITE}${LGREEN} [✓]  ${LGREEN}${TASK}\n"
+        printf "${OVERWRITE}${LGREEN} [OK]  ${LGREEN}${TASK}\n"
     fi
     # set new task title and print
     TASK="$*"
@@ -35,7 +35,7 @@ function _clear_task {
 # _task_done completes the current task and clears the task
 # this is used to mark previous TASK as complete for this session.
 function _task_done {
-    printf "${OVERWRITE}${LGREEN} [✓]  ${LGREEN}${TASK}\n"
+    printf "${OVERWRITE}${LGREEN} [OK]  ${LGREEN}${TASK}\n"
     _clear_task
 }
 
@@ -47,6 +47,10 @@ function _task_done {
 # Note: This function will hide stdout and print stderr on failure
 function _cmd {
     LOG=$(generate_log)
+    # creates log if it doesn't exists
+    if ! [[ -f $LOG ]]; then
+      touch $LOG
+    fi
     # hide stdout, on error we print and exit
     if eval "$1" 1> /dev/null 2> $LOG; then
         rm $LOG
