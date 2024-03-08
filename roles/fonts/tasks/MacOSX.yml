@@ -7,4 +7,7 @@
 
 - name: "FONTS | {{ ansible_distribution }} | Install fonts"
   ansible.builtin.command:
-    cmd: "/{{ ansible_user_dir }}/.nerd_fonts/install.sh Iosevka, JetBrainsMono"
+    cmd: "/{{ ansible_user_dir }}/.nerd_fonts/install.sh {{ item }}"
+  with_items:
+    - Iosevka
+    - JetBrainsMono

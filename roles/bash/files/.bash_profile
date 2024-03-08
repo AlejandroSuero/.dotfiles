@@ -1,3 +1,6 @@
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 bindkey -s ^f "tmux-sessionizer\n"
 bindkey -s ^g "lazygit\n"
