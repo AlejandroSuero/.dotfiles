@@ -50,9 +50,7 @@
         apply:
           tags:
             - "{{ roles_item }}"
-        name:
-          - townk.beautiful_output
-          - "{{ roles_item }}"
+        name: "{{ roles_item }}"
       loop_control:
         loop_var: roles_item
       with_items: "{{ run_roles }}"
