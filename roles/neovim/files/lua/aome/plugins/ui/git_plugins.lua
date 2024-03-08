@@ -37,7 +37,7 @@ return {
       "nvim-lua/plenary.nvim",
     },
     keys = {
-      { "<C-g>", "<cmd>LaziGit<CR>", desc = { "Open lazy[g]it" } },
+      { "<C-g>", "<cmd>LazyGit<CR>", desc = { "Open lazy[g]it" } },
     },
   },
 }
