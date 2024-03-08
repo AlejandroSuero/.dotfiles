@@ -23,7 +23,7 @@
 
 - name: "Starship | Create symlink to role files directory"
   ansible.builtin.file:
-    src: "{{ role_path }}/files"
+    src: "starship"
     dest: "{{ ansible_user_dir }}/.config/"
     state: link
     force: true
