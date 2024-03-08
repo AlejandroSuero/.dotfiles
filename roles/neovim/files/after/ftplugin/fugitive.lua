@@ -47,6 +47,37 @@ local mappings = {
       fugitive_select,
       "[Fugitive] Git options",
     },
+    ["<leader>gaa"] = {
+      "<cmd>Git add .<CR>",
+      "[Fugitive] Git add .",
+    },
+    ["<leader>gaA"] = {
+      "<cmd>Git add .<CR>",
+      "[Fugitive] Git add -A",
+    },
+    ["<leader>gai"] = {
+      function()
+        vim.ui.input(
+          { prompt = "Git add: write down the files to add" },
+          function(input)
+            if input == nil then
+              vim.notify("No input", vim.log.levels.WARN)
+              return nil
+            end
+            if input == "" then
+              vim.notify(
+                "No input, using default (git add -A)",
+                vim.log.levels.WARN
+              )
+              vim.cmd "Git add -A"
+            else
+              vim.cmd("Git add " .. input)
+            end
+          end
+        )
+      end,
+      "[Fugitive] Git add input",
+    },
   },
 }
 

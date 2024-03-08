@@ -23,4 +23,21 @@ return {
       { "<leader>gm", "<cmd>GitMessenger<CR>", desc = "[g]it [m]essenger" },
     },
   },
+  {
+    "kdheepak/lazygit.nvim",
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    keys = {
+      { "<C-g>", "<cmd>LaziGit<CR>", desc = { "Open lazy[g]it" } },
+    },
+  },
 }
