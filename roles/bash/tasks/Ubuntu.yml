@@ -51,7 +51,7 @@
 - name: "Bash | Copy local scripts"
   ansible.builtin.copy:
     dest: "{{ ansible_user_dir }}/.local/bin/"
-    src: "{{ role_path }}/files/bin/"
+    src: "{{ role_path }}/files/bash/bin/"
     mode: "0755"
     force: true
   become: true
