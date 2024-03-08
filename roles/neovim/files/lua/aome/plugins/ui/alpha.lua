@@ -14,9 +14,40 @@ return {
       .. "."
       .. vim.version().patch
 
+    ---Adds zero if the number is less than 10
+    ---@param number string|integer
+    ---@return string number
+    local add_zero = function(number)
+      if number < 10 then
+        return 0 .. number
+      end
+      return tostring(number)
+    end
+
+    local get_date = function()
+      local date = os.date "*t"
+      local formatted_date = add_zero(date.day)
+        .. "-"
+        .. add_zero(date.month)
+        .. "-"
+        .. date.year
+        .. " | "
+        .. add_zero(date.hour)
+        .. ":"
+        .. add_zero(date.min)
+      return formatted_date
+    end
+
     local header = dashboard.section.header
     local footer = dashboard.section.footer
     local buttons = dashboard.section.buttons
+
+    local plugins = #vim.tbl_keys(require("lazy").plugins())
+    local datetime = get_date()
+    local info = string.format("  %d plugins  at  %s", plugins, datetime)
+    local version = string.format("NVIM Version %s", nvim_version)
+
+    local fortune = require "alpha.fortune"()
 
     -- Set header
     header.val = {
@@ -53,10 +84,12 @@ return {
 
     footer.val = {
       " ",
-      " ",
-      " ",
-      "NVIM version " .. nvim_version,
+      info,
+      version,
     }
+    for _, text in pairs(fortune) do
+      table.insert(footer.val, text)
+    end
 
     -- Send config to alpha
     alpha.setup(dashboard.opts)
