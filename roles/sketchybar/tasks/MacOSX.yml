@@ -10,3 +10,17 @@
     name:
       - sketchybar
     state: present
+
+- name: "Sketchybar | Config folder"
+  ansible.builtin.file:
+    mode: "0755"
+    path: "{{ ansible_user_dir }}/.config/sketchybar"
+    state: directory
+
+- name: "Sketchybar | Create symlink to role files directory"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/sketchybar"
+    state: link
+    force: true
+
