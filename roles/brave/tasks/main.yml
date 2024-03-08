@@ -6,4 +6,4 @@
 
 - name: "BRAVE-BROWSER | Run Tasks: {{ ansible_distribution }}"
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
-  when: brave_distribution_config.stat.exists and ansible_host_enviroment_is_wsl
+  when: brave_distribution_config.stat.exists and not ansible_host_environment_is_wsl
