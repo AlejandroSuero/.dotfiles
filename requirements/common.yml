@@ -1,4 +1,3 @@
 collections:
-  - name:
-      - community.general
-      - townk.beautiful_output
+  - name: community.general
+  - name: townk.beautiful_output
