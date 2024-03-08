@@ -5,7 +5,7 @@ add_newline = true
 
 # Change the default prompt format
 format = """\
-[╭╴](blue) $env_var\
+[╭╴](blue)\
 $all[╰─](blue)$character"""
 
 # Change the default prompt characters
@@ -14,11 +14,15 @@ success_symbol = "[ ](blue)"
 error_symbol = "[ ](red)"
 vicmd_symbol = "[ ](green)"
 
-# No need for env variables as starship provides a way to show your current distro
-[env_var.os]
-format ='[$env_value](blue) '
-variable = 'os'
+[os]
+format = '[$symbol](bold white) '
 disabled = false
+
+[os.symbols]
+Windows = " "
+Arch = "󰣇 "
+Ubuntu = " "
+Macos = "󰀵 "
 
 # Shows the username
 [username]
