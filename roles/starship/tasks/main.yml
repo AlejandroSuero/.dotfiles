@@ -8,21 +8,16 @@
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
   when: starship_distribution_config.stat.exists
 
-- name: "Starship | Check if config files exists"
-  stat:
-    path: "{{ ansible_user_dir }}/.config/starship/starship.toml"
-  register: starship_config_result
-
-- name: "Starship | Remove starship.toml"
+- name: "Starship | Config folder"
   ansible.builtin.file:
+    mode: "0755"
     path: "{{ ansible_user_dir }}/.config/starship"
     state: directory
-    recurse: true
-    force: true
-  when: starship_config_result.stat.exists
 
 - name: "Starship | Create symlink to role files directory"
-  ansible.builtin.copy:
-    src: "starship"
-    dest: "{{ ansible_user_dir }}/.config/"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/starship"
+    state: link
     force: true
+
