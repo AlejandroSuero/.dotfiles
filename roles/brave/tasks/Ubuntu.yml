@@ -1,5 +1,4 @@
 ---
----
 - name: "BRAVE_BROWSER | Detecting Installed brave"
   ansible.builtin.command:
     cmd: which brave
