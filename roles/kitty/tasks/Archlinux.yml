@@ -1,6 +1,7 @@
 ---
 - name: "KITTY | {{ ansible_distribution }} | Install"
-  community.general.homebrew_cask:
+  community.general.pacman:
     name:
       - kitty
     state: present
+  become: true

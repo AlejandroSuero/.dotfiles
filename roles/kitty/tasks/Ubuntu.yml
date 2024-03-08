@@ -1,0 +1,13 @@
+---
+- name: "KITTY | {{ ansible_distribution }} | Add apt repo universe"
+  ansible.builtin.command:
+    cmd: sudo add-apt-repository -y universe
+  become: true
+
+- name: "KITTY | {{ ansible_distribution }} | Install"
+  ansible.builtin.apt:
+    name:
+      - kitty
+    state: present
+    update_cache: true
+  become: true
