@@ -1,0 +1,14 @@
+---
+- name: "KITTY | {{ ansible_distribution }} | Install"
+  community.general.hombrew_cask:
+    name:
+      - kitty
+    state: present
+
+- name: "KITTY | Copy files into config"
+  ansible.builtin.copy:
+    dest: "{{ ansible_user_dir }}/.config/"
+    src: "kitty"
+    mode: "0644"
+    directory_mode: "0755"
+    force: true

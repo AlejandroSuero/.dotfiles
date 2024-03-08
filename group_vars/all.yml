@@ -19,5 +19,6 @@ default_roles:
   - brave
   - tmux
   - python
+  - kitty
 
 git_user_name: "AlejandroSuero"
