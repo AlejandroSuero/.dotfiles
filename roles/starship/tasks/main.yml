@@ -22,8 +22,7 @@
   when: starship_config_result.stat.exists
 
 - name: "Starship | Create symlink to role files directory"
-  ansible.builtin.file:
+  ansible.builtin.copy:
     src: "starship"
     dest: "{{ ansible_user_dir }}/.config/"
-    state: link
     force: true
