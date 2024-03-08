@@ -1,0 +1,38 @@
+---
+- name: "Yabai | Install"
+  community.manager.homebrew:
+    name:
+      - koekeishiya/formulae/yabai
+    state: present
+
+- name: "Yabai | Config folder"
+  ansible.builtin.file:
+    mode: "0755"
+    path: "{{ ansible_user_dir }}/.config/yabai"
+    state: directory
+
+- name: "Yabai | Create symlink to role files directory"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/yabai"
+    dest: "{{ ansible_user_dir }}/.config/yabai"
+    state: link
+    force: true
+
+- name: "skhd | Install"
+  community.manager.homebrew:
+    name:
+      - koekeishiya/formulae/skhd
+    state: present
+
+- name: "skhd | Config folder"
+  ansible.builtin.file:
+    mode: "0755"
+    path: "{{ ansible_user_dir }}/.config/skhd"
+    state: directory
+
+- name: "skhd | Create symlink to role files directory"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/skhd"
+    dest: "{{ ansible_user_dir }}/.config/skhd"
+    state: link
+    force: true

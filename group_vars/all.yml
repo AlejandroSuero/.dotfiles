@@ -20,5 +20,8 @@ default_roles:
   - tmux
   - python
   - kitty
+  - sketchybar
+  - karabiner
+  - yabai
 
 git_user_name: "AlejandroSuero"
