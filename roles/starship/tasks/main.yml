@@ -16,7 +16,7 @@
 - name: "Starship | Remove starship.toml"
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/.config/starship"
-    state: absent
+    state: directory
     recurse: true
     force: true
   when: starship_config_result.stat.exists
