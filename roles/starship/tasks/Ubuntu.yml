@@ -1,6 +1,8 @@
 ---
 - name: "Starship | {{ ansible_distribution }} | Install starship"
   community.general.cargo:
+    executable: /usr/bin/cargo
     name:
       - starship
-    state: present
+    locked: true
+    state: latest
