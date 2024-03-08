@@ -18,5 +18,6 @@ default_roles:
   - starship
   - brave
   - tmux
+  - python
 
 git_user_name: "AlejandroSuero"
