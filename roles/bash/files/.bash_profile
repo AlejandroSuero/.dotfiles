@@ -5,6 +5,8 @@ fi
 bindkey -s ^f "tmux-sessionizer\n"
 bindkey -s ^g "lazygit\n"
 
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+
 if [ -n "$BASH_VERSION" -a -n "$PS1" ]; then
     # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
