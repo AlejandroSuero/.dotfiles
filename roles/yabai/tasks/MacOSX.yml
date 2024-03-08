@@ -1,6 +1,6 @@
 ---
 - name: "Yabai | Install"
-  community.manager.homebrew:
+  community.general.homebrew:
     name:
       - koekeishiya/formulae/yabai
     state: present
@@ -19,7 +19,7 @@
     force: true
 
 - name: "skhd | Install"
-  community.manager.homebrew:
+  community.general.homebrew:
     name:
       - koekeishiya/formulae/skhd
     state: present
