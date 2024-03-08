@@ -3,4 +3,5 @@
   community.general.homebrew:
     name:
       - jq
+      - xclip
     state: present

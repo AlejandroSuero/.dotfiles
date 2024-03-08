@@ -8,6 +8,7 @@
 - name: "System | {{ ansible_distribution }} | Install jq"
   community.general.pacman:
     name:
+      - xclip
       - jq
     state: present
   become: true

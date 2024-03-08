@@ -10,6 +10,7 @@
 - name: "System | {{ ansible_distribution }} | Install jq"
   ansible.builtin.apt:
     name:
+      - xclip
       - jq
     state: present
   become: true
