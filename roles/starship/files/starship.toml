@@ -5,7 +5,7 @@ add_newline = true
 
 # Change the default prompt format
 format = """\
-[╭╴](blue)\
+[╭╴](blue) $os\
 $all[╰─](blue)$character"""
 
 # Change the default prompt characters
@@ -15,7 +15,7 @@ error_symbol = "[ ](red)"
 vicmd_symbol = "[ ](green)"
 
 [os]
-format = '[$symbol](bold white) '
+format = '[$symbol](bold blue) '
 disabled = false
 
 [os.symbols]
