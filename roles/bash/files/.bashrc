@@ -10,7 +10,6 @@ export OSH="$HOME/.oh-my-bash"
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
 OSH_THEME=""
-eval "$(starship init bash)"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -156,6 +155,8 @@ for file in $HOME/.config/bash/*.sh; do
 done
 
 [ -f ~/.fzf.bash ]   && source ~/.fzf.bash
+
+[ -x "$(command -v starship)" ] && eval "$(starship init bash)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
