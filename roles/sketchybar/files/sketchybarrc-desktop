@@ -1,0 +1,62 @@
+#!/usr/bin/env zsh
+
+FONT_FACE="JetBrainsMonoNL Nerd Font"
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins-desktop"
+PLUGIN_SHARED_DIR="$HOME/.config/sketchybar/plugins"
+ITEMS_DIR="$HOME/.config/sketchybar/items"
+
+
+source "$HOME/.config/sketchybar/colors.sh"
+source "$HOME/.config/sketchybar/icons.sh"
+
+# Setting up the general bar appearance of the bar
+bar=(
+    height=30
+    color=0xbb212232
+    shadow=on
+    position=top
+    sticky=on
+    padding_right=0
+    padding_left=0
+    corner_radius=10
+    y_offset=12
+    margin=12
+    blur_radius=20
+    notch_width=0
+)
+
+sketchybar --bar "${bar[@]}"
+
+# Setting up default values
+defaults=(
+    updates=when_shown
+    background.height=32
+    background.corner_radius=0
+    icon.color=0xff24273a
+    icon.font="$FONT_FACE:Medium:20.0"
+    icon.padding_left=5
+    icon.padding_right=5
+    label.color=0xff24273a
+    label.font="$FONT_FACE:Bold:14.0"
+    label.y_offset=1
+    label.padding_left=0
+    label.padding_right=5
+)
+
+sketchybar --default "${defaults[@]}"
+
+source "$ITEMS_DIR/spaces.sh"
+
+source "$ITEMS_DIR/clock.sh"
+
+source "$ITEMS_DIR/battery.sh"
+
+source "$ITEMS_DIR/wifi.sh"
+
+source "$ITEMS_DIR/spotify.sh"
+
+##### Finalizing Setup #####
+sketchybar --update
+sketchybar --trigger space_change
+
+echo "sketchy bar configuration loaded..."

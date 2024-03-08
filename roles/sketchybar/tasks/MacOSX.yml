@@ -1,0 +1,12 @@
+---
+- name: "Sketchybar | Homebrew Tap"
+  community.general.homebrew_tap:
+    name:
+      - FelixKratz/formulae
+    state: present
+
+- name: "Sketchybar | Install"
+  community.general.homebrew:
+    name:
+      - sketchybar
+    state: present
