@@ -54,6 +54,14 @@
     directory_mode: "0755"
     force: true
 
+- name: "Bash | Copy local scripts"
+  ansible.builtin.copy:
+    dest: "{{ ansible_user_dir }}/.local/bin/"
+    src: "{{ role_path }}/files/bin/"
+    mode: "0755"
+    force: true
+  become: true
+
 - name: "Bash | Set default terminal"
   ansible.builtin.user:
     name: "{{ host_user }}"
