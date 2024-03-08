@@ -9,60 +9,47 @@ generate_log() {
     echo "/tmp/bash._task.$TIMESTAMP-$RANDOM_STRING.log"
 }
 
-
-# _task colorize the given argument with spacing
-#   This function will print the given argument with a color and spacing
-#   It will also clear the previous task if one was set
-#
-# Usage: _task "installing kubectl"
-# Returns: nothing
+# _header colorize the given argument with spacing
 function _task {
-    # if _task is called while a task was set, complete the previous
-    if [[ $TASK != "" ]]; then
-        printf "${OVERWRITE}${LGREEN} [OK]  ${LGREEN}${TASK}\n"
-    fi
-    # set new task title and print
-    TASK="$*"
-    printf "${LBLACK} [ ]  ${TASK} \n${LRED}"
-}
-
-# _clear_task clears the current task
-# this is used to clear the TASK in the session when it is completed
-function _clear_task {
-    TASK=""
-}
-
-# _task_done completes the current task and clears the task
-# this is used to mark previous TASK as complete for this session.
-function _task_done {
+  # if _task is called while a task was set, complete the previous
+  if [[ $TASK != "" ]]; then
     printf "${OVERWRITE}${LGREEN} [OK]  ${LGREEN}${TASK}\n"
-    _clear_task
+  fi
+  # set new task title and print
+  TASK=$1
+  printf "${LBLACK} [ ]  ${TASK} \n${LRED}"
 }
 
 # _cmd performs commands with error checking
-# This function will run the given command
-# If the command fails, it will print the error and return 1
-# Usage: _cmd "kubectl get pods"
-# Returns: 0 on success, 1 on failure
-# Note: This function will hide stdout and print stderr on failure
 function _cmd {
-    LOG=$(generate_log)
-    # creates log if it doesn't exists
-    if ! [[ -f $LOG ]]; then
-      touch $LOG
-    fi
-    # hide stdout, on error we print and exit
-    if eval "$1" 1> /dev/null 2> $LOG; then
-        rm $LOG
-        return 0 # success
-    fi
-    # read error from log and add spacing
-    printf "${OVERWRITE}${LRED} [X]  ${TASK}${LRED}\n"
-    while read line; do
-        printf "      ${line}\n"
-    done < $LOG
-    printf "\n"
-    cat $LOG >> /tmp/halp.log
-    rm $LOG
-    return 1
+  LOG=$(generate_log)
+  #create log if it doesn't exist
+  if ! [[ -f $LOG ]]; then
+    touch $LOG
+  fi
+  # empty conduro.log
+  > $LOG
+  # hide stdout, on error we print and exit
+  if eval "$1" 1> /dev/null 2> $LOG; then
+    return 0 # success
+  fi
+  # read error from log and add spacing
+  printf "${OVERWRITE}${LRED} [X]  ${TASK}${LRED}\n"
+  while read line; do
+    printf "      ${line}\n"
+  done < $LOG
+  printf "\n"
+  # remove log file
+  rm $LOG
+  # exit installation
+  exit 1
+}
+
+function _clear_task {
+  TASK=""
+}
+
+function _task_done {
+  printf "${OVERWRITE}${LGREEN} [OK]  ${LGREEN}${TASK}\n"
+  _clear_task
 }
