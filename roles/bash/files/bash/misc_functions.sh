@@ -3,6 +3,7 @@
 function junk {
   for item in $@; do
     _task "Moving '$item' to the trash"
-    _cmd "mv -f '$item' '$HOME/.Trash/'"
-  done
+    mv "$item" "$HOME/.Trash/"
+    _task_done
+  done;
 }
