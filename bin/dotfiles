@@ -161,8 +161,8 @@ function mac_setup() {
   fi
   _task "Installing python dependencies"
   _cmd "brew install python-argcomplete"
-  _cmd "python3 -m pip install PyObjC PyObjC-core"
-  _cmd "python3 -m pip install watchdog"
+  _cmd "python3 -m pip install PyObjC PyObjC-core --break-system-packages"
+  _cmd "python3 -m pip install watchdog --break-system-packages"
 }
 
 update_ansible_galaxy() {
