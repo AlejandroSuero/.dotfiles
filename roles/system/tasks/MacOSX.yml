@@ -28,7 +28,6 @@
       - stats
       - time-out
       - firefox
-      - google-chrome
       - android-platform-tools
       - homebrew/cask-versions/firefox-developer-edition
       - homebrew/cask-versions/google-chrome-dev
