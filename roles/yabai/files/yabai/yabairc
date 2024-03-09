@@ -24,9 +24,12 @@ yabai -m config left_padding 10
 yabai -m config mouse_follows_focus on
 
 # Disabled apps
-yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^.*Settings*$" manage=off
+yabai -m rule --add app="^Raycast$" manage=off
+yabai -m rule --add app="^Time Out$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" manage=off
+yabai -m rule --add app="^Karabiner-EventViewer$" manage=off
 yabai -m rule --add app="^Color UI$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^DBngin$" manage=off
