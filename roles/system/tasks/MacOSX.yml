@@ -1,14 +1,43 @@
 ---
+- name: "System | {{ ansible_distribution }} | Tap"
+  community.general.homebrew_tap:
+    name:
+      - homebrew/cask-versions
+    state: present
+
 - name: "System | {{ ansible_distribution }} | Install formulaes"
   community.general.homebrew:
     name:
       - jq
       - xclip
       - gnu-tar
+      - exa
+      - ffmpeg
+      - imagemagick
+      - wget
+      - telnet
+      - tldr
     state: present
 
 - name: "System | {{ ansible_distribution }} | Install casks"
   community.general.homebrew_cask:
     name:
+      - alt-tab
+      - hiddenbar
+      - raycast
+      - stats
+      - time-out
+      - firefox
+      - google-chrome
+      - android-platform-tools
+      - homebrew/cask-versions/firefox-developer-edition
+      - homebrew/cask-versions/google-chrome-dev
+      - homebrew/cask-versions/google-chrome-canary
+      - android-file-transfer
+      - vlc
+      - figma
+      - visual-studio-code
       - keka
+      - kap
+      - keepingyouawake
     state: present
