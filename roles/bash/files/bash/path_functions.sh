@@ -12,10 +12,6 @@ addToPathFront() {
     fi
 }
 
-change_background() {
-    dconf write /org/mate/desktop/background/picture-filename "'$HOME/anime/$(ls ~/anime| fzf)'"
-}
-
 die () {
     echo >&2 "$@"
     exit 1
