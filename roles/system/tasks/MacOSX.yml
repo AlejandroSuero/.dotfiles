@@ -4,10 +4,11 @@
     name:
       - jq
       - xclip
+      - gnu-tar
     state: present
 
 - name: "System | {{ ansible_distribution }} | Install casks"
   community.general.homebrew_cask:
     name:
-      - gnu-tar
+      - keka
     state: present
