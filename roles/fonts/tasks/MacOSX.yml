@@ -1,13 +1,13 @@
 ---
-- name: "FONTS | {{ ansible_distribution }} | Git clone nerdfonts"
-  ansible.builtin.git:
-    repo: "https://github.com/ryanoasis/nerd-fonts.git"
-    depth: 1
-    dest: "{{ ansible_user_dir }}/.nerd_fonts"
+- name: "FONTS | {{ ansible_distribution }} {{ ansible_os_family }} | Tap cask-fonts"
+  community.general.homebrew_tap:
+    name:
+      - homebrew/cask-fonts
+    state: present
 
-- name: "FONTS | {{ ansible_distribution }} | Install fonts"
-  ansible.builtin.command:
-    cmd: "/{{ ansible_user_dir }}/.nerd_fonts/install.sh {{ item }}"
-  with_items:
-    - Iosevka
-    - JetBrainsMono
+- name: "FONTS | {{ ansible_distribution }} | Install"
+  community.general.homebrew_cask:
+    name:
+      - homebrew/cask-fonts/font-jetbrains-mono-nerd-font
+      - homebrew/cask-fonts/font-iosevka-nerd-font
+    state: latest
