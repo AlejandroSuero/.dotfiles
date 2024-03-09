@@ -1,7 +1,13 @@
 ---
-- name: "System | {{ ansible_distribution }} | Install jq"
+- name: "System | {{ ansible_distribution }} | Install formulaes"
   community.general.homebrew:
     name:
       - jq
       - xclip
+    state: present
+
+- name: "System | {{ ansible_distribution }} | Install casks"
+  community.general.homebrew_cask:
+    name:
+      - gnu-tar
     state: present
