@@ -111,4 +111,8 @@
   with_items:
     - bun
     - blitz
+    - lite-server
+    - license
+    - gitconfig
+    - http-server
   when: npm_is_installed
