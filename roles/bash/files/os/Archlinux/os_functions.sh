@@ -14,5 +14,5 @@ alias c="_copy"
 alias v="_paste"
 
 change_background() {
-    dconf write /org/mate/desktop/background/picture-filename "'$HOME/anime/$(ls ~/anime| fzf)'"
+    nitrogen --set-auto "$HOME/wallpapers/$(ls "$HOME/wallpapers" | fzf)" --save
 }
