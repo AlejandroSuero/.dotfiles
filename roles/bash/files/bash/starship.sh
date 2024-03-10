@@ -49,3 +49,4 @@ esac
 
 export STARSHIP_DISTRO="$ICON"
 export STARSHIP_DEVICE="$DEVICE"
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
