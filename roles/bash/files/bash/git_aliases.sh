@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-alias yolo="git push origin master --force --no-verify"
+alias yolo="git push origin main --force --no-verify"
 
 alias g="git"
 alias ghp="git --help"
