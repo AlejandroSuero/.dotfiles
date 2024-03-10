@@ -13,6 +13,3 @@ _paste() {
 
 alias c="_copy"
 alias v="_paste"
-
-# gnu-tar as tar
-addToPathFront "/opt/homebrew/opt/gnu-tar/libexec/gnubin"
