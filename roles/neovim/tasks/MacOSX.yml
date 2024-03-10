@@ -8,6 +8,7 @@
       - unzip
       - ansible-lint
       - ripgrep
+      - fd
     state: present
 
 - name: "Neovim | {{ ansible_distribution }} | Install"
