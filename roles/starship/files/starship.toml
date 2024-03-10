@@ -23,6 +23,7 @@ Windows = ""
 Arch = "󰣇"
 Ubuntu = ""
 Macos = "󰀵"
+Manjaro = ""
 
 # Shows the username
 [username]
