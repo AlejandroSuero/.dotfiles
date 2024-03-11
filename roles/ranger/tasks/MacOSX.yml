@@ -1,0 +1,5 @@
+---
+- name: "Ranger | {{ ansible_distrubution }} || {{ ansible_package_manager }} install"
+  community.general.homebrew:
+    name: ranger
+    state: present
