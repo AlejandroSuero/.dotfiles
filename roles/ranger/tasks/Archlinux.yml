@@ -1,5 +1,6 @@
 ---
 - name: "Ranger | {{ ansible_distribution }} | {{ ansible_pkg_mgr }} install"
-  community.general.homebrew:
+  community.general.pacman:
     name: ranger
     state: present
+  become: true
