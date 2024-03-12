@@ -47,6 +47,14 @@ update_space() {
         LABEL="music"
         LABEL_FONT="$FONT_FACE:Medium:15.0"
         ;;
+    6)
+        ICON=$DISCORD_ICON
+        ICON_FONT="$FONT_FACE:Bold:20.0"
+        ICON_PADDING_LEFT=10
+        ICON_PADDING_RIGHT=10
+        LABEL="communication"
+        LABEL_FONT="$FONT_FACE:Medium:15.0"
+        ;;
     *)
         ICON=$SPACE_ID
         ICON_FONT="$FONT_FACE:Bold:20.0"
