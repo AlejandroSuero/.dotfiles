@@ -2,7 +2,7 @@
 
 cdnvm() {
     if ! [ -x "$(command -v nvm)" ]; then
-      return 0
+      echo "not nvm" . [ -x "$(command -v nvm)"]
     fi
     command cd "$@" || return $?
     nvm_path="$(nvm_find_up .nvmrc | command tr -d '\n')"
