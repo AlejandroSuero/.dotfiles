@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 cdnvm() {
+    if ! [ -x "$(command -v nvm)" ]; then
+      return 0
+    fi
     command cd "$@" || return $?
     nvm_path="$(nvm_find_up .nvmrc | command tr -d '\n')"
 
