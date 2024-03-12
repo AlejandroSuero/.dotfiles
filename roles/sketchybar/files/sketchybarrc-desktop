@@ -20,7 +20,7 @@ bar=(
     padding_left=0
     corner_radius=10
     y_offset=0
-    margin=12
+    margin=0
     blur_radius=20
     notch_width=0
 )
