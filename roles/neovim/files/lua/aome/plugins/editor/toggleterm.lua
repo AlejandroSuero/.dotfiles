@@ -5,7 +5,7 @@ return {
     { "<C-t>", "<cmd>ToggleTerm<CR>", desc = "[t]oggle [t]erminal" },
   },
   opts = {
-    open_mapping = [[<leader>tt]],
+    open_mapping = [[<C-t>]],
     direction = "float",
     insert_mappings = false,
     float_opts = {
