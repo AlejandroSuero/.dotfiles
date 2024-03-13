@@ -12,6 +12,6 @@ cd() {
 }
 
 z() {
-  builtin z "$@"
+  command z "$@"
   check_nvmrc
 }
