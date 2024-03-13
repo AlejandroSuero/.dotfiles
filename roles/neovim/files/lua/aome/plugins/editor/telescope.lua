@@ -32,12 +32,12 @@ return {
   },
   keys = {
     {
-      "<leader>pf",
+      "<leader>ff",
       "<cmd>Telescope find_files<cr>",
       desc = "[Telescope] Find project files",
     },
     {
-      "<C-p>",
+      "<leader>fg",
       "<cmd>Telescope git_files<cr>",
       desc = "[Telescope] Find git files",
     },
