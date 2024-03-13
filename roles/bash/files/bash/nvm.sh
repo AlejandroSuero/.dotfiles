@@ -10,8 +10,3 @@ cd() {
   builtin cd "$@"
   check_nvmrc
 }
-
-z() {
-  command z "$@"
-  check_nvmrc
-}
