@@ -45,20 +45,20 @@ read_only = "RO"
 format = " at [$path]($style)[$read_only]($read_only_style) "
 
 [git_branch]
-symbol = "󰊢 "
+symbol = "󰊢"
 format = "on [$symbol $branch]($style) "
 truncation_length = 4
 truncation_symbol = ".../"
 style = "bold cyan"
 
 [git_status]
-format = '\($all_status$ahead_behind\) '
+format = '\($all_status -- $ahead_behind\) '
 conflicted = "[conf](red)"
 up_to_date = "[ok](bold green)"
 untracked = "[U++${count} ](purple)"
-ahead = "a${count}"
-diverged = "div${ahead_count} b${behind_count}"
-behind = "b${count}"
+ahead = "[a${count} ](yellow)"
+diverged = "[div${ahead_count} b${behind_count} ](purple)"
+behind = "[b${count} ](orange)"
 stashed = "[s++${count} ](purple)"
 modified = "[M++${count} ](yellow)"
 staged = "[S++$count ](green)"
@@ -78,7 +78,7 @@ format = "via [ $context](bold blue) "
 format = "via [ $version](bold purple) "
 
 [python]
-symbol = "󰌠 "
+symbol = "󰌠"
 python_binary = "python3"
 
 [nodejs]
