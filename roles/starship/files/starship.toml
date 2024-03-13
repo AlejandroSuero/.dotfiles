@@ -1,5 +1,8 @@
 # ~/.config/starship/starship.toml
 
+command_timeout = 1500
+scan_timeout = 500
+
 # Inserts a blank line between shell prompts
 add_newline = true
 
