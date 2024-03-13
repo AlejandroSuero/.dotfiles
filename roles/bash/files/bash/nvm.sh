@@ -1,8 +1,17 @@
 #!/usr/bin/env bash
 
-cd() {
-  builtin cd "$@"
+function check_nvmrc() {
   if [[ -f "$PWD"/.nvmrc ]]; then
     nvm use > /dev/null
   fi
+}
+
+cd() {
+  builtin cd "$@"
+  check_nvmrc
+}
+
+z() {
+  builtin z "$@"
+  check_nvmrc
 }
