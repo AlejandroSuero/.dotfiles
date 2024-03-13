@@ -52,7 +52,7 @@ truncation_symbol = ".../"
 style = "bold cyan"
 
 [git_status]
-format = '\($all_status -- $ahead_behind\) '
+format = '\($all_status$ahead_behind\) '
 conflicted = "[conf](red)"
 up_to_date = "[ok](bold green)"
 untracked = "[U++${count} ](purple)"
