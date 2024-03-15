@@ -5,3 +5,16 @@
       - kitty
     state: present
   become: true
+
+- name: "KITTY | Config folder"
+  ansible.builtin.file:
+    mode: "0755"
+    path: "{{ ansible_user_dir }}/.config/kitty"
+    state: directory
+
+- name: "KITTY | Create symlink to role files directory"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/kitty"
+    state: link
+    force: true
