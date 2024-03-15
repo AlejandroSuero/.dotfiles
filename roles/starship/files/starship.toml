@@ -1,8 +1,5 @@
 # ~/.config/starship/starship.toml
 
-command_timeout = 1500
-scan_timeout = 500
-
 # Inserts a blank line between shell prompts
 add_newline = true
 
@@ -42,7 +39,7 @@ home_symbol = "󰋞 ~"
 read_only_style = "red"
 style = "bold blue"
 read_only = "RO"
-format = " at [$path]($style)[$read_only]($read_only_style) "
+format = " [$path]($style)[$read_only]($read_only_style) "
 
 [git_branch]
 symbol = "󰊢"
