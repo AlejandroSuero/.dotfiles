@@ -8,7 +8,7 @@
       - libtool
       - unzip
       - ansible-lint
-      - fd
+      - fd-find
       - ripgrep
     state: present
   become: true
