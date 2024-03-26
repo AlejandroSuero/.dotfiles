@@ -26,10 +26,22 @@ return {
     { "j-hui/fidget.nvim", opts = {} },
   },
   config = function()
-    require("neodev").setup {}
-    -- import lspconfig plugin
-    local lspconfig = require "lspconfig"
+    local neodev = vim.F.npcall(require, "neodev")
+    if neodev then
+      neodev.setup {
+        override = function(_, library)
+          library.enabled = true
+          library.plugins = true
+        end,
+        lspconfig = true,
+        pathStrict = true,
+      }
+    end
 
+    local lspconfig = vim.F.npcall(require, "lspconfig")
+    if not lspconfig then
+      return
+    end
     local ok_builtin, telescope_builtin = pcall(require, "telescope.builtin")
     if not ok_builtin then
       vim.notify("Telescope builtin is not loaded", 3)
@@ -242,21 +254,21 @@ return {
         },
       },
       gopls = {
-        root_dir = function(fname)
-          local Path = require "plenary.path"
-
-          local absolute_cwd = Path:new(vim.uv.cwd()):absolute()
-          local absolute_fname = Path:new(fname):absolute()
-
-          if
-            string.find(absolute_cwd, "/cmd/", 1, true)
-            and string.find(absolute_fname, absolute_cwd, 1, true)
-          then
-            return absolute_cwd
-          end
-
-          return require("lspconfig.util").root_pattern("go.mod", ".git")(fname)
-        end,
+        -- root_dir = function(fname)
+        --   local Path = require "plenary.path"
+        --
+        --   local absolute_cwd = Path:new(vim.uv.cwd()):absolute()
+        --   local absolute_fname = Path:new(fname):absolute()
+        --
+        --   if
+        --     string.find(absolute_cwd, "/cmd/", 1, true)
+        --     and string.find(absolute_fname, absolute_cwd, 1, true)
+        --   then
+        --     return absolute_cwd
+        --   end
+        --
+        --   return require("lspconfig.util").root_pattern("go.mod", ".git")(fname)
+        -- end,
 
         settings = {
           gopls = {
