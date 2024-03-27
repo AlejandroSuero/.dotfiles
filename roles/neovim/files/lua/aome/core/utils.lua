@@ -50,6 +50,14 @@ M.map_keys = function(mappings_table, mapping_opt)
   end
 end
 
+M.imap = function(tbl)
+  vim.keymap.set("i", tbl[1], tbl[2], tbl[3])
+end
+
+M.nmap = function(tbl)
+  vim.keymap.set("n", tbl[1], tbl[2], tbl[3])
+end
+
 --- Replace old colorscheme for the new one
 ---@param old string Old string you want to change
 ---@param new string New string you want to change
@@ -73,5 +81,22 @@ M.replace_word = function(old, new, path_name)
     file:close()
   end
 end
+
+M.auto = {
+  autocmd = function(args)
+    local event = args[1]
+    local group = args[2]
+    local callback = args[3]
+
+    vim.api.nvim_create_autocmd(event, {
+      group = group,
+      buffer = args[4],
+      callback = function()
+        callback()
+      end,
+      once = args.once,
+    })
+  end,
+}
 
 return M
