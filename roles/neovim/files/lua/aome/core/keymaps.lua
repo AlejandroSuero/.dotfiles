@@ -11,6 +11,11 @@ local mappings = {
       "[Lazy] Open",
     },
 
+    ["Q"] = {
+      "@q",
+      "Apply recorded 'q' macro",
+    },
+
     ["<leader>rs"] = {
       vim.cmd.LspRestart,
       "Restart LSP",
@@ -29,8 +34,6 @@ local mappings = {
     ["<leader>Y"] = { '"+Y', "Copies to system clipboard" },
 
     ["<leader>d"] = { '"_d', "Deletes into the void register" },
-
-    ["Q"] = { "<nop>", "You won't wanna go there buddy" },
 
     ["<leader>fm"] = {
       vim.lsp.buf.format,
