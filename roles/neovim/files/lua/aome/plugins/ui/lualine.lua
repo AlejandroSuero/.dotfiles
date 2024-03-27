@@ -6,7 +6,12 @@ local show_lsp = function()
   if lsp_client == "null-ls" then
     lsp_client = vim.lsp.get_active_clients()[2].config.name
   end
-  return string.format("%s %s", " ", lsp_client)
+  if
+    string.find(vim.bo.ft, "javascript") or string.find(vim.bo.ft, "typescript")
+  then
+    lsp_client = "tsserver"
+  end
+  return string.format("%s %s", "", lsp_client)
 end
 
 ---Adds zero if the number is less than 10
