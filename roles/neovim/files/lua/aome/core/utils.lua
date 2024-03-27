@@ -26,6 +26,18 @@ M.load_config = function()
   end
 end
 
+--- Map table into insert mode mapping
+--@param tbl table { "keys", "command", opts }
+M.imap = function(tbl)
+  vim.keymap.set("i", tbl[1], tbl[2], tbl[3])
+end
+
+--- Map table into normal mode mapping
+--@param tbl table { "keys", "command", opts }
+M.nmap = function(tbl)
+  vim.keymap.set("n", tbl[1], tbl[2], tbl[3])
+end
+
 -- Maps keys with options
 ---@param mappings_table table Table that contains the mappings
 ---@param mapping_opt table|nil that contains the mapping options
@@ -48,14 +60,6 @@ M.map_keys = function(mappings_table, mapping_opt)
       vim.keymap.set(mode, lhs, rhs, opts)
     end
   end
-end
-
-M.imap = function(tbl)
-  vim.keymap.set("i", tbl[1], tbl[2], tbl[3])
-end
-
-M.nmap = function(tbl)
-  vim.keymap.set("n", tbl[1], tbl[2], tbl[3])
 end
 
 --- Replace old colorscheme for the new one
