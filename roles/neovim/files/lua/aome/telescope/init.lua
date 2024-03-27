@@ -3,7 +3,7 @@ local reloader = function()
   if SHOULD_RELOAD_TELESCOPE then
     R "plenary"
     R "telescope"
-    R "aome.plugins.editor.configs.telescope.setup"
+    R "aome.telescope.setup"
   end
 end
 

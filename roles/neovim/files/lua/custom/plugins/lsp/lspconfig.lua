@@ -41,6 +41,6 @@ return {
     "b0o/schemastore.nvim",
   },
   config = function()
-    require "aome.plugins.lsp.configs.lsp"
+    require "aome.lsp"
   end,
 }

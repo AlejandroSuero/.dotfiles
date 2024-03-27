@@ -20,12 +20,11 @@ local nmap = require("aome.core.utils").nmap
 local autocmd = require("aome.core.utils").auto.autocmd
 local autocmd_clear = vim.api.nvim_clear_autocmds
 
-local telescope_mapper =
-  require "aome.plugins.editor.configs.telescope.mappings"
-local handlers = require "aome.plugins.lsp.configs.lsp.handlers"
+local telescope_mapper = require "aome.telescope.mappings"
+local handlers = require "aome.lsp.handlers"
 
 local ts_util = require "nvim-lsp-ts-utils"
-local inlays = require "aome.plugins.lsp.configs.lsp.inlay"
+local inlays = require "aome.lsp.inlay"
 
 local custom_init = function(client)
   client.config.flags = client.config.flags or {}
@@ -44,14 +43,14 @@ local filetype_attach = setmetatable({
     autocmd {
       { "BufEnter", "BufWritePost", "CursorHold" },
       augroup_codelens,
-      require("aome.plugins.lsp.configs.lsp.codelens").refresh_virtlines,
+      require("aome.lsp.codelens").refresh_virtlines,
       0,
     }
 
     vim.keymap.set(
       "n",
-      "<space>tt",
-      require("aome.plugins.lsp.configs.lsp.codelens").toggle_virtlines,
+      "<space>TT",
+      require("aome.codelens").toggle_virtlines,
       { silent = true, desc = "[T]oggle [T]ypes", buffer = 0 }
     )
   end,
@@ -109,7 +108,7 @@ local custom_attach = function(client, bufnr)
   buf_nnoremap { "<leader>gI", handlers.implementation }
   buf_nnoremap {
     "<leader>lr",
-    "<cmd>lua R('aome.plugins.lsp.configs.lsp.codelens').run()<CR>",
+    "<cmd>lua R('aome.lsp.codelens').run()<CR>",
   }
   buf_nnoremap { "<leader>rr", "LspRestart" }
 

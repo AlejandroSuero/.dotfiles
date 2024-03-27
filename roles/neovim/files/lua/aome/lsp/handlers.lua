@@ -23,8 +23,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
     virtual_text = true,
   })
 
-vim.lsp.handlers["window/showMessage"] =
-  require "aome.plugins.lsp.configs.lsp.show_message"
+vim.lsp.handlers["window/showMessage"] = require "aome.lsp.show_message"
 
 local M = {}
 

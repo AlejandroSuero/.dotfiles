@@ -11,7 +11,7 @@ return {
     "MasonUpdate",
     "MasonUninstall",
   },
-  opts = require "aome.plugins.lsp.configs.mason",
+  opts = require "aome.lsp.mason",
   config = function(_, opts)
     local mason = require "mason"
 

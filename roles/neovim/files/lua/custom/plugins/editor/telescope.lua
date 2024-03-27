@@ -31,7 +31,7 @@ return {
     "Telescope",
   },
   config = function()
-    require "aome.plugins.editor.configs.telescope.setup"
-    require "aome.plugins.editor.configs.telescope.keys"
+    require "aome.telescope.setup"
+    require "aome.telescope.keys"
   end,
 }

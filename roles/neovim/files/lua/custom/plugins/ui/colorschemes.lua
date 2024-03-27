@@ -1,4 +1,4 @@
-local configs = "aome.plugins.ui.configs."
+local configs = "aome.colorschemes."
 return {
   {
     "rebelot/kanagawa.nvim",

@@ -57,8 +57,7 @@ if not ok then
   return
 end
 lazy.setup({
-  -- { import = "aome.plugins" },
-  { import = "aome.plugins.ui" },
-  { import = "aome.plugins.lsp" },
-  { import = "aome.plugins.editor" },
+  { import = "custom.plugins.ui" },
+  { import = "custom.plugins.lsp" },
+  { import = "custom.plugins.editor" },
 }, opts)

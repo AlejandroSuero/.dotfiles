@@ -16,7 +16,7 @@ local map_tele = function(key, f, options, buffer)
 
   local mode = "n"
   local rhs = string.format(
-    "<cmd>lua R('aome.plugins.editor.configs.telescope')['%s'](TelescopeMapArgs['%s'])<CR>",
+    "<cmd>lua R('aome.telescope')['%s'](TelescopeMapArgs['%s'])<CR>",
     f,
     map_key
   )

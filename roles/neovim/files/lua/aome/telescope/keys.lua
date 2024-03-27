@@ -1,4 +1,4 @@
-local map_tele = require "aome.plugins.editor.configs.telescope.mappings"
+local map_tele = require "aome.telescope.mappings"
 
 -- Dotfiles
 map_tele("<leader>en", "edit_neovim")
