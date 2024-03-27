@@ -2,4 +2,4 @@
 
 bind -x '"\C-f":tmux-sessionizer'
 bind -x '"\C-g":lazygit'
-bind -x '"\C-b":open -b $DEFAULT_BROWSER'
+bind -x '"\C-b":$(_open_default_browser)'

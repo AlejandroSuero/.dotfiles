@@ -18,5 +18,9 @@ _get_default_browser() {
   plutil -convert binary1 $x
 }
 
+_open_default_browser() {
+  open -b "$(_get_default_browser)"
+}
+
 alias c="_copy"
 alias v="_paste"
