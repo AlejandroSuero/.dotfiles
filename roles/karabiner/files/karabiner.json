@@ -20,7 +20,7 @@
           {
             "manipulators": [
               {
-                "description": "Open Google Chrome with HYPER + b",
+                "description": "Open default browser with HYPER + b",
                 "from": {
                   "key_code": "b",
                   "modifiers": {
@@ -33,7 +33,7 @@
                   }
                 },
                 "to": {
-                  "shell_command": "open -b \"$DEFAULT_BROWSER\""
+                  "shell_command": "open -b $DEFAULT_BROWSER"
                 },
                 "type": "basic"
               },
