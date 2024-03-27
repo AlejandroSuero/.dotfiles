@@ -7,10 +7,21 @@ TelescopeMapArgs = TelescopeMapArgs or {}
 --- Telescope key mappings
 ---@param key string Sequence of keys
 ---@param f string Function from "Telescope" to use
+---@param desc string|nil A short description of what the mapping do
 ---@param options table|nil Options for the telescope function
 ---@param buffer boolean|nil Buffer to attach to
-local map_tele = function(key, f, options, buffer)
+local map_tele = function(key, f, options, buffer, desc)
   local map_key = vim.api.nvim_replace_termcodes(key .. f, true, true, true)
+
+  if not desc then
+    desc = "[Telescope] " .. f
+  end
+
+  local map_options = {
+    noremap = true,
+    silent = true,
+    desc = desc,
+  }
 
   TelescopeMapArgs[map_key] = options or {}
 
@@ -20,11 +31,6 @@ local map_tele = function(key, f, options, buffer)
     f,
     map_key
   )
-
-  local map_options = {
-    noremap = true,
-    silent = true,
-  }
 
   if not buffer then
     vim.api.nvim_set_keymap(mode, key, rhs, map_options)

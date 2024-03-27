@@ -56,10 +56,10 @@ local filetype_attach = setmetatable({
   end,
 
   rust = function()
-    telescope_mapper("<space>wf", "lsp_workspace_symbols", {
+    telescope_mapper("<space>wrs", "lsp_workspace_symbols", {
       ignore_filename = true,
       query = "#",
-    }, true)
+    }, true, "[w]orkspace [r]ust [s]ymbols")
   end,
 }, {
   __index = function()
@@ -92,28 +92,55 @@ local custom_attach = function(client, bufnr)
 
   local filetype = vim.api.nvim_buf_get_option(0, "filetype")
 
-  buf_inoremap { "<c-s>", vim.lsp.buf.signature_help }
+  buf_inoremap {
+    "<c-h>",
+    vim.lsp.buf.signature_help,
+    { desc = "signature [h]elp" },
+  }
 
-  buf_nnoremap { "<leader>rn", vim.lsp.buf.rename }
-  buf_nnoremap { "<leader>ca", vim.lsp.buf.code_action }
+  buf_nnoremap { "<leader>rn", vim.lsp.buf.rename, { desc = "[r]e[n]ame" } }
+  buf_nnoremap {
+    "<leader>ca",
+    vim.lsp.buf.code_action,
+    { desc = "[c]ode [a]ction" },
+  }
 
-  buf_nnoremap { "[d", vim.diagnostic.goto_prev }
-  buf_nnoremap { "]d", vim.diagnostic.goto_next }
+  buf_nnoremap { "[d", vim.diagnostic.goto_prev, { desc = "prev [d]iagnostic" } }
+  buf_nnoremap { "]d", vim.diagnostic.goto_next, { desc = "next [d]iagnostic" } }
 
-  buf_nnoremap { "gd", vim.lsp.buf.definition }
-  buf_nnoremap { "gD", vim.lsp.buf.declaration }
-  buf_nnoremap { "gT", vim.lsp.buf.type_definition }
+  buf_nnoremap { "gd", vim.lsp.buf.definition, { desc = "[g]o to [d]efinition" } }
+  buf_nnoremap {
+    "gD",
+    vim.lsp.buf.declaration,
+    { desc = "[g]o to [D]eclaration" },
+  }
+  buf_nnoremap {
+    "gT",
+    vim.lsp.buf.type_definition,
+    { desc = "[g]o to [T]ype definition" },
+  }
   buf_nnoremap { "K", vim.lsp.buf.hover, { desc = "lsp:hover" } }
 
-  buf_nnoremap { "<leader>gI", handlers.implementation }
+  buf_nnoremap {
+    "<leader>gI",
+    handlers.implementation,
+    { desc = "[g]o to [I]mplementation" },
+  }
   buf_nnoremap {
     "<leader>lr",
     "<cmd>lua R('aome.lsp.codelens').run()<CR>",
+    { desc = "code[l]ens [r]un" },
   }
-  buf_nnoremap { "<leader>rr", "LspRestart" }
+  buf_nnoremap { "<leader>rs", "LspRestart", { desc = "Lps [r]e[s]tart" } }
 
-  telescope_mapper("gr", "lsp_references", nil, true)
-  telescope_mapper("gI", "lsp_implementations", nil, true)
+  telescope_mapper("gr", "lsp_references", nil, true, "[g]o to [r]eferences")
+  telescope_mapper(
+    "gI",
+    "lsp_implementations",
+    nil,
+    true,
+    "[g]o to [I]mplementation"
+  )
   telescope_mapper(
     "<leader>wd",
     "lsp_document_symbols",
@@ -121,10 +148,11 @@ local custom_attach = function(client, bufnr)
     true
   )
   telescope_mapper(
-    "<leader>ww",
+    "<leader>ws",
     "lsp_dynamic_workspace_symbols",
     { ignore_filename = true },
-    true
+    true,
+    "[w]orkspace [s]ymbols"
   )
 
   vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
