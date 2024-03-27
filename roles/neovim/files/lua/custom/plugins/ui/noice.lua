@@ -13,6 +13,7 @@ return {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
           ["cmp.entry.get_documentation"] = true,
+          ["config.lsp.message.enabled"] = false,
         },
       },
       -- you can enable a preset for easier configuration
@@ -68,6 +69,10 @@ return {
             pattern = "^:%s*he?l?p?%s+",
             icon = "?",
           },
+          edit = {
+            pattern = "^:%s*e%s+",
+            icon = "  ",
+          },
           input = {
             icon = " 󱔏 ",
             lang = "text",
@@ -83,14 +88,34 @@ return {
       },
       views = {
         cmdline_popup = {
+          position = {
+            row = 5,
+            col = "50%",
+          },
+          size = {
+            width = 60,
+            height = "auto",
+          },
+        },
+        popupmenu = {
+          relative = "editor",
+          position = {
+            row = 9,
+            col = "50%",
+          },
+          size = {
+            width = 60,
+            height = 10,
+          },
           border = {
-            style = "none",
+            style = "rounded",
             padding = { 1, 2 },
           },
-          filter_options = {},
           win_options = {
-            winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
-            winblend = 0,
+            winhighlight = {
+              NormalFloat = "NormalFloat",
+              FloatBorder = "DiagnosticInfo",
+            },
           },
         },
       },
