@@ -87,7 +87,6 @@ end
 
 function M.find_files()
   require("telescope.builtin").find_files {
-    sorting_strategy = "descending",
     scroll_strategy = "cycle",
     layout_config = {
       -- height = 10,
@@ -96,8 +95,7 @@ function M.find_files()
 end
 
 function M.fs()
-  local opts =
-    themes.get_ivy { hidden = false, sorting_strategy = "descending" }
+  local opts = themes.get_ivy { hidden = false, sorting_strategy = "ascending" }
   require("telescope.builtin").find_files(opts)
 end
 
@@ -132,7 +130,7 @@ function M.git_files()
 end
 
 function M.colorscheme()
-  require("telescope.builtin").colorscheme {
+  local opts = {
     enable_preview = true,
     attach_mappings = function(prompt_bufnr, map)
       -- reload theme while typing
@@ -210,6 +208,7 @@ function M.colorscheme()
       return true
     end,
   }
+  require("telescope.builtin").colorscheme(opts)
 end
 
 function M.buffer_git_files()
