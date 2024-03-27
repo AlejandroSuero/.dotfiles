@@ -39,9 +39,9 @@ end
 local get_filename_and_status = function(reverse)
   local filename = vim.fn.expand "%:t"
   local modified = vim.bo.modified
-  local file_status = " "
+  local file_status = ""
   if modified then
-    file_status = " "
+    file_status = ""
   end
 
   if reverse == true then
@@ -64,8 +64,8 @@ return {
       options = {
         icons_enabled = true,
         theme = "auto",
-        section_separators = { left = "", right = "" },
-        component_separators = { left = "/", right = "\\" },
+        section_separators = { left = "", right = "" },
+        component_separators = { left = "|", right = "|" },
         disabled_filetypes = {},
         globalstatus = true,
       },
