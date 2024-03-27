@@ -7,3 +7,6 @@ roles/neovim/files/lazy-lock.json
 roles/neovim/files/lua/aome/core/aomerc.lua
 roles/karabiner/files/automatic_backups
 logs
+
+node_modules
+pnpm-lock.yaml
