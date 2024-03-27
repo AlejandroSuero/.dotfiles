@@ -281,6 +281,8 @@ local servers = {
 
   cssls = true,
 
+  astro = true,
+
   eslint = true,
   tsserver = {
     init_options = ts_util.init_options,
