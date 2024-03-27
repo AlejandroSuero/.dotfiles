@@ -6,3 +6,4 @@ roles/neovim/files/lazy-lock.json
 .DS_Store
 roles/neovim/files/lua/aome/core/aomerc.lua
 roles/karabiner/files/automatic_backups
+logs
