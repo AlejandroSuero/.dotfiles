@@ -59,6 +59,26 @@ local options = {
     },
   },
   g = { -- global scope
+    loaded_gzip = 1,
+    loaded_zip = 1,
+    loaded_zipPlugin = 1,
+    loaded_tar = 1,
+    loaded_tarPlugin = 1,
+
+    loaded_getscript = 1,
+    loaded_getscriptPlugin = 1,
+    loaded_vimball = 1,
+    loaded_vimballPlugin = 1,
+    loaded_2html_plugin = 1,
+
+    loaded_matchit = 1,
+    loaded_matchparen = 1,
+    loaded_logiPat = 1,
+    loaded_rrhelper = 1,
+
+    loaded_netrw = vim.g.aome_netrw_loaded,
+    loaded_netrwPlugin = vim.g.aome_netrw_loaded,
+    loaded_netrwSettings = vim.g.aome_netwr_loaded,
     netrw_banner = false,
     netrw_browse_split = 0,
     netrw_winsize = 25,
@@ -67,7 +87,7 @@ local options = {
     -- -> 0 = thin listing (default)
     -- -> 1 = long listing
     -- -> 3 = tree listing
-    netrw_liststyle = vim.g.aome_netrw,
+    netrw_liststyle = vim.g.aome_netrw_list,
 
     mapleader = " ",
     maplocalleader = ",",

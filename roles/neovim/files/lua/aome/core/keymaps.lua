@@ -1,25 +1,11 @@
 local plugins_path = "~/.config/nvim/lua/aome/lazy.lua"
 
-local check_netrw = function()
-  local ok, _ = pcall(vim.cmd.Ex)
-  if not ok then
-    vim.cmd.NvimTreeFindFileToggle()
-  else
-    vim.cmd.Ex()
-  end
-end
-
 local mappings = {
   i = { -- insert mode
     ["jk"] = { "<ESC>", "Leave insert mode" },
     ["<C-c>"] = { "<ESC>", "Leave insert mode" },
   },
   n = { -- normal mode
-    ["<leader>pv"] = {
-      check_netrw,
-      "Open netrw Explorer",
-    },
-
     ["<leader>l"] = {
       "<cmd>Lazy<CR>",
       "[Lazy] Open",

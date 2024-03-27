@@ -12,7 +12,8 @@ M.load_config = function()
     if file ~= nil then
       file:write "vim.g.transparency = false\n"
       file:write 'vim.g.colorscheme = "kanagawa"\n'
-      file:write "vim.g.aome_netrw = 0"
+      file:write "vim.g.aome_netrw_loaded = 1\n"
+      file:write "vim.g.aome_netrw_list = 0"
       file:close()
       require "aome.core.aomerc"
     else
