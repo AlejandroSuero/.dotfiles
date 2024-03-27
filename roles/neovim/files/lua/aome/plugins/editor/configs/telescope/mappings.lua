@@ -8,7 +8,7 @@ TelescopeMapArgs = TelescopeMapArgs or {}
 ---@param key string Sequence of keys
 ---@param f string Function from "Telescope" to use
 ---@param options table|nil Options for the telescope function
----@param buffer number|nil Buffer to attach to
+---@param buffer boolean|nil Buffer to attach to
 local map_tele = function(key, f, options, buffer)
   local map_key = vim.api.nvim_replace_termcodes(key .. f, true, true, true)
 

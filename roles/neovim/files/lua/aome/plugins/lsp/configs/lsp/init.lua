@@ -98,6 +98,9 @@ local custom_attach = function(client, bufnr)
   buf_nnoremap { "<leader>rn", vim.lsp.buf.rename }
   buf_nnoremap { "<leader>ca", vim.lsp.buf.code_action }
 
+  buf_nnoremap { "[d", vim.diagnostic.goto_prev }
+  buf_nnoremap { "]d", vim.diagnostic.goto_next }
+
   buf_nnoremap { "gd", vim.lsp.buf.definition }
   buf_nnoremap { "gD", vim.lsp.buf.declaration }
   buf_nnoremap { "gT", vim.lsp.buf.type_definition }
