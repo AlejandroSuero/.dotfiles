@@ -33,7 +33,7 @@
                   }
                 },
                 "to": {
-                  "shell_command": "open -a \"$DEFAULT_BROWSER\""
+                  "shell_command": "open -b \"$DEFAULT_BROWSER\""
                 },
                 "type": "basic"
               },
