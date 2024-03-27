@@ -75,9 +75,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-default_browser=$(_get_default_browser)
-export $DEFAULT_BROWSER="$default_browser"
-
 if [[ "$(uname)" == "Darwin" ]]; then
   # gnu-tar as tar
   addToPathFront "/opt/homebrew/opt/gnu-tar/libexec/gnubin"
