@@ -61,10 +61,10 @@ local mappings = {
     ["<C-p>"] = { "<cmd>cprev<CR>zz", "Previous quickfix item" },
 
     -- Window
-    ["<C-h>"] = { "<C-w>h", "Window Navigate left" },
-    ["<C-j>"] = { "<C-w>j", "Window Navigate down" },
-    ["<C-k>"] = { "<C-w>k", "Window Navigate up" },
-    ["<C-l>"] = { "<C-w>l", "Window Navigate right" },
+    ["<C-h>"] = { "<cmd>wincmd h<CR>", "Window Navigate left" },
+    ["<C-j>"] = { "<cmd>wincmd j<CR>", "Window Navigate down" },
+    ["<C-k>"] = { "<cmd>wincmd k<CR>", "Window Navigate up" },
+    ["<C-l>"] = { "<cmd>wincdm l<CR>", "Window Navigate right" },
 
     ["<leader>sj"] = { "<cmd>split<CR>", "[w]indow [s]plit down" },
     ["<leader>sl"] = { "<cmd>vsplit<cr>", "[w]indow [s]plit right" },
