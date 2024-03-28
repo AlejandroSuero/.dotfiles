@@ -1,0 +1,6 @@
+---
+- name: Wezterm | Installation
+  ansible.builtin.apt:
+    name: wezterm
+  state: present
+  become: true
