@@ -2,6 +2,12 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-bash installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 ZSH_THEME=""
