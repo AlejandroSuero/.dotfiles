@@ -1,5 +1,5 @@
 ---
 - name: Wezterm | Installation
-  community.general.hombrew_cask:
+  community.general.homebrew_cask:
     name: wezterm
     state: latest
