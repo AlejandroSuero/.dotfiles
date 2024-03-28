@@ -10,8 +10,8 @@
 
 - name: Tmux | Install TPM
   ansible.builtin.git:
-    repo: https://github.com/tmux-plugins/tpm
-    dest: ~/.tmux/plugins/tpm
+    repo: https://github.com/tmux-plugins/tpm # noqa: latest
+    dest: "{{ ansible_user_dir }}/.tmux/plugins/tpm"
 
 - name: Tmux | Config folder
   ansible.builtin.file:

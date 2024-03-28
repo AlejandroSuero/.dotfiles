@@ -1,11 +1,11 @@
 ---
-- name: System | {{ ansible_distribution }} | Tap
+- name: System | Tap | {{ ansible_distribution }}
   community.general.homebrew_tap:
     name:
       - homebrew/cask-versions
     state: present
 
-- name: System | {{ ansible_distribution }} | Install formulaes
+- name: System | Formulaes | {{ ansible_distribution }}
   community.general.homebrew:
     name:
       - jq
@@ -19,7 +19,7 @@
       - tldr
     state: present
 
-- name: System | {{ ansible_distribution }} | Install casks
+- name: System | Casks | {{ ansible_distribution }}
   community.general.homebrew_cask:
     name:
       - alt-tab

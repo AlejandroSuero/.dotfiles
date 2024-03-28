@@ -18,19 +18,19 @@
     state: link
     force: true
 
-- name: skhd | Install
+- name: Skhd | Install
   community.general.homebrew:
     name:
       - koekeishiya/formulae/skhd
     state: present
 
-- name: skhd | Config folder
+- name: Skhd | Config folder
   ansible.builtin.file:
     mode: "0755"
     path: "{{ ansible_user_dir }}/.config/skhd"
     state: directory
 
-- name: skhd | Create symlink to role files directory
+- name: Skhd | Create symlink to role files directory
   ansible.builtin.file:
     src: "{{ role_path }}/files/skhd"
     dest: "{{ ansible_user_dir }}/.config/skhd"

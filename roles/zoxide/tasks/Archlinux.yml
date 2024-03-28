@@ -1,5 +1,5 @@
 ---
-- name: Zoxide | {{ ansible_distribution }} | Install Zoxide
+- name: Zoxide | Installation | {{ ansible_distribution }}
   community.general.pacman:
     name: zoxide
     state: present

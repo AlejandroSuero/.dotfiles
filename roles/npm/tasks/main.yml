@@ -1,7 +1,9 @@
 ---
 - name: NPM | Get latest STABLE NodeJS version
   ansible.builtin.shell:
-    cmd: curl -sL https://nodejs.org/dist/index.json | jq -r '.[] | select(.lts) | .version' | head -n 1
+    cmd: |
+      set -o pipefail
+      curl -sL https://nodejs.org/dist/index.json | jq -r '.[] | select(.lts) | .version' | head -n 1
   register: nodejs_latest_version
   changed_when: false
 

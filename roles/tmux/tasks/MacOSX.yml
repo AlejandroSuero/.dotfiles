@@ -1,5 +1,5 @@
 ---
-- name: Tmux | {{ ansible_distribution }} | Install tmux
+- name: Tmux | {{ ansible_distribution }}
   community.general.homebrew:
     name: tmux
     state: present

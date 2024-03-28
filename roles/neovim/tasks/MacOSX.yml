@@ -1,5 +1,5 @@
 ---
-- name: Neovim | {{ ansible_distribution }} | Dependencies
+- name: Neovim | Dependencies | {{ ansible_distribution }}
   community.general.homebrew:
     name:
       - cmake
@@ -11,7 +11,7 @@
       - fd
     state: present
 
-- name: Neovim | {{ ansible_distribution }} | Install
+- name: Neovim | Installation | {{ ansible_distribution }}
   community.general.homebrew:
     name: neovim
     state: present

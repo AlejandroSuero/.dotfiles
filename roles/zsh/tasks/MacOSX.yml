@@ -68,12 +68,12 @@
     shell: /opt/homebrew/bin/zsh
   become: true
 
-- name: ZSH | {{ ansible_distribution }} | Identify distribution config
+- name: ZSH | Config for {{ ansible_distribution }}
   ansible.builtin.stat:
     path: "{{ role_path }}/files/os/{{ ansible_distribution }}"
   register: zsh_os_distribution_config
 
-- name: ZSH | {{ ansible_os_family }} | Identify os family config
+- name: ZSH | OS family {{ ansible_os_family }}
   ansible.builtin.stat:
     path: "{{ role_path }}/files/os/{{ ansible_os_family }}"
   register: zsh_os_family_config

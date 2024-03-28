@@ -11,3 +11,5 @@
 - name: Github CLI | Install gh-dash
   ansible.builtin.command:
     cmd: gh extension install dlvhdr/gh-dash
+  register: gh_dash
+  changed_when: gh_dash.rc != 0

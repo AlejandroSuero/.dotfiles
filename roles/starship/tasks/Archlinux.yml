@@ -1,5 +1,5 @@
 ---
-- name: Starship | {{ ansible_distribution }} | Install starship
+- name: Starship | {{ ansible_distribution }}
   community.general.pacman:
     name:
       - starship

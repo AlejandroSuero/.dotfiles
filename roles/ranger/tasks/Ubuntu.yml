@@ -1,5 +1,5 @@
 ---
-- name: Ranger | {{ ansible_distribution }} | {{ ansible_pkg_mgr }} install
+- name: Ranger | {{ ansible_distribution }}
   ansible.builtin.apt:
     name: ranger
     state: present

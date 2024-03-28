@@ -1,5 +1,5 @@
 ---
-- name: FZF | {{ ansible_distribution }} | Install
+- name: FZF | Installation | {{ ansible_distribution }}
   community.general.homebrew:
     name:
       - fzf

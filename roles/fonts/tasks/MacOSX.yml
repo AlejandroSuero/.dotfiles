@@ -1,11 +1,11 @@
 ---
-- name: FONTS | {{ ansible_distribution }} {{ ansible_os_family }} | Tap cask-fonts
+- name: FONTS | Tap | {{ ansible_distribution }}
   community.general.homebrew_tap:
     name:
       - homebrew/cask-fonts
     state: present
 
-- name: FONTS | {{ ansible_distribution }} | Install
+- name: FONTS | Installation | {{ ansible_distribution }}
   community.general.homebrew_cask:
     name:
       - homebrew/cask-fonts/font-jetbrains-mono-nerd-font

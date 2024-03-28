@@ -1,11 +1,11 @@
 ---
-- name: System | {{ ansible_distribution }} | Update pacman
+- name: System | Update pacman | {{ ansible_distribution }}
   community.general.pacman:
     update_cache: true
     state: latest
   become: true
 
-- name: System | {{ ansible_distribution }} | Install jq
+- name: System | Installing tools
   community.general.pacman:
     name:
       - xclip

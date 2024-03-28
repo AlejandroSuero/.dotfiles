@@ -15,7 +15,9 @@
 
 - name: LAZYGIT | Getting version information
   ansible.builtin.shell:
-    cmd: /usr/local/bin/lazygit --version | grep -oP 'version=\K[^,]+' | awk 'NR==1' | sed 's/^/v/'
+    cmd: |
+      set -o pipefail
+      /usr/local/bin/lazygit --version | grep -oP 'version=\K[^,]+' | awk 'NR==1' | sed 's/^/v/'
   args:
     executable: /bin/bash
   register: current_lazygit_version

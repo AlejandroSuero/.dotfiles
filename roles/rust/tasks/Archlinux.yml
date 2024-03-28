@@ -1,11 +1,7 @@
 ---
-- name: Rust | {{ ansible_distribution }} | Install rustup
+- name: Rust | Install rustup | {{ ansible_distribution }}
   community.general.pacman:
     name: rustup
     extra_args: --noconfirm
     state: present
   become: true
-
-- name: Rust | {{ ansible_distribution }} | Rustup stable
-  ansible.builtin.command:
-    cmd: rustup default stable
