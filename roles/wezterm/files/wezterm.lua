@@ -78,22 +78,22 @@ config.keys = {
   },
   {
     key = "l",
-    mods = "CTRL",
+    mods = "LEADER|CTRL",
     action = action.ActivatePaneDirection "Right",
   },
   {
     key = "j",
-    mods = "CTRL",
+    mods = "LEADER|CTRL",
     action = action.ActivatePaneDirection "Down",
   },
   {
     key = "k",
-    mods = "CTRL",
+    mods = "LEADER|CTRL",
     action = action.ActivatePaneDirection "Up",
   },
   {
     key = "h",
-    mods = "CTRL",
+    mods = "LEADER|CTRL",
     action = action.ActivatePaneDirection "Left",
   },
   {
