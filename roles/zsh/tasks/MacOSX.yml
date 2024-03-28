@@ -42,7 +42,7 @@
 
 - name: "ZSH | Copy .zprofile"
   ansible.builtin.copy:
-    src: ".zsh_profile"
+    src: ".zprofile"
     dest: "{{ ansible_user_dir }}/.zprofile"
     mode: "0644"
 
