@@ -231,6 +231,7 @@ local rust_analyzer = {
 
 local servers = {
   -- Also uses `shellcheck` and `explainshell`
+  ansiblels = true,
   bashls = true,
   lua_ls = {
     Lua = {
@@ -250,7 +251,12 @@ local servers = {
   -- graphql = true,
   html = true,
   vimls = true,
-  yamlls = true,
+  yamlls = {
+    settings = {
+      schemas = require("schemastore").yaml.schemas(),
+    },
+    filetypes = { "yaml", "yaml.docker-compose" },
+  },
 
   -- Enable jsonls with json schemas
   jsonls = {
@@ -321,6 +327,7 @@ local servers = {
       "typescript",
       "typescriptreact",
       "typescript.tsx",
+      "astro",
     },
 
     on_attach = function(client)
