@@ -28,14 +28,14 @@
         cmd: /{{ ansible_user_dir }}/oh-my-zsh.install.sh
 - name: ZSH | Copy .zshrc
   ansible.builtin.file:
-    src: .zshrc
+    src: '{{ role_path }}/files/.zshrc'
     dest: '{{ ansible_user_dir }}/.zshrc'
     mode: '0644'
     state: link
     force: true
 - name: ZSH | Copy .zprofile
   ansible.builtin.file:
-    src: .zprofile
+    src: '{{ role_path }}/files/.zprofile'
     dest: '{{ ansible_user_dir }}/.zprofile'
     mode: '0644'
     state: link
