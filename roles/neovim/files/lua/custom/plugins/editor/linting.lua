@@ -13,6 +13,7 @@ return {
       markdown = { "markdownlint" },
       lua = { "luacheck" },
       go = { "golangcilint" },
+      yaml = { "ansible_lint", "yamllint" },
     }
   end,
 }
