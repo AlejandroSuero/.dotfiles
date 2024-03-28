@@ -14,27 +14,14 @@ COMPLETION_WAITING_DOTS="true"
 # don't put duplicate lines in the history. See zsh(1) for more options
 export HISTCONTROL=ignoredups
 
-completions=(
-  docker
-  git
-  gh
-  go
-  ssh
-  system
-  tmux
-  vault
-)
-
-aliases=(
-  chmod
-  general
-  misc
-)
-
 plugins=(
   ansible
+  docker
+  gh
   git
   golang
+  tmux
+  vault
   zoxide
   zsh-autosuggestions
   zsh-syntax-highlighting
