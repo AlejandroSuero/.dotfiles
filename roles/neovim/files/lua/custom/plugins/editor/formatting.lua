@@ -11,7 +11,6 @@ return {
       astro = { { "eslintd", "eslint", "prettierd", "prettier" } },
       go = { { "goimports-reviser", "golines", "gofumpt" } },
       c = { "clang_format" },
-      yaml = { "yamlfix" },
     },
     format_on_save = {
       timeout_ms = 500,
