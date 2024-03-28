@@ -11,12 +11,12 @@ _paste() {
 }
 
 _get_default_browser() {
-  default_browser=$(xdg-settings get default-web-browser)
-  tr ".desktop" "" < default_browser
+  default_browser=$(xdg-settings get default-web-browser | tr ".desktop" "")
+  echo default_browser
 }
 
 _open_default_browser() {
-  "$(_get_default_browser)" 2>dev/null
+  "$(_get_default_browser)" 2> /dev/null
 }
 
 alias c="_copy"
