@@ -1,15 +1,8 @@
 ---
-- name: FONTS | Git clone nerdfonts | {{ ansible_distribution }}
-  ansible.builtin.git:
-    repo: https://github.com/ryanoasis/nerd-fonts.git # noqa: latest
-    depth: 1
-    dest: "{{ ansible_user_dir }}/.nerd_fonts"
-
 - name: FONTS | Installation | {{ ansible_distribution }}
-  ansible.builtin.command:
-    cmd: /{{ ansible_user_dir }}/.nerd_fonts/install.sh {{ item }}
-  register: nf
-  changed_when: nf.rc != 0
-  with_items:
-    - Iosevka
-    - JetBrainsMono
+  community.general.pacman:
+    name:
+      - ttf-jetbrains-mono-nerd
+      - ttf-iosevka-nerd
+    state: present
+  become: true
