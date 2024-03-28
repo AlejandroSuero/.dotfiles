@@ -5,7 +5,7 @@ default_roles:
   - lua
   - nvm
   - system
-  - bash
+  # - bash
   - zsh
   - fzf
   - npm
