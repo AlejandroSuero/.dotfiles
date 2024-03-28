@@ -63,7 +63,6 @@
   ansible.builtin.file:
     src: "{{ role_path }}/files/zsh"
     dest: "{{ ansible_user_dir }}/.config/zsh"
-    mode: "0644"
     state: link
     force: true
 
