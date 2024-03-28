@@ -1,3 +1,4 @@
+---
 default_roles:
   - brave
   - fonts
@@ -24,4 +25,4 @@ default_roles:
   - zoxide
   - zsh
 
-git_user_name: "AlejandroSuero"
+git_user_name: AlejandroSuero
