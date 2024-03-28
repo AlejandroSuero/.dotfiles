@@ -31,7 +31,7 @@ This Ansible playbook only supports `Ubuntu|Archlinux|MacOSX` distribution. This
 
 Verify your `Ubuntu|Archlinux|MacOSX` installation has all latest packages installed before running the playbook.
 
-```
+```bash
 # Ubuntu
 sudo apt-get update && sudo apt-get upgrade -y
 # Arch
@@ -174,7 +174,7 @@ The `vault.secret` file allows you to encrypt values with `Ansible vault` and st
 nvim ~/.ansible-vault/vault.secret
 ```
 
-> Note: you can use any other text editor.
+> NOTE: you can use any other text editor.
 
 To then encrypt values with your vault password use the following:
 
