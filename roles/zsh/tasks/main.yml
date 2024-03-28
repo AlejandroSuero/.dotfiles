@@ -41,13 +41,13 @@
   ansible.builtin.copy:
     src: ".zshrc"
     dest: "{{ ansible_user_dir }}/.zshrc"
-    mode: "0644"
+    mode: "0755"
 
 - name: "ZSH | Copy .zprofile"
   ansible.builtin.copy:
     src: ".zprofile"
     dest: "{{ ansible_user_dir }}/.zprofile"
-    mode: "0644"
+    mode: "0755"
 
 - name: "ZSH | Copy custom zsh config"
   ansible.builtin.copy:
