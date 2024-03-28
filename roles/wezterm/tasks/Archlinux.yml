@@ -2,5 +2,5 @@
 - name: Wezterm | Installation
   community.general.pacman:
     name: wezterm
-  state: present
+    state: present
   become: true

@@ -2,4 +2,4 @@
 - name: Wezterm | Installation
   community.general.hombrew_cask:
     name: wezterm
-  state: latest
+    state: latest
