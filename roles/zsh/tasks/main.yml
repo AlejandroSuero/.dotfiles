@@ -68,11 +68,10 @@
     force: true
 
 - name: ZSH | Copy local scripts
-  ansible.builtin.file:
+  ansible.builtin.copy:
     dest: "{{ ansible_user_dir }}/.local/bin/"
     src: "{{ role_path }}/files/zsh/bin/"
     mode: "0755"
-    state: link
     force: true
   become: true
 
