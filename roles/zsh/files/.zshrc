@@ -14,6 +14,8 @@ COMPLETION_WAITING_DOTS="true"
 # don't put duplicate lines in the history. See zsh(1) for more options
 export HISTCONTROL=ignoredups
 
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+
 plugins=(
   ansible
   docker
