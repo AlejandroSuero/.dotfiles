@@ -7,4 +7,3 @@
 - name: "Lua | Run Tasks: {{ ansible_distribution }}"
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
   when: lua_distribution_config.stat.exists
-

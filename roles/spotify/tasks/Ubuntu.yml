@@ -1,5 +1,5 @@
 ---
-- name: "Spotify | Install snap"
+- name: Spotify | Install snap
   community.general.snap:
     name: spotify
     state: present

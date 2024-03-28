@@ -1,5 +1,5 @@
 ---
-- name: "BRAVE_BROWSER | Install"
+- name: BRAVE_BROWSER | Install
   community.general.pacman:
     name:
       - brave-browser

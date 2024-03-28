@@ -8,16 +8,15 @@
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
   when: starship_distribution_config.stat.exists
 
-- name: "Starship | Config folder"
+- name: Starship | Config folder
   ansible.builtin.file:
     mode: "0755"
     path: "{{ ansible_user_dir }}/.config/starship"
     state: directory
 
-- name: "Starship | Create symlink to role files directory"
+- name: Starship | Create symlink to role files directory
   ansible.builtin.file:
     src: "{{ role_path }}/files"
     dest: "{{ ansible_user_dir }}/.config/starship"
     state: link
     force: true
-

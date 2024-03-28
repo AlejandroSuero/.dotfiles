@@ -1,5 +1,5 @@
 ---
-- name: "Rust | {{ ansible_distribution }} | Install rustc cargo"
+- name: Rust | {{ ansible_distribution }} | Install rustc cargo
   ansible.builtin.apt:
     name: "{{ item }}"
     state: present

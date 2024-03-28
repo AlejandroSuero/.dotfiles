@@ -1,8 +1,8 @@
 ---
-- name: "Go-Lang | Install go"
+- name: Go-Lang | Install go
   community.general.homebrew:
     name:
-      - 'go'
+      - go
     state: present
   register: brew_result
   until: brew_result is success

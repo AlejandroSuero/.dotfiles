@@ -1,5 +1,5 @@
 ---
-- name: "Ranger | {{ ansible_distribution }} | {{ ansible_pkg_mgr }} install"
+- name: Ranger | {{ ansible_distribution }} | {{ ansible_pkg_mgr }} install
   community.general.pacman:
     name: ranger
     state: present

@@ -8,9 +8,9 @@
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
   when: system_distribution_config.stat.exists
 
-- name: "System | Set hosts"
+- name: System | Set hosts
   ansible.builtin.template:
-    dest: "/etc/hosts"
+    dest: /etc/hosts
     src: hosts.j2
     mode: "0644"
   become: true
@@ -22,7 +22,7 @@
   register: win32yank_installed
   when: ansible_host_environment_is_wsl
 
-- name: "System | Install win32yank.exe"
+- name: System | Install win32yank.exe
   when:
     - ansible_host_environment_is_wsl
     - not win32yank_installed.stat.exists
@@ -54,4 +54,3 @@
       loop:
         - /tmp/win32yank.zip
         - /tmp/win32yank.exe
-

@@ -8,18 +8,18 @@
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
   when: tmux_distribution_config.stat.exists
 
-- name: "Tmux | Install TPM"
+- name: Tmux | Install TPM
   ansible.builtin.git:
     repo: https://github.com/tmux-plugins/tpm
     dest: ~/.tmux/plugins/tpm
 
-- name: "Tmux | Config folder"
+- name: Tmux | Config folder
   ansible.builtin.file:
     mode: "0755"
     path: "{{ ansible_user_dir }}/.config/tmux"
     state: directory
 
-- name: "Tmux | Create symlink to role files directory"
+- name: Tmux | Create symlink to role files directory
   ansible.builtin.file:
     src: "{{ role_path }}/files"
     dest: "{{ ansible_user_dir }}/.config/tmux"

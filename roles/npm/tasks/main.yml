@@ -1,31 +1,31 @@
 ---
-- name: "NPM | Get latest STABLE NodeJS version"
+- name: NPM | Get latest STABLE NodeJS version
   ansible.builtin.shell:
     cmd: curl -sL https://nodejs.org/dist/index.json | jq -r '.[] | select(.lts) | .version' | head -n 1
   register: nodejs_latest_version
   changed_when: false
 
-- name: "NPM | Check if NodeJS is installed"
+- name: NPM | Check if NodeJS is installed
   ansible.builtin.command: node --version
   register: nodejs_installed
   failed_when: false
   changed_when: false
 
-- name: "NPM | Check if NodeJS is up to date"
+- name: NPM | Check if NodeJS is up to date
   ansible.builtin.command: node --version
   register: nodejs_up_to_date
   failed_when: false
   changed_when: false
 
-- name: "NPM | Show NodeJS version"
+- name: NPM | Show NodeJS version
   ansible.builtin.debug:
     msg: "Installed NodeJS version: {{ nodejs_installed.stdout }}"
 
-- name: "NPM | Show NodeJS latest version"
+- name: NPM | Show NodeJS latest version
   ansible.builtin.debug:
     msg: "Online NodeJS LTS version: {{ nodejs_latest_version.stdout }}"
 
-- name: "NPM | Register update needed"
+- name: NPM | Register update needed
   ansible.builtin.set_fact:
     nodejs_install_needed: true
   when:
@@ -33,23 +33,23 @@
     # - nodejs_up_to_date.rc != 0
     - nodejs_up_to_date.stdout != nodejs_latest_version.stdout
 
-- name: "NPM | Install NodeJS"
+- name: NPM | Install NodeJS
   become: true
   when:
     - nodejs_install_needed is defined
     - nodejs_install_needed
   block:
-    - name: "NPM | Get System Arch"
+    - name: NPM | Get System Arch
       ansible.builtin.set_fact:
         nodejs_arch: "{{ ansible_machine | replace('x86_64', 'x64') | replace('aarch64', 'arm64') }}"
 
-    - name: "NPM | Register Pagkage Name"
+    - name: NPM | Register Pagkage Name
       ansible.builtin.set_fact:
-        nodejs_package_name: "node-{{ nodejs_latest_version.stdout }}-{{ ansible_system | lower }}-{{ nodejs_arch }}"
+        nodejs_package_name: node-{{ nodejs_latest_version.stdout }}-{{ ansible_system | lower }}-{{ nodejs_arch }}
 
-    - name: "NPM | Download NodeJS"
+    - name: NPM | Download NodeJS
       ansible.builtin.get_url:
-        url: "https://nodejs.org/dist/{{ nodejs_latest_version.stdout }}/{{ nodejs_package_name }}.tar.xz"
+        url: https://nodejs.org/dist/{{ nodejs_latest_version.stdout }}/{{ nodejs_package_name }}.tar.xz
         dest: /tmp/{{ nodejs_package_name }}.tar.xz
         mode: "0644"
 
@@ -59,14 +59,14 @@
         state: directory
         mode: "0755"
 
-    - name: "NPM | Extract NodeJS"
+    - name: NPM | Extract NodeJS
       ansible.builtin.unarchive:
         src: /tmp/{{ nodejs_package_name }}.tar.xz
         dest: /tmp/{{ nodejs_package_name }}
         remote_src: true
-        extra_opts: "--strip-components=1"
+        extra_opts: --strip-components=1
 
-    - name: "NPM | Copy NodeJS"
+    - name: NPM | Copy NodeJS
       ansible.builtin.copy:
         src: /tmp/{{ nodejs_package_name }}/bin/
         dest: /usr/local/bin/*
@@ -79,31 +79,31 @@
         state: directory
         mode: "0755"
 
-    - name: "NPM | Copy NodeJS Modules"
+    - name: NPM | Copy NodeJS Modules
       ansible.builtin.copy:
         src: /tmp/{{ nodejs_package_name }}/lib/node_modules/
         dest: /usr/local/lib/node_modules/*
         remote_src: true
         mode: "0644"
 
-- name: "NPM | Detecting Installed npm"
+- name: NPM | Detecting Installed npm
   ansible.builtin.command:
     cmd: which npm
   changed_when: false
   register: npm_cmd
   failed_when: false
 
-- name: "NPM | Register npm status installed"
+- name: NPM | Register npm status installed
   ansible.builtin.set_fact:
     npm_is_installed: true
   when: npm_cmd.stdout|length > 0
 
-- name: "NPM | Register npm status not installed"
+- name: NPM | Register npm status not installed
   ansible.builtin.set_fact:
     npm_is_installed: false
   when: npm_cmd.stdout|length == 0
 
-- name: "NPM | Install NPM Packages"
+- name: NPM | Install NPM Packages
   community.general.npm:
     name: "{{ item }}"
     global: true

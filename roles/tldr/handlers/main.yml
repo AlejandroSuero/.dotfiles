@@ -1,7 +1,7 @@
 ---
 - name: Cleanup Tldr downloaded tar
   ansible.builtin.file:
-    path: "/tmp/{{ tldr_file }}.tar.gz"
+    path: /tmp/{{ tldr_file }}.tar.gz
     state: absent
   become: true
 

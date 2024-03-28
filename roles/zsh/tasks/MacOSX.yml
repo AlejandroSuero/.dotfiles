@@ -1,60 +1,60 @@
 ---
-- name: "ZSH | Install for {{ ansible_distribution }}"
+- name: ZSH | Install for {{ ansible_distribution }}
   community.general.homebrew:
     name:
       - zsh
     state: present
 
-- name: "ZSH | Detect oh-my-zsh"
+- name: ZSH | Detect oh-my-zsh
   ansible.builtin.stat:
     path: "{{ ansible_user_dir }}/.oh-my-zsh"
   register: ohmyzsh
 
-- name: "ZSH | Register oh-my-zsh state"
+- name: ZSH | Register oh-my-zsh state
   ansible.builtin.set_fact:
     ohmyzsh_is_installed: "{{ ohmyzsh.stat.exists }}"
 
-- name: "ZSH | Debug ohmyzsh_is_installed"
+- name: ZSH | Debug ohmyzsh_is_installed
   ansible.builtin.debug:
     var: ohmyzsh_is_installed
 
-- name: "ZSH | Install oh-my-zsh"
+- name: ZSH | Install oh-my-zsh
   when: not ohmyzsh_is_installed
   block:
-    - name: "ZSH | Download oh-my-zsh Install Script"
+    - name: ZSH | Download oh-my-zsh Install Script
       ansible.builtin.get_url:
         url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
         dest: /{{ ansible_user_dir }}/oh-my-zsh.install.sh
         force: true
         mode: "0755"
       notify:
-        - "ZSH | Cleanup oh-my-zsh install script"
+        - ZSH | Cleanup oh-my-zsh install script
 
-    - name: "ZSH | Run the install script"
+    - name: ZSH | Run the install script
       ansible.builtin.script:
         cmd: /{{ ansible_user_dir }}/oh-my-zsh.install.sh
 
-- name: "ZSH | Copy .zshrc"
+- name: ZSH | Copy .zshrc
   ansible.builtin.copy:
-    src: ".zshrc"
+    src: .zshrc
     dest: "{{ ansible_user_dir }}/.zshrc"
     mode: "0644"
 
-- name: "ZSH | Copy .zprofile"
+- name: ZSH | Copy .zprofile
   ansible.builtin.copy:
-    src: ".zprofile"
+    src: .zprofile
     dest: "{{ ansible_user_dir }}/.zprofile"
     mode: "0644"
 
-- name: "ZSH | Copy custom zsh config"
+- name: ZSH | Copy custom zsh config
   ansible.builtin.copy:
     dest: "{{ ansible_user_dir }}/.config/"
-    src: "zsh"
+    src: zsh
     mode: "0644"
     directory_mode: "0755"
     force: true
 
-- name: "ZSH | Copy local scripts"
+- name: ZSH | Copy local scripts
   ansible.builtin.copy:
     dest: "{{ ansible_user_dir }}/.local/bin/"
     src: "{{ role_path }}/files/zsh/bin/"
@@ -62,24 +62,24 @@
     force: true
   become: true
 
-- name: "ZSH | Set default terminal"
+- name: ZSH | Set default terminal
   ansible.builtin.user:
     name: "{{ host_user }}"
     shell: /opt/homebrew/bin/zsh
   become: true
 
-- name: "ZSH | {{ ansible_distribution }} | Identify distribution config"
+- name: ZSH | {{ ansible_distribution }} | Identify distribution config
   ansible.builtin.stat:
     path: "{{ role_path }}/files/os/{{ ansible_distribution }}"
   register: zsh_os_distribution_config
 
-- name: "ZSH | {{ ansible_os_family }} | Identify os family config"
+- name: ZSH | {{ ansible_os_family }} | Identify os family config
   ansible.builtin.stat:
     path: "{{ role_path }}/files/os/{{ ansible_os_family }}"
   register: zsh_os_family_config
   when: not zsh_os_distribution_config.stat.exists
 
-- name: "ZSH | Calculate os config src"
+- name: ZSH | Calculate os config src
   ansible.builtin.set_fact:
     zsh_os_config: "{{ zsh_os_distribution_config if zsh_os_distribution_config.stat.exists else zsh_os_family_config }}"
 

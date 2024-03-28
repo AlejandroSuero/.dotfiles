@@ -1,5 +1,5 @@
 ---
-- name: "System | {{ ansible_distribution }} | Update APT Repos and Upgrade APT Packages"
+- name: System | {{ ansible_distribution }} | Update APT Repos and Upgrade APT Packages
   ansible.builtin.apt:
     update_cache: true
     upgrade: full
@@ -7,7 +7,7 @@
     autoclean: true
   become: true
 
-- name: "System | {{ ansible_distribution }} | Install jq"
+- name: System | {{ ansible_distribution }} | Install jq
   ansible.builtin.apt:
     name:
       - xclip

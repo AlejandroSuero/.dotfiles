@@ -1,5 +1,5 @@
 ---
-- name: "FZF | {{ ansible_distribution }} | Install fzf"
+- name: FZF | {{ ansible_distribution }} | Install fzf
   community.general.pacman:
     name:
       - fzf

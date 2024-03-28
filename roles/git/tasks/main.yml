@@ -2,32 +2,32 @@
 - name: "Git | Run Tasks: {{ ansible_distribution }}"
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
 
-- name: "Git | Set init.defaultBranch"
+- name: Git | Set init.defaultBranch
   community.general.git_config:
     name: init.defaultBranch
     scope: global
     value: main
 
-- name: "Git | Set pull.rebase"
+- name: Git | Set pull.rebase
   community.general.git_config:
     name: pull.rebase
     scope: global
     value: true
 
-- name: "Git | Set user.name"
+- name: Git | Set user.name
   community.general.git_config:
     name: user.name
     scope: global
     value: "{{ git_user_name }}"
 
-- name: "Git | Set core.editor"
+- name: Git | Set core.editor
   community.general.git_config:
     name: core.editor
     scope: global
-    value: "nvim"
+    value: nvim
 
-- name: "Git | Set sequence.editor"
+- name: Git | Set sequence.editor
   community.general.git_config:
     name: sequence.editor
     scope: global
-    value: "nvim"
+    value: nvim

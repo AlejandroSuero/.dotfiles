@@ -1,5 +1,5 @@
 ---
-- name: "Rust | Install rust"
+- name: Rust | Install rust
   community.general.homebrew:
     name:
       - rust

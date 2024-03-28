@@ -1,5 +1,5 @@
 ---
-- name: "NPM | Cleanup NodeJS"
+- name: NPM | Cleanup NodeJS
   ansible.builtin.file:
     path: /tmp/{{ nodejs_package_name }}*
     state: absent
