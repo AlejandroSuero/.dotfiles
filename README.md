@@ -2,7 +2,6 @@
 <p align="center">
   <a href="https://github.com/AlejanroSuero/.dotfiles/actions/workflows/ansible-lint.yml"><img align="center" src="https://github.com/AlejandroSuero/.dotfiles/actions/workflows/ansible-lint.yml/badge.svg" alt="ansible action badge" title="Ansible passing?"/></a>
   <a href="https://github.com/AlejanroSuero/.dotfiles/issues"><img align="center" src="https://img.shields.io/github/issues/alejandrosuero/.dotfiles" alt="issues badge" title="Issues" /></a>
-  <a href="https://github.com/AlejandroSuero/.dotfiles/commits/main"><img align="center" src="https://img.shields.io/github/commit-activity/m/alejandrosuero/.dotfiles" alt="commit frequency" title="Commit frequency" ></a>
 </p>
 
 ---
