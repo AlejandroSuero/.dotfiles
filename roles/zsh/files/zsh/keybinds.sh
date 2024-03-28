@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
-bind -x '"\C-f":tmux-sessionizer'
-bind -x '"\C-g":lazygit'
-bind -x '"\C-b":$(_open_default_browser)'
+bindkey -s ^f "tmux-sessionizer\n"
+bindkey -s ^g "lazygit\n"
+bindkey -s ^b "$(_open_default_browser)"

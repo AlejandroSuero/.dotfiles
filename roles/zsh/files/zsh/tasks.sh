@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # Generate a timestamped log file name
 #   Usage: LOG=$(generate_log)
@@ -10,7 +10,7 @@ generate_log() {
 }
 
 # _header colorize the given argument with spacing
-function _task {
+_task() {
   # if _task is called while a task was set, complete the previous
   if [[ $TASK != "" ]]; then
     printf "${OVERWRITE}${LGREEN} [OK]  ${LGREEN}${TASK}\n"
@@ -21,7 +21,7 @@ function _task {
 }
 
 # _cmd performs commands with error checking
-function _cmd {
+_cmd() {
   LOG=$(generate_log)
   #create log if it doesn't exist
   if ! [[ -f $LOG ]]; then
@@ -45,11 +45,11 @@ function _cmd {
   exit 1
 }
 
-function _clear_task {
+_clear_task() {
   TASK=""
 }
 
-function _task_done {
+_task_done() {
   printf "${OVERWRITE}${LGREEN} [OK]  ${LGREEN}${TASK}\n"
   _clear_task
 }

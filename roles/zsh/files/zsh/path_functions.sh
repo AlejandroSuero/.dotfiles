@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 addToPath() {
     if [[ "$PATH" != *"$1"* ]]; then

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 addToPath /usr/local/go/bin
 addToPath $GOPATH/bin

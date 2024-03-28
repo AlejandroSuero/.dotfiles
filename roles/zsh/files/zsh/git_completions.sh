@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
-__git_complete gc _git_checkout
-__git_complete gcb _git_checkout
-__git_complete gp _git_push
-__git_complete gb _git_switch
-__git_complete gbc _git_switch
+gc _git_checkout
+gcb _git_checkout
+gp _git_push
+gb _git_switch
+gbc _git_switch

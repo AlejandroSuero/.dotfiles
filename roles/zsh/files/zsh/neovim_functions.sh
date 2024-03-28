@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 function __nisshfs_usage() {
     echo -e "${ARROW} ${YELLOW}Usage: nisshfs -s <server> [-d remote_dir]${NC}"

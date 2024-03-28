@@ -1,4 +1,4 @@
-#!/usr/env/bin bash
+#!/usr/env/bin zsh
 
 # color codes
 RESTORE='\033[0m'

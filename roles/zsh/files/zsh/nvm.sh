@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 function check_nvmrc() {
   if [[ -f "$PWD"/.nvmrc ]]; then
@@ -8,5 +8,10 @@ function check_nvmrc() {
 
 cd() {
   builtin cd "$@"
+  check_nvmrc
+}
+
+z() {
+  __zoxide_z "$@"
   check_nvmrc
 }

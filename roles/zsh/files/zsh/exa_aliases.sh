@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 alias ls="exa --icons --classify"
 alias ll="exa -l --icons"
