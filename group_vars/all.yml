@@ -1,26 +1,27 @@
 default_roles:
-  - fonts
-  - git
-  - neovim
-  - lua
-  - nvm
-  - system
-  - zsh
-  - fzf
-  - npm
-  - zoxide
-  - rust
-  - go
-  - gh
-  - spotify
-  - lazygit
-  - starship
   - brave
-  - tmux
-  - python
-  - sketchybar
+  - fonts
+  - fzf
+  - gh
+  - git
+  - go
   - karabiner
+  - lazygit
+  - lua
+  - neovim
+  - npm
+  - nvm
+  - python
   - ranger
+  - rust
+  - sketchybar
+  - spotify
+  - starship
+  - system
+  - tmux
+  - wezterm
   - yabai
+  - zoxide
+  - zsh
 
 git_user_name: "AlejandroSuero"
