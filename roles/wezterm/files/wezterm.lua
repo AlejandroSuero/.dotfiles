@@ -31,7 +31,7 @@ config.font = wezterm.font_with_fallback {
   "nonicons",
 }
 
-config.font_size = 16
+config.font_size = 10
 
 -- default is true, has more "native" look
 config.use_fancy_tab_bar = false
