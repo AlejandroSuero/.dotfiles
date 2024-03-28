@@ -12,7 +12,7 @@
 
 - name: "ZSH | Register oh-my-zsh state"
   ansible.builtin.set_fact:
-    ohmyzsh_is_installed: "{{ ohmybash.stat.exists }}"
+    ohmyzsh_is_installed: "{{ ohmyzsh.stat.exists }}"
 
 - name: "ZSH | Debug ohmyzsh_is_installed"
   ansible.builtin.debug:
@@ -81,9 +81,9 @@
 
 - name: "ZSH | Calculate os config src"
   ansible.builtin.set_fact:
-    zsh_os_config: "{{ bash_os_distribution_config if bash_os_distribution_config.stat.exists else bash_os_family_config }}"
+    zsh_os_config: "{{ zsh_os_distribution_config if zsh_os_distribution_config.stat.exists else zsh_os_family_config }}"
 
-- name: "ZSH | Copy custom zsh config for os: {{ bash_os_config.stat.path | basename }}"
+- name: "ZSH | Copy custom zsh config for os: {{ zsh_os_config.stat.path | basename }}"
   ansible.builtin.copy:
     dest: "{{ ansible_user_dir }}/.config/zsh/"
     src: "{{ zsh_os_config.stat.path }}/"
