@@ -14,6 +14,11 @@ COMPLETION_WAITING_DOTS="true"
 # don't put duplicate lines in the history. See zsh(1) for more options
 export HISTCONTROL=ignoredups
 
+zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
+
+fpath=(~/.zsh/ $fpath)
+
+autoload -Uz compinit && compinit
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
 plugins=(
