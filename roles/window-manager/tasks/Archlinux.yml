@@ -1,14 +1,14 @@
 ---
 - name: Window Manager | Dependencies
   block:
-    - name: Yay
-      kewlfft.aur.aur:
-        use: yay
+    - name: Window Manager | i3lock-color
+      community.general.pacman:
+        executable: yay
+        state: present
         name:
           - i3lock-color
-        state: present
 
-    - name: Pacman
+    - name: Window Manager | i3, feh, appearance
       ansible.builtin.package:
         name:
           - feh
