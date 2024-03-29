@@ -113,7 +113,7 @@ return {
           },
           win_options = {
             winhighlight = {
-              NormalFloat = "NormalFloat",
+              Normal = "Normal",
               FloatBorder = "DiagnosticInfo",
             },
           },
