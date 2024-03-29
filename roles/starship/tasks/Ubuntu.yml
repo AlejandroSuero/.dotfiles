@@ -4,5 +4,5 @@
     executable: /usr/bin/cargo
     name:
       - starship
-    locked: true
+    locked: false
     state: latest
