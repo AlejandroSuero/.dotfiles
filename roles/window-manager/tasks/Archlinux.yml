@@ -7,6 +7,7 @@
         state: present
         name:
           - i3lock-color
+      become: true
 
     - name: Window Manager | i3, feh, appearance
       ansible.builtin.package:
