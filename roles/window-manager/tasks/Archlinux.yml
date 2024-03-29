@@ -1,13 +1,19 @@
 ---
 - name: Window Manager | Dependencies
   block:
+    - name: Remove i3lock
+      ansible.builtin.package:
+        name:
+          - i3lock
+        state: absent
+      become: true
+
     - name: Window Manager | i3lock-color
       community.general.pacman:
         executable: yay
         state: present
         name:
           - i3lock-color
-      become: true
 
     - name: Window Manager | i3, feh, appearance
       ansible.builtin.package:
