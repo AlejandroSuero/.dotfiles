@@ -23,7 +23,7 @@ config.color_scheme = "Catppuccin Mocha"
 
 config.font = wezterm.font_with_fallback {
   {
-    family = "JetBrainsMono Nerd Font Mono",
+    family = "JetBrainsMono Nerd Font",
     weight = 600,
     harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
   },
