@@ -1,20 +1,28 @@
 ---
 - name: Window Manager | Dependencies
-  ansible.builtin.package:
-    name:
-      - feh
-      - xorg
-      - lightdm
-      - lightdm-gtk-greeter
-      - i3-wm
-      - i3lock-color
-      - i3status
-      - i3blocks
-      - dmenu
-      - lxappearance
-      - terminator
-    state: present
-  become: true
+  block:
+    - name: Yay
+      kewlfft.aur.aur:
+        use: yay
+        name:
+          - i3lock-color
+        state: present
+
+    - name: Pacman
+      ansible.builtin.package:
+        name:
+          - feh
+          - xorg
+          - lightdm
+          - lightdm-gtk-greeter
+          - i3-wm
+          - i3status
+          - i3blocks
+          - dmenu
+          - lxappearance
+          - terminator
+        state: present
+      become: true
 
 - name: Window Manager | Start services
   ansible.builtin.service:
