@@ -32,9 +32,9 @@ local custom_init = function(client)
 end
 
 local augroup_highlight =
-    vim.api.nvim_create_augroup("custom-lsp-references", { clear = true })
+  vim.api.nvim_create_augroup("custom-lsp-references", { clear = true })
 local augroup_codelens =
-    vim.api.nvim_create_augroup("custom-lsp-codelens", { clear = true })
+  vim.api.nvim_create_augroup("custom-lsp-codelens", { clear = true })
 
 local filetype_attach = setmetatable({
   ocaml = function()
@@ -203,7 +203,7 @@ end
 
 local updated_capabilities = vim.lsp.protocol.make_client_capabilities()
 updated_capabilities.textDocument.completion.completionItem.snippetSupport =
-    true
+  true
 updated_capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
 -- Completion configuration
@@ -213,7 +213,7 @@ vim.tbl_deep_extend(
   require("cmp_nvim_lsp").default_capabilities()
 )
 updated_capabilities.textDocument.completion.completionItem.insertReplaceSupport =
-    false
+  false
 
 updated_capabilities.textDocument.codeLens = { dynamicRegistration = false }
 
@@ -230,8 +230,10 @@ local rust_analyzer = {
 }
 
 local servers = {
+  ansiblels = {
+    filetypes = { "yaml", "yaml.ansible" },
+  },
   -- Also uses `shellcheck` and `explainshell`
-  ansiblels = true,
   bashls = true,
   lua_ls = {
     Lua = {
