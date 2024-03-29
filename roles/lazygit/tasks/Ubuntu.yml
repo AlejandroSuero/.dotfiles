@@ -36,9 +36,9 @@
   when: lazygit_latest_release not in current_lazygit_version.stdout|default('')
   block:
     - name: LAZYGIT | Define architecture
-      ansible.builtin.shell:
-        cmd: dpkg --print-architecture
+      ansible.builtin.command: dpkg --print-architecture
       register: linux_arch
+      changed_when: false
 
     # regex_replace('^.', '') removes the first character from the string (the 'v' in the version number)
     - name: LAZYGIT | Define lazygit_file
