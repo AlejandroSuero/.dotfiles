@@ -17,7 +17,7 @@
   retries: 1
   delay: 2
 
-- name: Go-Lang | Define GOARCH
+- name: Go-Lang | Define GOARCH | {{ ansible_machine, ansible_architecture }}
   ansible.builtin.set_fact:
     goarch: "{{ ansible_machine | replace('x86_64', 'amd64') | replace('aarch64', 'arm64') }}"
 
