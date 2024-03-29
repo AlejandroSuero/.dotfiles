@@ -11,7 +11,6 @@ export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 ZSH_THEME=""
-eval "$(starship init zsh)"
 
 DISABLE_UPDATE_PROMPT=true
 
@@ -76,3 +75,5 @@ if [[ "$(uname)" == "Darwin" ]]; then
   # gnu-tar as tar
   addToPathFront "/opt/homebrew/opt/gnu-tar/libexec/gnubin"
 fi
+
+eval "$(starship init zsh)"
