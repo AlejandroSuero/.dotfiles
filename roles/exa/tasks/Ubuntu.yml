@@ -1,0 +1,7 @@
+---
+- name: EXA | Install
+  ansible.builtin.apt:
+    name:
+      - exa
+    state: present
+  become: true

@@ -1,0 +1,6 @@
+---
+- name: EXA | Install
+  community.general.homebrew:
+    name:
+      - exa
+    state: present

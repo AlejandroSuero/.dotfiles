@@ -1,0 +1,7 @@
+---
+- name: EXA | Install
+  community.general.pacman:
+    name:
+      - exa
+    state: present
+  become: true
