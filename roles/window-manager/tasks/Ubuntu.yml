@@ -1,0 +1,88 @@
+---
+- name: Window Manager | Dependencies
+  ansible.builtin.package:
+    name:
+      - feh
+      - xorg
+      - lightdm
+      - lightdm-gtk-greeter
+      - i3-wm
+      - i3lock
+      - i3status
+      - i3blocks
+      - dmenu
+      - lxappearance
+      - terminator
+    state: present
+  become: true
+
+- name: Window Manager | i3lock-color
+  block:
+    - name: Dependencies
+      ansible.builtin.package:
+        name:
+          - autoconf
+          - gcc
+          - make
+          - pkg-config
+          - libpam0g-dev
+          - libcairo2-dev
+          - libfontconfig1-dev
+          - libxcb-composite-dev
+          - libev-dev
+          - libx11-xcb-dev
+          - libxcb-xkb-dev
+          - libxcb-xinerama0-dev
+          - libxcb-randr0-dev
+          - libxcb-image0-dev
+          - libxcb-util-dev
+          - libxcb-xrm-dev
+          - libxkbcommon-dev
+          - libxkbcommon-x11-dev
+          - libjpeg-dev
+        state: present
+      become: true
+
+    - name: Clone i3lock-color
+      ansible.builtin.git:
+        clone: true
+        repo: https://github.com/Raymo111/i3lock-color.git # noqa: latest
+        dest: "{{ ansible_user_dir }}/i3lock-color"
+
+    - name: Build and Install
+      ansible.builtin.command:
+        cmd: ./install-i3lock-color.sh
+        chdir: "{{ ansible_user_dir }}/i3lock-color"
+      changed_when: false
+
+- name: Window Manager | Start services
+  ansible.builtin.service:
+    name: lightdm
+    enabled: true
+    state: started
+
+- name: Window Manager | Config
+  block:
+    - name: Scripts
+      ansible.builtin.template:
+        dest: "{{ ansible_user_dir }}/.config/scripts/{{ item }}"
+        src: "{{ item }}.j2"
+        mode: "0755"
+      with_items:
+        - lock
+        - memory
+        - disk
+
+    - name: Config
+      ansible.builtin.template:
+        dest: "{{ ansible_user_dir }}/.config/i3/config"
+        src: config.j2
+        mode: "0755"
+
+    - name: Blocks config
+      ansible.builtin.template:
+        dest: "{{ ansible_user_dir }}/.config/i3blocks/i3blocks.conf"
+        src: i3blocks.conf.j2
+        mode: "0755"
+        group: ansible_user_id
+        owner: ansible_user_id

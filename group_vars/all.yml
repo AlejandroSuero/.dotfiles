@@ -23,6 +23,7 @@ default_roles:
   - system
   - tmux
   - wezterm
+  - window-manager
   - yabai
   - zoxide
   - zsh
