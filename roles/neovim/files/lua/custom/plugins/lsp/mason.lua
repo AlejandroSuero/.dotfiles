@@ -15,16 +15,6 @@ return {
   config = function(_, opts)
     local mason = require "mason"
 
-    if package.config:sub(1, 1) ~= "\\" then
-      opts.ensure_installed = vim.list_extend(opts.ensure_installed or {}, {
-        "phpactor",
-      })
-    else
-      opts.ensure_installed = vim.list_extend(opts.ensure_installed or {}, {
-        "intelephense",
-      })
-    end
-
     mason.setup(opts)
 
     vim.api.nvim_create_user_command("MasonInstallAll", function()
