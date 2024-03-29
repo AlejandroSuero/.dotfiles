@@ -1,6 +1,6 @@
 ---
-- name: Spotify | Install snap
+- name: Spotify | Install snap | {{ ansible_architecture }}
   community.general.snap:
     name: spotify
     state: present
-  when: not ansible_host_environment_is_wsl
+  when: not ansible_host_environment_is_wsl and ansible_architecture == "amd64"
