@@ -35,7 +35,10 @@ return {
 
     -- Useful status updates for LSP.
     -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-    { "j-hui/fidget.nvim", opts = {} },
+    {
+      "j-hui/fidget.nvim",
+      opts = {},
+    },
     "simrat39/inlay-hints.nvim",
     "jose-elias-alvarez/nvim-lsp-ts-utils",
     "b0o/schemastore.nvim",

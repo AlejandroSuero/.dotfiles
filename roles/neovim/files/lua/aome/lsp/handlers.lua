@@ -13,17 +13,15 @@ vim.lsp.handlers["textDocument/definition"] = function(_, result)
 end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
-  vim.lsp.with(vim.lsp.handlers["textDocument/publishDiagnostics"], {
-    signs = {
-      severity = { min = vim.diagnostic.severity.WARNING },
-    },
-    underline = {
-      severity = { min = vim.diagnostic.severity.ERROR },
-    },
-    virtual_text = true,
-  })
-
-vim.lsp.handlers["window/showMessage"] = require "aome.lsp.show_message"
+    vim.lsp.with(vim.lsp.handlers["textDocument/publishDiagnostics"], {
+      signs = {
+        severity = { min = vim.diagnostic.severity.WARNING },
+      },
+      underline = {
+        severity = { min = vim.diagnostic.severity.ERROR },
+      },
+      virtual_text = true,
+    })
 
 local M = {}
 

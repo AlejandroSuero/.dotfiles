@@ -32,9 +32,9 @@ local custom_init = function(client)
 end
 
 local augroup_highlight =
-  vim.api.nvim_create_augroup("custom-lsp-references", { clear = true })
+    vim.api.nvim_create_augroup("custom-lsp-references", { clear = true })
 local augroup_codelens =
-  vim.api.nvim_create_augroup("custom-lsp-codelens", { clear = true })
+    vim.api.nvim_create_augroup("custom-lsp-codelens", { clear = true })
 
 local filetype_attach = setmetatable({
   ocaml = function()
@@ -203,7 +203,7 @@ end
 
 local updated_capabilities = vim.lsp.protocol.make_client_capabilities()
 updated_capabilities.textDocument.completion.completionItem.snippetSupport =
-  true
+    true
 updated_capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
 -- Completion configuration
@@ -213,7 +213,7 @@ vim.tbl_deep_extend(
   require("cmp_nvim_lsp").default_capabilities()
 )
 updated_capabilities.textDocument.completion.completionItem.insertReplaceSupport =
-  false
+    false
 
 updated_capabilities.textDocument.codeLens = { dynamicRegistration = false }
 
@@ -244,13 +244,9 @@ local servers = {
   tailwindcss = true,
 
   pyright = true,
-  ruff_lsp = true,
-  -- pylyzer = true,
 
-  gdscript = true,
-  -- graphql = true,
+  graphql = true,
   html = true,
-  vimls = true,
   yamlls = {
     settings = {
       schemas = require("schemastore").yaml.schemas(),
