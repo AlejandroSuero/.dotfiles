@@ -13,6 +13,7 @@ default_roles:
   - neovim
   - npm
   - nvm
+  - php
   - python
   - ranger
   - rust

@@ -1,0 +1,39 @@
+---
+- name: PHP | Installation
+  ansible.builtin.apt:
+    name:
+      - php
+      - libapache2-mod-php
+    state: present
+    update_cache: true
+  become: true
+
+- name: PHP | Dependencies
+  ansible.builtin.apt:
+    name:
+      - php-cli
+      - unzip
+    state: present
+  become: true
+
+- name: PHP | Composer
+  block:
+    - name: Composer | Download
+      ansible.builtin.get_url:
+        url: https://getcomposer.org/installer
+        dest: /tmp/composer-setup.php
+        force: true
+        mode: "0755"
+
+    - name: Composer | Execute hash
+      ansible.builtin.command: |
+        php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH')
+        { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+      enviroment: curl -sS https://composer.github.io/installer.sig
+      changed_when: false
+
+    - name: Composer | Installation
+      ansible.builtin.command: |
+        php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
+      changed_when: false
+      become: true

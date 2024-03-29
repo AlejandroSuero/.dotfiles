@@ -1,0 +1,12 @@
+---
+- name: PHP | Installation
+  community.general.homebrew:
+    name:
+      - php
+    state: present
+
+- name: PHP | Composer
+  community.general.homebrew:
+    name:
+      - composer
+    state: present

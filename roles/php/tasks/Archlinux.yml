@@ -1,0 +1,14 @@
+---
+- name: PHP | Installation
+  community.general.pacman:
+    name:
+      - php
+    state: present
+  become: true
+
+- name: PHP | Composer
+  community.general.pacman:
+    name:
+      - composer
+    state: present
+  become: true
