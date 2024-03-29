@@ -40,10 +40,10 @@ config.use_fancy_tab_bar = false
 config.enable_scroll_bar = false
 
 config.window_padding = {
-  left = 5,
-  right = 5,
-  top = 5,
-  bottom = 5,
+  left = 0,
+  right = 0,
+  top = 0,
+  bottom = 0,
 }
 
 config.window_decorations = "RESIZE"
@@ -59,8 +59,13 @@ config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
 config.freetype_load_target = "HorizontalLcd"
 
-config.leader = { key = " ", mods = "SHIFT", timeout_milliseconds = 2000 }
+config.leader = { key = ",", mods = "CTRL", timeout_milliseconds = 2000 }
 config.keys = {
+  {
+    key = "w",
+    mods = "LEADER",
+    action = wezterm.action.CloseCurrentTab { confirm = true },
+  },
   {
     key = "c",
     mods = "LEADER",
@@ -78,22 +83,22 @@ config.keys = {
   },
   {
     key = "l",
-    mods = "LEADER|CTRL",
+    mods = "LEADER",
     action = action.ActivatePaneDirection "Right",
   },
   {
     key = "j",
-    mods = "LEADER|CTRL",
+    mods = "LEADER",
     action = action.ActivatePaneDirection "Down",
   },
   {
     key = "k",
-    mods = "LEADER|CTRL",
+    mods = "LEADER",
     action = action.ActivatePaneDirection "Up",
   },
   {
     key = "h",
-    mods = "LEADER|CTRL",
+    mods = "LEADER",
     action = action.ActivatePaneDirection "Left",
   },
   {
