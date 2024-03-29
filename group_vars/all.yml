@@ -27,3 +27,4 @@ default_roles:
   - zsh
 
 git_user_name: AlejandroSuero
+git_user_email: asuerome@gmail.com
