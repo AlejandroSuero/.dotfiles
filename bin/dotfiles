@@ -141,7 +141,7 @@ function manjaro_setup() {
   if ! [ -x "$(command -v yay)" ]; then
     _task "Installing yay"
     _cmd "sudo pacman -S --needed base-devel git"
-    _cmd "git clone https://aur.archlinux.org/yay.git '$HOME/yay'"
+    _cmd "git clone https://aur.archlinux.org/yay-git.git '$HOME/yay'"
     _cmd "cd '$HOME/yay'"
     _cmd "makepkg -si"
     _cmd "cd $DOTFILES_DIR"
