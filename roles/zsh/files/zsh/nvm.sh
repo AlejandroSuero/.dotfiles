@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-function check_nvmrc() {
+check_nvmrc() {
   if [[ -f "$PWD"/.nvmrc ]]; then
     nvm use > /dev/null
   fi
@@ -8,10 +8,5 @@ function check_nvmrc() {
 
 cd() {
   builtin cd "$@"
-  check_nvmrc
-}
-
-z() {
-  __zoxide_z "$@"
   check_nvmrc
 }
