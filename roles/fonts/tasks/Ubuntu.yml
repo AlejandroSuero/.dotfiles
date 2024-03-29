@@ -6,10 +6,20 @@
     dest: "{{ ansible_user_dir }}/.nerd_fonts"
 
 - name: FONTS | Installation | {{ ansible_distribution }}
-  ansible.builtin.command:
-    cmd: /{{ ansible_user_dir }}/.nerd_fonts/install.sh {{ item }}
-  register: nf
-  changed_when: nf.rc != 0
-  with_items:
-    - Iosevka
-    - JetBrainsMono
+  block:
+    - name: FONTS | nerd-fonts
+      ansible.builtin.command:
+        cmd: /{{ ansible_user_dir }}/.nerd_fonts/install.sh {{ item }}
+      register: nf
+      changed_when: nf.rc != 0
+      with_items:
+        - Iosevka
+        - JetBrainsMono
+
+    - name: FONTS | {{ ansible_pkg_manager }}
+      ansible.builtin.package:
+        name:
+          - fonts-droid-fallback
+          - fonts-font-awesome
+        state: present
+      become: true

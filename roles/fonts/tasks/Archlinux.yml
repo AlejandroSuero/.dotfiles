@@ -4,5 +4,8 @@
     name:
       - ttf-jetbrains-mono-nerd
       - ttf-iosevka-nerd
+      - ttf-ubuntu-font-family
+      - ttf-font-awesome
+      - ttf-droid
     state: present
   become: true
