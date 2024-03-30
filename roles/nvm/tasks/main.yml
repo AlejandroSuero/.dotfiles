@@ -35,7 +35,7 @@
 
     - name: NVM | Get latest STABLE NodeJS version
       ansible.builtin.command:
-        cmd: "{{ ansible_user_dir }}/nodejs_versions.json | jq -r '.[] | select(.lts) | .version' | head -n 1"
+        cmd: /tmp/nodejs_versions.json | jq -r '.[] | select(.lts) | .version' | head -n 1
       register: nodejs_latest_version
       changed_when: false
 
