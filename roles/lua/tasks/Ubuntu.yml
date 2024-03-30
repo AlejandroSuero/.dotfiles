@@ -1,9 +1,4 @@
 ---
-- name: Lua | Update APT cache
-  ansible.builtin.apt:
-    update_cache: true
-  become: true
-
 - name: Lua | Install Lua
   ansible.builtin.apt:
     name:
@@ -11,9 +6,3 @@
       - luarocks
       - luajit
   become: true
-
-- name: Lua | Gather installed lua rocks
-  ansible.builtin.command: luarocks list
-  register: rocks
-  changed_when: false
-  check_mode: false
