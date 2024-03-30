@@ -5,11 +5,3 @@
       - go
     state: present
   become: true
-
-- name: GoLang | Install tools
-  community.general.pacman:
-    executable: yay
-    state: present
-    name:
-      - gotestsum
-      - gotests
