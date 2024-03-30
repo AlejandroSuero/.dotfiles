@@ -8,13 +8,13 @@
         state: absent
       become: true
 
-    - name: Remove manjaro packages {{ ansible_lsb.id }}
+    - name: Install if not Manjaro
       ansible.builtin.package:
         name:
-          - dmenu-manjaro
-          - i3status-manjaro
-        state: absent
-      when: ansible_lsb.id == "ManjaroLinux"
+          - dmenu
+          - i3status
+        state: present
+      when: ansible_lsb.id != "ManjaroLinux"
       become: true
 
     - name: Window Manager | i3lock-color
@@ -32,9 +32,7 @@
           - lightdm
           - lightdm-gtk-greeter
           - i3-wm
-          - i3status
           - i3blocks
-          - dmenu
           - lxappearance
           - terminator
         state: present
