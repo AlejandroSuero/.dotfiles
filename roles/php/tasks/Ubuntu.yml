@@ -5,7 +5,6 @@
       - php
       - libapache2-mod-php
     state: present
-    update_cache: true
   become: true
 
 - name: PHP | Dependencies

@@ -1,10 +1,4 @@
 ---
-- name: System | Update pacman | {{ ansible_distribution }}
-  community.general.pacman:
-    update_cache: true
-    state: latest
-  become: true
-
 - name: System | Installing tools
   community.general.pacman:
     name:
