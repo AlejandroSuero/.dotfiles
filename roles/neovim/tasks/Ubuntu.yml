@@ -2,6 +2,9 @@
 - name: Neovim | Dependencies | {{ ansible_distribution }}
   ansible.builtin.apt:
     name:
+      - ninja-build
+      - build-essential
+      - gettext
       - cmake
       - curl
       - pkg-config
@@ -14,7 +17,35 @@
   become: true
 
 - name: Neovim | Installation | {{ ansible_distribution }}
-  ansible.builtin.apt:
-    name: neovim
-    state: present
-  become: true
+  block:
+    - name: Neovim | Clone repo
+      ansible.builtin.git:
+        clone: yes
+        depth: 1
+        repo: https://github.com/neovim/neovim.git # noqa: latest
+        force: yes
+        single_branch: yes
+        update: yes
+        dest: "{{ ansible_user_dir }}/neovim"
+        version: stable
+      register: clone
+
+    - name: Neovim | Build
+      community.general.make:
+        chdir: "{{ ansible_user_dir }}/neovim"
+        params:
+          CMAKE_BUILD_TYPE: RelWithDebInfo
+      when: clone.changed
+
+    - name: Neovim | Install
+      community.general.make:
+        chdir: "{{ ansible_user_dir }}/neovim"
+        target: install
+      become: true
+      when: clone.changed
+
+    - name: Remove build folder
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/neovim"
+        state: absent
+      become: true
