@@ -16,6 +16,7 @@ local servers = {
   "golines",
   "goimports-reviser",
   "gotests",
+  "gotestsum",
   "rust-analyzer",
   "astro-language-server",
   "json-lsp",
