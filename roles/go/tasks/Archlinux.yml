@@ -7,8 +7,8 @@
   become: true
 
 - name: GoLang | Install tools
-  kewlfft.aur.aur:
-    use: yay
+  community.general.pacman:
+    executable: yay
     state: present
     name:
       - gotestsum
