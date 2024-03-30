@@ -1,4 +1,23 @@
 ---
+- name: Starship | Check cargo installed
+  ansible.builtin.command:
+    cmd: which cargo
+  changed_when: false
+  register: cargo_cmd
+  failed_when: false
+
+- name: Starship | Register cargo status installed
+  ansible.builtin.set_fact:
+    cargo_is_installed: true
+  when: cargo_cmd.stdout|length > 0
+
+- name: Starship | Install cargo
+  ansible.builtin.include_role:
+    name: rust
+  tags:
+    - rust
+  when: not cargo_is_installed
+
 - name: Starship | {{ ansible_distribution }}
   community.general.cargo:
     executable: /usr/bin/cargo
