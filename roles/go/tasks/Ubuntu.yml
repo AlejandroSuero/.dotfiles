@@ -66,7 +66,7 @@
   ansible.builtin.debug:
     var: go_latest_release
 
-- name: Go-Lang | Install | {{ go_file }}
+- name: Go-Lang | Install
   when: go_latest_version not in current_go_version.stdout|default('')
   block:
     - name: Go-Lang | Ensure clean download destination
@@ -75,7 +75,7 @@
         state: absent
       become: true
 
-    - name: Go-Lang | Downloading GoLang Release
+    - name: Go-Lang | Downloading GoLang Release | {{ go_file }}
       ansible.builtin.get_url:
         url: https://golang.org/dl/{{ go_file }}.tar.gz
         dest: /tmp/
