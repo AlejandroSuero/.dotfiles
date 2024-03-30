@@ -3,7 +3,7 @@
 TYPE="${BLOCK_INSTANCE:-mem}"
 PERCENT="${PERCENT:-true}"
 
-awk -v type=$TYPE -v percent=$PERCENT '
+awk -v label=$LABEL -v type=$TYPE -v percent=$PERCENT '
 /^MemTotal:/ {
 	mem_total=$2
 }
@@ -38,12 +38,12 @@ END {
 	}
 	# full text
 	if (percent == "true" ) {
-		printf("%.1fG/%.1fG (%.f%%)\n", used, total, pct)
+		printf("%s %.1fG/%.1fG (%.f%%)\n", label, used, total, pct)
 	} else {
-		printf("%.1fG/%.1fG\n", used, total)
+		printf("%s %.1fG/%.1fG\n", label, used, total)
 	}
 	# short text
-	printf("%.f%%\n", pct)
+	printf("%s %.f%%\n", label, pct)
 	# color
 	if (pct > 90) {
 		print("#FF0000")
