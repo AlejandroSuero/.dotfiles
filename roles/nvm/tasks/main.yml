@@ -33,19 +33,26 @@
       register: nodejs_latest_version
       changed_when: false
 
-    - name: NVM | Check if NodeJS is installed
-      ansible.builtin.command: node --version
-      register: nodejs_installed
+    - name: NVM | Detecting Installed node
+      ansible.builtin.command:
+        cmd: which node
+      changed_when: false
+      register: node_cmd
       failed_when: false
-      changed_when: false
 
-    - name: NVM | Install
-      ansible.builtin.command: nvm install {{ nodejs_latest_version }}
-      when: not nodejs_installed
-      changed_when: false
+    - name: NVM | Register node status installed
+      ansible.builtin.set_fact:
+        nodejs_is_installed: true
+      when: nvm_cmd.stdout|length > 0
+
+    - name: NVM | Register node status not installed
+      ansible.builtin.set_fact:
+        nodejs_is_installed: false
+      when: nvm_cmd.stdout|length == 0
 
     - name: NVM | Check if NodeJS is up to date
       ansible.builtin.command: node --version
+      when: nodejs_is_installed
       register: nodejs_up_to_date
       failed_when: false
       changed_when: false
@@ -57,14 +64,6 @@
     - name: NVM | Show NodeJS latest version
       ansible.builtin.debug:
         msg: "Online NodeJS LTS version: {{ nodejs_latest_version.stdout }}"
-
-    - name: NVM | Register update needed
-      ansible.builtin.set_fact:
-        nodejs_install_needed: true
-      when:
-        # - nodejs_installed.rc == 0
-        # - nodejs_up_to_date.rc != 0
-        - nodejs_up_to_date.stdout != nodejs_latest_version.stdout
 
     - name: NVM | Detecting Installed nvm
       ansible.builtin.command:
@@ -83,8 +82,8 @@
         nvm_is_installed: false
       when: nvm_cmd.stdout|length == 0
 
-    - name: NVM | Update
+    - name: NVM | Install latest lts
       ansible.builtin.command: nvm install {{ nodejs_latest_version }}
-      when: nodejs_install_needed == true and nvm_is_installed == true
+      when: nvm_is_installed
       failed_when: false
       changed_when: false
