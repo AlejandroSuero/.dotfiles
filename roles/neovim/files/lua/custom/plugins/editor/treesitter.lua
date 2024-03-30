@@ -12,6 +12,9 @@ return {
     local treesitter = require "nvim-treesitter.configs"
 
     treesitter.setup {
+      modules = {},
+      sync_install = false,
+      ignore_install = {},
       highlight = {
         enable = true,
       },
@@ -47,6 +50,8 @@ return {
         "c",
         "astro",
         "jsdoc",
+        "http",
+        "xml",
       },
       auto_install = true,
     }
@@ -58,10 +63,17 @@ return {
       return
     end
     ts_context_commentstring.setup {
+      commentary_integration = {
+        Commentary = "gc",
+        CommentaryLine = "gcc",
+        ChangeCommentary = "cgc",
+        CommentaryUndo = "gcu",
+      },
       enable_autocmd = false,
       languages = {
         typescript = "// %s",
       },
+      config = {},
     }
   end,
 }
