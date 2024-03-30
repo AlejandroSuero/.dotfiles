@@ -199,6 +199,9 @@ case $ID in
   ubuntu)
     ubuntu_setup
     ;;
+  debian)
+    ubuntu_setup
+    ;;
   manjaro)
     manjaro_setup
     ;;
