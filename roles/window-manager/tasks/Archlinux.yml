@@ -14,8 +14,8 @@
         state: absent
       when: ansible_lsb.id == ManjaroLinux
       with_items:
-        - dmenu
-        - i3status
+        - "dmenu"
+        - "i3status"
       become: true
 
     - name: Window Manager | i3lock-color
