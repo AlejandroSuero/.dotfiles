@@ -1,12 +1,4 @@
 ---
-- name: System | Update and Upgrade APT | {{ ansible_distribution }}
-  ansible.builtin.apt:
-    update_cache: true
-    upgrade: full
-    autoremove: true
-    autoclean: true
-  become: true
-
 - name: System | Installing tools
   ansible.builtin.apt:
     name:
