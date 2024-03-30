@@ -63,12 +63,6 @@
         chdir: "{{ ansible_user_dir }}/i3lock-color"
       changed_when: false
 
-- name: Window Manager | Start services
-  ansible.builtin.service:
-    name: lightdm
-    enabled: true
-    state: started
-
 - name: Window Manager | Config
   block:
     - name: Scripts Directory

@@ -38,12 +38,6 @@
         state: present
       become: true
 
-- name: Window Manager | Start services
-  ansible.builtin.service:
-    name: lightdm
-    enabled: true
-    state: started
-
 - name: Window Manager | Config
   block:
     - name: Scripts Directory
