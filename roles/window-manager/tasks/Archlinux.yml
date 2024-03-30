@@ -25,7 +25,6 @@
           - i3-wm
           - i3status
           - i3blocks
-          - dmenu
           - lxappearance
           - terminator
         state: present
