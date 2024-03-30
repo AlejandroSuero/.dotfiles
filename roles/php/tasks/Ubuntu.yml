@@ -15,7 +15,25 @@
     state: present
   become: true
 
+- name: Composer | Detecting Installed composer
+  ansible.builtin.command:
+    cmd: which composer-browser
+  changed_when: false
+  register: composer_cmd
+  failed_when: false
+
+- name: Composer | Register composer status installed
+  ansible.builtin.set_fact:
+    composer_is_installed: true
+  when: composer_cmd.stdout|length > 0
+
+- name: Composer | Register composer status not installed
+  ansible.builtin.set_fact:
+    composer_is_installed: false
+  when: composer_cmd.stdout|length == 0
+
 - name: PHP | Composer
+  when: not composer_is_installed
   block:
     - name: Composer | Download
       ansible.builtin.get_url:
@@ -28,7 +46,8 @@
       ansible.builtin.command: |
         php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH')
         { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-      enviroment: curl -sS https://composer.github.io/installer.sig
+      enviroment:
+        HASH: curl -sS https://composer.github.io/installer.sig
       changed_when: false
 
     - name: Composer | Installation
