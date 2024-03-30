@@ -66,8 +66,25 @@
         # - nodejs_up_to_date.rc != 0
         - nodejs_up_to_date.stdout != nodejs_latest_version.stdout
 
+    - name: NVM | Detecting Installed nvm
+      ansible.builtin.command:
+        cmd: which nvm
+      changed_when: false
+      register: nvm_cmd
+      failed_when: false
+
+    - name: NVM | Register nvm status installed
+      ansible.builtin.set_fact:
+        nvm_is_installed: true
+      when: nvm_cmd.stdout|length > 0
+
+    - name: NVM | Register nvm status not installed
+      ansible.builtin.set_fact:
+        nvm_is_installed: false
+      when: nvm_cmd.stdout|length == 0
+
     - name: NVM | Update
       ansible.builtin.command: nvm install {{ nodejs_latest_version }}
-      when: nodejs_install_needed
+      when: nodejs_install_needed and nvm_is_installed
       failed_when: false
       changed_when: false
