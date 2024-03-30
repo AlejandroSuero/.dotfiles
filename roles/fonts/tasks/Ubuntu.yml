@@ -16,7 +16,7 @@
         - Iosevka
         - JetBrainsMono
 
-    - name: FONTS | {{ ansible_pkg_manager }}
+    - name: FONTS | {{ ansible_pkg_mgr }}
       ansible.builtin.package:
         name:
           - fonts-droid-fallback
