@@ -28,8 +28,8 @@
   block:
     - name: NVM | Get latest STABLE NodeJS version
       ansible.builtin.shell: >
-          set -o pipefail
-          curl -sL https://nodejs.org/dist/index.json | jq -r '.[] | select(.lts) | .version' | head -n 1
+        set -o pipefail
+        curl -sL https://nodejs.org/dist/index.json | jq -r '.[] | select(.lts) | .version' | head -n 1
       register: nodejs_latest_version
       changed_when: false
 
@@ -43,12 +43,12 @@
     - name: NVM | Register node status installed
       ansible.builtin.set_fact:
         nodejs_is_installed: true
-      when: nvm_cmd.stdout|length > 0
+      when: node_cmd.stdout|length > 0
 
     - name: NVM | Register node status not installed
       ansible.builtin.set_fact:
         nodejs_is_installed: false
-      when: nvm_cmd.stdout|length == 0
+      when: node_cmd.stdout|length == 0
 
     - name: NVM | Check if NodeJS is up to date
       ansible.builtin.command: node --version
