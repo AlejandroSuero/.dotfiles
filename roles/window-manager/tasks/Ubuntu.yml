@@ -21,6 +21,8 @@
           - dmenu
           - lxappearance
           - terminator
+          - nitrogen
+          - picom
         state: present
       become: true
 
