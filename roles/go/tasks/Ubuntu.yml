@@ -107,8 +107,8 @@
         remote_src: true
         src: /tmp/go
         dest: /usr/local/
-        owner: "{{ host_user }}"
-        group: "{{ host_user }}"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
         force: true
         mode: "0644"
       become: true
