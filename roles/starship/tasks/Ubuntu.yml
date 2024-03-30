@@ -30,6 +30,11 @@
     starship_is_installed: true
   when: starship_cmd.stdout|length > 0
 
+- name: Starship | Register starship status not installed
+  ansible.builtin.set_fact:
+    starship_is_installed: false
+  when: starship_cmd.stdout|length == 0
+
 - name: Starship | Install | {{ ansible_distribution }}
   community.general.cargo:
     executable: /usr/bin/cargo
