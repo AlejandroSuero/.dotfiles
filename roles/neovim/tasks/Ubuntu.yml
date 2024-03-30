@@ -20,12 +20,12 @@
   block:
     - name: Neovim | Clone repo
       ansible.builtin.git:
-        clone: yes
+        clone: true
         depth: 1
         repo: https://github.com/neovim/neovim.git # noqa: latest
-        force: yes
-        single_branch: yes
-        update: yes
+        force: true
+        single_branch: true
+        update: true
         dest: "{{ ansible_user_dir }}/neovim"
         version: stable
       register: clone
@@ -35,14 +35,12 @@
         chdir: "{{ ansible_user_dir }}/neovim"
         params:
           CMAKE_BUILD_TYPE: RelWithDebInfo
-      when: clone.changed
 
     - name: Neovim | Install
       community.general.make:
         chdir: "{{ ansible_user_dir }}/neovim"
         target: install
       become: true
-      when: clone.changed
 
     - name: Remove build folder
       ansible.builtin.file:
