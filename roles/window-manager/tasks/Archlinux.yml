@@ -13,7 +13,7 @@
         name: "{{ item }}-manjaro"
         state: absent
       when: ansible_lsb.id == ManjaroLinux
-      with_items:
+      loop:
         - "dmenu"
         - "i3status"
       become: true
