@@ -66,7 +66,7 @@
   ansible.builtin.debug:
     var: go_latest_release
 
-- name: Go-Lang | Install
+- name: Go-Lang | Install | {{ go_file }}
   when: go_latest_version not in current_go_version.stdout|default('')
   block:
     - name: Go-Lang | Ensure clean download destination
