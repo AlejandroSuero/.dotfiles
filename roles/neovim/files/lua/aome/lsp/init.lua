@@ -325,7 +325,6 @@ local servers = {
       "typescript",
       "typescriptreact",
       "typescript.tsx",
-      "astro",
     },
 
     on_attach = function(client)
