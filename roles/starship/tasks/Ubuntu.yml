@@ -18,10 +18,23 @@
     - rust
   when: not cargo_is_installed
 
-- name: Starship | {{ ansible_distribution }}
+- name: Starship | Detecting Installed starship
+  ansible.builtin.command:
+    cmd: which starship
+  changed_when: false
+  register: starship_cmd
+  failed_when: false
+
+- name: Starship | Register starship status installed
+  ansible.builtin.set_fact:
+    starship_is_installed: true
+  when: starship_cmd.stdout|length > 0
+
+- name: Starship | Install | {{ ansible_distribution }}
   community.general.cargo:
     executable: /usr/bin/cargo
     name:
       - starship
     locked: false
-    state: latest
+    state: present
+  when: not starship_is_installed
