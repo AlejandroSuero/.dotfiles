@@ -7,10 +7,3 @@
 - name: "Github CLI | Run Tasks: {{ ansible_distribution }}"
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
   when: gh_distribution_config.stat.exists
-
-- name: Github CLI | Install gh-dash
-  ansible.builtin.command:
-    cmd: gh extension install dlvhdr/gh-dash
-  register: gh_dash
-  changed_when: gh_dash.rc != 0
-  msg: "gh_dash = {{ gh_dash }}"
