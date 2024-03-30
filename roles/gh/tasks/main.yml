@@ -13,3 +13,4 @@
     cmd: gh extension install dlvhdr/gh-dash
   register: gh_dash
   changed_when: gh_dash.rc != 0
+  msg: "gh_dash = {{ gh_dash }}"
