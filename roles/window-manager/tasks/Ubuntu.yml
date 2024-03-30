@@ -1,20 +1,28 @@
 ---
 - name: Window Manager | Dependencies
-  ansible.builtin.package:
-    name:
-      - feh
-      - xorg
-      - lightdm
-      - lightdm-gtk-greeter
-      - i3-wm
-      - i3lock
-      - i3status
-      - i3blocks
-      - dmenu
-      - lxappearance
-      - terminator
-    state: present
-  become: true
+  block:
+    - name: Window Manager | Remove i3lock
+      ansible.builtin.package:
+        name:
+          - i3lock
+        state: absent
+      become: true
+
+    - name: Window Manager | i3, feh, appearance
+      ansible.builtin.package:
+        name:
+          - feh
+          - xorg
+          - lightdm
+          - lightdm-gtk-greeter
+          - i3-wm
+          - i3status
+          - i3blocks
+          - dmenu
+          - lxappearance
+          - terminator
+        state: present
+      become: true
 
 - name: Window Manager | i3lock-color
   block:
@@ -63,6 +71,12 @@
 
 - name: Window Manager | Config
   block:
+    - name: Scripts Directory
+      ansible.builtin.file:
+        mode: "0755"
+        path: "{{ ansible_user_dir }}/.config/scripts"
+        state: directory
+
     - name: Scripts
       ansible.builtin.template:
         dest: "{{ ansible_user_dir }}/.config/scripts/{{ item }}"
@@ -73,16 +87,28 @@
         - memory
         - disk
 
+    - name: WM Directory
+      ansible.builtin.file:
+        mode: "0755"
+        path: "{{ ansible_user_dir }}/.config/i3"
+        state: directory
+
     - name: Config
       ansible.builtin.template:
         dest: "{{ ansible_user_dir }}/.config/i3/config"
         src: config.j2
         mode: "0755"
 
-    - name: Blocks config
+    - name: Blocks Directory
+      ansible.builtin.file:
+        mode: "0755"
+        path: "{{ ansible_user_dir }}/.config/i3blocks"
+        state: directory
+
+    - name: Blocks
       ansible.builtin.template:
         dest: "{{ ansible_user_dir }}/.config/i3blocks/i3blocks.conf"
         src: i3blocks.conf.j2
         mode: "0755"
-        group: ansible_user_id
-        owner: ansible_user_id
+        group: "{{ ansible_user_id }}"
+        owner: "{{ ansible_user_id }}"
