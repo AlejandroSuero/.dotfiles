@@ -13,5 +13,3 @@
     name:
       - gotestsum
       - gotests
-  become: true
-  become_user: aur_builder
