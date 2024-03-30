@@ -26,23 +26,12 @@
 
 - name: NVM | Install latest NodeJS
   block:
-    - name: NVM | Get Node versions
-      ansible.builtin.get_url:
-        url: https://nodejs.org/dist/index.json
-        dest: /tmp/nodejs_versions.json
-        mode: "0755"
-        force: true
-
     - name: NVM | Get latest STABLE NodeJS version
-      ansible.builtin.command:
-        cmd: "/tmp/nodejs_versions.json | jq -r '.[] | select(.lts) | .version' | head -n 1"
+      ansible.builtin.shell: >
+          set -o pipefail
+          curl -sL https://nodejs.org/dist/index.json | jq -r '.[] | select(.lts) | .version' | head -n 1
       register: nodejs_latest_version
       changed_when: false
-
-    - name: NVM | Cleanup NodeJS versions
-      ansible.builtin.file:
-        path: /tmp/nodejs_versions.json
-        state: absent
 
     - name: NVM | Check if NodeJS is installed
       ansible.builtin.command: node --version
