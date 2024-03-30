@@ -1,4 +1,16 @@
 ---
+- name: NPM | Check if NodeJS is installed
+  ansible.builtin.command: node --version
+  register: nodejs_installed
+  changed_when: false
+
+- name: NPM | Include NVM role if NodeJS not installed
+  ansible.builtin.include_role:
+    name: nvm
+  tags:
+    - nvm
+  when: not nodejs_installed
+
 - name: NPM | Detecting Installed npm
   ansible.builtin.command:
     cmd: which npm

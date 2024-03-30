@@ -23,3 +23,62 @@
   args:
     creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
     executable: /bin/bash
+
+- name: NVM | Install latest NodeJS
+  block:
+    - name: NVM | Get Node versions
+      ansible.builtin.get_url:
+        url: https://nodejs.org/dist/index.json
+        dest: /tmp/nodejs_versions.json
+        mode: "0755"
+        force: true
+
+    - name: NVM | Get latest STABLE NodeJS version
+      ansible.builtin.command:
+        cmd: "{{ ansible_user_dir }}/nodejs_versions.json | jq -r '.[] | select(.lts) | .version' | head -n 1"
+      register: nodejs_latest_version
+      changed_when: false
+
+    - name: NVM | Cleanup NodeJS versions
+      ansible.builtin.file:
+        path: /tmp/nodejs_versions.json
+        state: absent
+
+    - name: NVM | Check if NodeJS is installed
+      ansible.builtin.command: node --version
+      register: nodejs_installed
+      failed_when: false
+      changed_when: false
+
+    - name: NVM | Install
+      ansible.builtin.command: nvm install {{ nodejs_latest_version }}
+      when: not nodejs_installed
+      changed_when: false
+
+    - name: NVM | Check if NodeJS is up to date
+      ansible.builtin.command: node --version
+      register: nodejs_up_to_date
+      failed_when: false
+      changed_when: false
+
+    - name: NVM | Show NodeJS version
+      ansible.builtin.debug:
+        msg: "Installed NodeJS version: {{ nodejs_installed.stdout }}"
+
+    - name: NVM | Show NodeJS latest version
+      ansible.builtin.debug:
+        msg: "Online NodeJS LTS version: {{ nodejs_latest_version.stdout }}"
+
+    - name: NVM | Register update needed
+      ansible.builtin.set_fact:
+        nodejs_install_needed: true
+      when:
+        # - nodejs_installed.rc == 0
+        # - nodejs_up_to_date.rc != 0
+        - nodejs_up_to_date.stdout != nodejs_latest_version.stdout
+
+    - name: NVM | Update
+      ansible.builtin.command: nvm install {{ nodejs_latest_version }}
+      when: nodejs_install_needed
+      failed_when: false
+      changed_when: false
