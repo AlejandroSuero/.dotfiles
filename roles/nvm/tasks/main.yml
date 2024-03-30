@@ -85,6 +85,6 @@
 
     - name: NVM | Update
       ansible.builtin.command: nvm install {{ nodejs_latest_version }}
-      when: nodejs_install_needed == true && nvm_is_installed == true
-      # failed_when: false
+      when: nodejs_install_needed == true and nvm_is_installed == true
+      failed_when: false
       changed_when: false
