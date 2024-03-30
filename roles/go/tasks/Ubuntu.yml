@@ -79,7 +79,7 @@
       ansible.builtin.get_url:
         url: https://golang.org/dl/{{ go_file }}.tar.gz
         dest: /tmp/
-        mode: "0644"
+        mode: "0755"
         force: true
       notify:
         - Cleanup go downloaded tar
@@ -110,7 +110,7 @@
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
         force: true
-        mode: "0644"
+        mode: "0755"
       become: true
       notify:
         - Remove extracted go directory
