@@ -24,7 +24,6 @@
         depth: 1
         repo: https://github.com/neovim/neovim.git # noqa: latest
         force: true
-        single_branch: true
         update: true
         dest: "{{ ansible_user_dir }}/neovim"
         version: stable
