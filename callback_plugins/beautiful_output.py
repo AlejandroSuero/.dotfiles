@@ -88,16 +88,16 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler, EVENT_TYPE_CREATED
 
 _symbol = {
-    "success": to_text("✔"),
-    "warning": to_text("⚠"),
-    "failure": to_text("✘"),
-    "dead": to_text("✝"),
+    "success": to_text("󰄳"),
+    "warning": to_text(""),
+    "failure": to_text(""),
+    "dead": to_text("󰚌"),
     "yaml": to_text("🅨"),
-    "retry": to_text("️↻"),
-    "loop": to_text("∑"),
+    "retry": to_text("️󰑓"),
+    "loop": to_text("󱉯"),
     "arrow_right": to_text("➞"),
-    "skip": to_text("⤼"),
-    "flag": to_text("⚑"),
+    "skip": to_text("󰒭"),
+    "flag": to_text(""),
 }  # type: Dict[str,str]
 """:obj:`dict` of :obj:`str` to :obj:`str`: A dictionary of symbols to be used
 when the Callback needs to display a symbol on the screen.
