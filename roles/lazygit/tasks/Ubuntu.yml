@@ -23,7 +23,7 @@
   register: current_lazygit_version
   changed_when: false
   failed_when: false
-#
+
 - name: LAZYGIT | Show current_lazygit_version debug
   ansible.builtin.debug:
     var: current_lazygit_version.stdout
@@ -36,14 +36,13 @@
   when: lazygit_latest_release not in current_lazygit_version.stdout|default('')
   block:
     - name: LAZYGIT | Define architecture
-      ansible.builtin.command: dpkg --print-architecture
-      register: linux_arch
-      changed_when: false
+      ansible.builtin.set_fact:
+        linux_arch: "{{ ansible_machine | replace('aarch64', 'arm64') }}"
 
     # regex_replace('^.', '') removes the first character from the string (the 'v' in the version number)
     - name: LAZYGIT | Define lazygit_file
       ansible.builtin.set_fact:
-        lazygit_file: lazygit_{{ lazygit_latest_release | regex_replace('^.', '') }}_Linux_{{ linux_arch.stdout }}
+        lazygit_file: lazygit_{{ lazygit_latest_release | regex_replace('^.', '') }}_Linux_{{ linux_arch }}
 
     - name: LAZYGIT | Ensure clean download destination
       ansible.builtin.file:
