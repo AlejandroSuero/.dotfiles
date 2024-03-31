@@ -77,3 +77,4 @@ if [[ "$(uname)" == "Darwin" ]]; then
 fi
 
 eval "$(starship init zsh)"
+check_nvmrc

@@ -12,8 +12,7 @@ _paste() {
 }
 
 _get_default_browser() {
-  default_browser=$(xdg-settings get default-web-browser | tr ".desktop" " ")
-  echo default_browser
+  echo "brave-browser"
 }
 
 _open_default_browser() {
