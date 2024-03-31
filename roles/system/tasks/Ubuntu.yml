@@ -2,6 +2,7 @@
 - name: System | Installing tools
   ansible.builtin.apt:
     name:
+      - unzip
       - xclip
       - jq
     state: present
