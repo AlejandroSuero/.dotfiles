@@ -15,7 +15,7 @@ error_symbol    = "[](red)"
 vicmd_symbol    = "[V](green)"
 
 [os]
-format = '[$symbol](bold blue) '
+format = "[$symbol](bold blue) "
 disabled = false
 
 [os.symbols]
@@ -90,3 +90,16 @@ disabled = false
 [kubernetes.context_aliases]
 "clcreative-k8s-staging" = "cl-k8s-staging"
 "clcreative-k8s-production" = "cl-k8s-prod"
+
+[golang]
+symbol = ""
+format = "via [$symbol $version](bold cyan) "
+
+[package]
+symbol = ""
+version_format = " ${raw}"
+style = "bold purple"
+
+[lua]
+symbol = ""
+format = "[$symbol $version](bold blue) "
