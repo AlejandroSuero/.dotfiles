@@ -93,7 +93,7 @@ _symbol = {
     "failure": to_text(""),
     "dead": to_text("󰚌"),
     "yaml": to_text("🅨"),
-    "retry": to_text("️󰑓"),
+    "retry": to_text("️↻"),
     "loop": to_text("󱉯"),
     "arrow_right": to_text("➞"),
     "skip": to_text("󰒭"),
