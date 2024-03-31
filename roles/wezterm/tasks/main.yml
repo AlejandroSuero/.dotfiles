@@ -5,18 +5,21 @@
   register: wezterm_distribution_config
 
 - name: "Wezterm | Run Tasks: {{ ansible_distribution }}"
-  ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
-  when: wezterm_distribution_config.stat.exists
+  when: wezterm_distribution_config.stat.exists and not ansible_host_environment_is_wsl
+  block:
+    - name: "Wezterm | Include Tasks: {{ ansible_distribution, ansible_os_family }}"
+      ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
+      when: wezterm_distribution_config.stat.exists
 
-- name: Wezterm | Config folder
-  ansible.builtin.file:
-    mode: "0755"
-    path: "{{ ansible_user_dir }}/.config/wezterm"
-    state: directory
+    - name: Wezterm | Config folder
+      ansible.builtin.file:
+        mode: "0755"
+        path: "{{ ansible_user_dir }}/.config/wezterm"
+        state: directory
 
-- name: Wezterm | Create symlink to role files directory
-  ansible.builtin.file:
-    src: "{{ role_path }}/files"
-    dest: "{{ ansible_user_dir }}/.config/wezterm"
-    state: link
-    force: true
+    - name: Wezterm | Create symlink to role files directory
+      ansible.builtin.file:
+        src: "{{ role_path }}/files"
+        dest: "{{ ansible_user_dir }}/.config/wezterm"
+        state: link
+        force: true
