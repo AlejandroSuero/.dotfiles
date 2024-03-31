@@ -4,11 +4,11 @@ return {
   opts = {
     formatters_by_ft = {
       lua = { "stylua" },
-      javascript = { { "eslintd", "eslint", "prettierd", "prettier" } },
-      typescript = { { "eslintd", "eslint", "prettierd", "prettier" } },
-      javascriptreact = { { "eslintd", "eslint", "prettierd", "prettier" } },
-      typescriptreact = { { "eslintd", "eslint", "prettierd", "prettier" } },
-      astro = { { "eslintd", "eslint", "prettierd", "prettier" } },
+      javascript = { { "prettierd", "prettier" } },
+      typescript = { { "prettierd", "prettier" } },
+      javascriptreact = { { "prettierd", "prettier" } },
+      typescriptreact = { { "prettierd", "prettier" } },
+      astro = { { "prettierd", "prettier" } },
       go = { { "goimports-reviser", "golines", "gofumpt" } },
       c = { "clang_format" },
     },

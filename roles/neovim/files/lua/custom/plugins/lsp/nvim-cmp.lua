@@ -3,18 +3,7 @@ return {
   event = "InsertEnter",
   dependencies = {
     -- Snippet Engine & its associated nvim-cmp source
-    {
-      "L3MON4D3/LuaSnip",
-      build = (function()
-        -- Build Step is needed for regex support in snippets
-        -- This step is not supported in many windows environments
-        -- Remove the below condition to re-enable on windows
-        if vim.fn.has "win32" == 1 or vim.fn.executable "make" == 0 then
-          return
-        end
-        return "make install_jsregexp"
-      end)(),
-    },
+    "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
 
     -- Adds other completion capabilities.
@@ -24,17 +13,13 @@ return {
     "hrsh7th/cmp-path",
 
     "rafamadriz/friendly-snippets", -- useful snippets
-    "onsails/lspkind.nvim", -- vs-code like pictograms
   },
   config = function()
     local cmp = require "cmp"
 
     local luasnip = require "luasnip"
 
-    local lspkind = require "lspkind"
-
-    -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
-    require("luasnip.loaders.from_vscode").lazy_load()
+    local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
     cmp.setup {
       completion = {
@@ -46,13 +31,13 @@ return {
         end,
       },
       mapping = cmp.mapping.preset.insert {
-        ["<C-p>"] = cmp.mapping.select_prev_item(), -- previous suggestion
-        ["<C-n>"] = cmp.mapping.select_next_item(), -- next suggestion
+        ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select), -- previous suggestion
+        ["<C-n>"] = cmp.mapping.select_next_item(cmp_select), -- next suggestion
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete {}, -- show completion suggestions
         ["<C-e>"] = cmp.mapping.abort(), -- close completion window
-        ["<C-y>"] = cmp.mapping.confirm { select = false },
+        ["<C-y>"] = cmp.mapping.confirm { select = true },
         ["<C-l>"] = cmp.mapping(function()
           if luasnip.expand_or_locally_jumpable() then
             luasnip.expand_or_jump()
@@ -69,14 +54,16 @@ return {
         { name = "nvim_lsp" },
         { name = "luasnip" }, -- snippets
         { name = "buffer" }, -- text within current buffer
-        { name = "path" }, -- file system paths
       },
-      -- configure lspkind for vs-code like pictograms in completion menu
-      formatting = {
-        format = lspkind.cmp_format {
-          maxwidth = 50,
-          ellipsis_char = "...",
-        },
+    }
+    vim.diagnostic.config {
+      float = {
+        focusable = false,
+        style = "minimal",
+        border = "rounded",
+        source = "always",
+        header = "",
+        prefix = "",
       },
     }
   end,

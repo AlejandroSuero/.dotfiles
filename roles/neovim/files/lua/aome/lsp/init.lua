@@ -15,6 +15,11 @@ if not lspconfig then
   return
 end
 
+local cmp_lsp = vim.F.npcall(require, "cmp_nvim_lsp")
+if not cmp_lsp then
+  return
+end
+
 local imap = require("aome.core.utils").imap
 local nmap = require("aome.core.utils").nmap
 local autocmd = require("aome.core.utils").auto.autocmd
@@ -210,7 +215,7 @@ updated_capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 vim.tbl_deep_extend(
   "force",
   updated_capabilities,
-  require("cmp_nvim_lsp").default_capabilities()
+  cmp_lsp.default_capabilities()
 )
 updated_capabilities.textDocument.completion.completionItem.insertReplaceSupport =
   false
