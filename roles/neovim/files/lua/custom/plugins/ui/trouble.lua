@@ -1,6 +1,7 @@
 return {
   {
     "folke/trouble.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       local trouble = require "trouble"
       trouble.setup {
