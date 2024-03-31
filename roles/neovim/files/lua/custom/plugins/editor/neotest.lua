@@ -17,6 +17,11 @@ return {
       desc = "[t]est [r]un",
     },
     {
+      "<leader>tf",
+      "<cmd>lua require('neotest').run.run(vim.fn.expand('%')<cr>",
+      desc = "[t]est [f]ile",
+    },
+    {
       "<leader>tK",
       "<cmd>lua require('neotest').output.open()<CR>",
       desc = "[t]est [K]hover",
