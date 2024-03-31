@@ -1,24 +1,23 @@
 #!/usr/bin/env zsh
 
-choose_pkg_mgr() {
-  packages=("npm" "pnpm" "bun")
-  choice=$(printf "%s\n" "${packages[@]}" | fzf)
-  echo "$choice"
-}
+alias p="pnpm"
+alias n="npm"
+alias b="bun"
+alias y="yarn"
 
-# p for package
-alias p="$(choose_pkg_mgr)"
+alias pi="p install"
+alias ni="n install"
+alias bi="b install"
+alias ya="y add"
 
-# p + cmd
-alias pi="$(choose_pkg_mgr) install"
-alias pie="$(choose_pkg_mgr) install -E"
-alias pidev="$(choose_pkg_mgr) install -D -E"
+alias pie="pi -E"
+alias nie="ni -E"
+alias bie="bi -E"
+alias yae="ya -E"
 
-alias pdev="$(choose_pkg_mgr) dev"
-alias pstart="$(choose_pkg_mgr) start"
-alias pbuild="$(choose_pkg_mgr) build"
-
-alias plint="$(choose_pkg_mgr) lint"
-alias pformat="$(choose_pkg_mgr) format"
+alias pied="pie -D"
+alias nied="nie -D"
+alias bied="bie -D"
+alias yaed="yae -D"
 
 # vi:ft=zsh
