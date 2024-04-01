@@ -1,6 +1,6 @@
 ---
 - name: Neovim | Dependencies | {{ ansible_distribution }}
-  ansible.builtin.package:
+  community.general.homebrew:
     name:
       - curl
       - homebrew/cask/cmake
