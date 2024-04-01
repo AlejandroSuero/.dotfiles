@@ -99,12 +99,12 @@
     - name: Neovim | Register if update needed
       ansible.builtin.set_fact:
         neovim_update: true
-      when: neovim_latest_release != neovim_current_version
+      when: neovim_latest_release not in neovim_current_version
 
     - name: Neovim | Register if update not needed
       ansible.builtin.set_fact:
         neovim_update: false
-      when: neovim_latest_release == neovim_current_version
+      when: neovim_latest_release in neovim_current_version
 
 - name: Neovim | Installation | {{ ansible_distribution }}
   when: neovim_update
