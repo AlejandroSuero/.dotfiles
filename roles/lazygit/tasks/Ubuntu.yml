@@ -54,7 +54,7 @@
       ansible.builtin.get_url:
         url: https://github.com/jesseduffield/lazygit/releases/download/{{ lazygit_latest_release }}/{{ lazygit_file }}.tar.gz
         dest: /tmp/
-        mode: "0644"
+        mode: "0755"
         force: true
       notify:
         - Cleanup lazygit downloaded tar

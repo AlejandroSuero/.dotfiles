@@ -12,7 +12,7 @@
   ansible.builtin.template:
     dest: /etc/hosts
     src: hosts.j2
-    mode: "0644"
+    mode: "0755"
   become: true
   when: not ansible_host_environment_is_wsl
 

@@ -47,7 +47,7 @@
   ansible.builtin.copy:
     dest: "{{ ansible_user_dir }}/.config/"
     src: "zsh"
-    mode: "0644"
+    mode: "0755"
     directory_mode: "0755"
     force: true
 
@@ -84,7 +84,7 @@
   ansible.builtin.copy:
     dest: "{{ ansible_user_dir }}/.config/zsh/"
     src: "{{ zsh_os_config.stat.path }}/"
-    mode: "0644"
+    mode: "0755"
     force: true
   when:
     - zsh_os_config is defined
