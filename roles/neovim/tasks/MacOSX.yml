@@ -1,17 +1,43 @@
 ---
 - name: Neovim | Dependencies | {{ ansible_distribution }}
-  community.general.homebrew:
+  ansible.builtin.package:
     name:
-      - cmake
       - curl
-      - libtool
-      - unzip
+      - homebrew/cask/cmake
       - ansible-lint
       - ripgrep
       - fd
+      - ninja
+      - gettext
     state: present
 
 - name: Neovim | Installation | {{ ansible_distribution }}
-  community.general.homebrew:
-    name: neovim
-    state: present
+  block:
+    - name: Neovim | Clone repo
+      ansible.builtin.git:
+        clone: true
+        depth: 1
+        repo: https://github.com/neovim/neovim.git
+        force: true
+        update: true
+        dest: "{{ ansible_user_dir }}/neovim"
+        version: stable
+      register: clone
+
+    - name: Neovim | Build
+      community.general.make:
+        chdir: "{{ ansible_user_dir }}/neovim"
+        params:
+          CMAKE_BUILD_TYPE: RelWithDebInfo
+
+    - name: Neovim | Install
+      community.general.make:
+        chdir: "{{ ansible_user_dir }}/neovim"
+        target: install
+      become: true
+
+    - name: Remove build folder
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/neovim"
+        state: absent
+      become: true
