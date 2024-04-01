@@ -9,6 +9,7 @@ local actions = require "telescope.actions"
 telescope.setup {
   defaults = {
     preview = true,
+    initial_mode = "normal",
     mappings = {
       i = {
         ["<C-j>"] = actions.move_selection_next,
@@ -85,9 +86,7 @@ telescope.setup {
     },
     find_files = {
       prompt_prefix = " 󰈔 ",
-      find_command = vim.fn.executable "fd" == 1
-          and { "fd", "--strip-cwd-prefix", "--type", "f" }
-        or nil,
+      find_command = { "rg", "--files", "--ignore", "--hidden" },
     },
     git_files = {
       prompt_prefix = " 󰊢 ",

@@ -87,15 +87,19 @@ end
 
 function M.find_files()
   require("telescope.builtin").find_files {
-    scroll_strategy = "cycle",
+    initial_mode = "insert",
     layout_config = {
-      -- height = 10,
+      height = vim.o.lines - 20,
     },
   }
 end
 
 function M.fs()
-  local opts = themes.get_ivy { hidden = false, sorting_strategy = "ascending" }
+  local opts = themes.get_ivy {
+    cwd = vim.fn.expand "%:h",
+    hidden = false,
+    sorting_strategy = "ascending",
+  }
   require("telescope.builtin").find_files(opts)
 end
 
@@ -105,24 +109,17 @@ end
 
 function M.git_files()
   local path = vim.fn.expand "%:h"
-  if path == "" then
-    path = nil
-  end
-
-  local width = 0.75
-  if path and string.find(path, "sourcegraph.*sourcegraph", 1, false) then
-    width = 0.5
-  end
 
   local opts = themes.get_dropdown {
     winblend = 5,
     previewer = false,
     shorten_path = false,
+    initial_mode = "insert",
 
     cwd = path,
 
     layout_config = {
-      width = width,
+      width = 0.8,
     },
   }
 
@@ -132,6 +129,7 @@ end
 function M.colorscheme()
   local opts = {
     enable_preview = true,
+    initial_mode = "insert",
     attach_mappings = function(prompt_bufnr, map)
       -- reload theme while typing
       vim.schedule(function()
@@ -227,6 +225,7 @@ function M.lsp_code_actions()
     border = true,
     previewer = false,
     shorten_path = false,
+    initial_mode = "insert",
   }
 
   require("telescope.builtin").lsp_code_actions(opts)
@@ -236,6 +235,7 @@ function M.live_grep()
   require("telescope.builtin").live_grep {
     previewer = false,
     fzf_separator = "|>",
+    initial_mode = "insert",
   }
 end
 
@@ -298,6 +298,7 @@ end
 function M.help_tags()
   require("telescope.builtin").help_tags {
     show_version = true,
+    initial_mode = "insert",
   }
 end
 
@@ -326,7 +327,6 @@ function M.file_browser()
     hidden = true,
     grouped = true,
     previewer = false,
-    initial_mode = "normal",
 
     attach_mappings = function(prompt_bufnr, map)
       local current_picker = action_state.get_current_picker(prompt_bufnr)
@@ -424,10 +424,6 @@ function M.vim_options()
     },
     sorting_strategy = "ascending",
   }
-end
-
-function M.rest()
-  require("telescope").extensions.rest.select_env()
 end
 
 return setmetatable({}, {

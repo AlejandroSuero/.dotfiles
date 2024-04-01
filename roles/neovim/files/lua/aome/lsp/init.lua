@@ -177,6 +177,8 @@ local custom_attach = function(client, bufnr)
       vim.lsp.buf.clear_references,
       bufnr,
     }
+  else
+    autocmd_clear { group = augroup_highlight, buffer = bufnr }
   end
 
   if false and client.server_capabilities.codeLensProvider then

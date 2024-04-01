@@ -12,7 +12,6 @@ map_tele("<leader>fb", "file_browser", nil, false, "[f]ile [b]rowser")
 map_tele("<leader>fs", "fs", nil, false, "[f]ile [s]earch")
 map_tele("<leader>pv", "project_search", nil, false, "[p]roject [v]iew")
 map_tele("<leader>ps", "grep_prompt", nil, false, "[p]roject [s]earch")
-map_tele("<leader>fe", "rest", nil, false, "[f]ind .[e]nv files")
 
 -- Misc
 map_tele("<leader>cs", "colorscheme", nil, false, "[c]olor[s]chemes")
