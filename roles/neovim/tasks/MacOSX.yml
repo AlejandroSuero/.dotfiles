@@ -79,21 +79,35 @@
           set -o pipefail
           /usr/local/bin/nvim --version | grep -w "NVIM " | awk "NR==1" | tr -d "NVIM "
       args:
-        executable: /bin/bash
+        executable: /bin/zsh
       register: current_neovim_version
       changed_when: false
       failed_when: false
 
+    - name: Neovim | Register neovim current version
+      ansible.builtin.set_fact:
+        neovim_current_version: "{{ current_neovim_version.stdout | default('') }}"
+
     - name: Neovim | Show current_neovim_version debug
       ansible.builtin.debug:
-        var: current_neovim_version.stdout
+        var: neovim_current_version
 
     - name: Neovim | Show neovim_latest_release debug
       ansible.builtin.debug:
         var: neovim_latest_release
 
+    - name: Neovim | Register if update needed
+      ansible.builtin.set_fact:
+        neovim_update: true
+      when: neovim_latest_release != neovim_current_version
+
+    - name: Neovim | Register if update not needed
+      ansible.builtin.set_fact:
+        neovim_update: false
+      when: neovim_latest_release == neovim_current_version
+
 - name: Neovim | Installation | {{ ansible_distribution }}
-  when: neovim_latest_release != current_neovim_version.stdout
+  when: neovim_update
   block:
     - name: Neovim | Clone repo
       ansible.builtin.git:
