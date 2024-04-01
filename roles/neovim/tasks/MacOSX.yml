@@ -1,15 +1,40 @@
 ---
 - name: Neovim | Dependencies | {{ ansible_distribution }}
-  community.general.homebrew:
-    name:
-      - curl
-      - homebrew/cask/cmake
-      - ansible-lint
-      - ripgrep
-      - fd
-      - ninja
-      - gettext
-    state: present
+  block:
+    - name: Neovim | Detecting Installed cmake
+      ansible.builtin.command:
+        cmd: which cmake
+      changed_when: false
+      register: cmake_cmd
+      failed_when: false
+
+    - name: Neovim | Register cmake status installed
+      ansible.builtin.set_fact:
+        cmake_is_installed: true
+      when: cmake_cmd.stdout|length > 0
+
+    - name: Neovim | Register cmake status not installed
+      ansible.builtin.set_fact:
+        cmake_is_installed: false
+      when: cmake_cmd.stdout|length == 0
+
+    - name: Neovim | Install cmake
+      ansible.builtin.package:
+        name:
+          - cmake
+      state: present
+      when: not cmake_is_installed
+
+    - name: Neovim | Dependencies | Install
+      ansible.builtin.package:
+        name:
+          - curl
+          - ansible-lint
+          - ripgrep
+          - fd
+          - ninja
+          - gettext
+        state: present
 
 - name: Neovim | Installation | {{ ansible_distribution }}
   block:
