@@ -1,5 +1,25 @@
 ---
+- name: Neovim | Install | {{ ansible_distribution }}
+  block:
+    - name: Neovim | Detecting Installed nvim
+      ansible.builtin.command:
+        cmd: which nvim
+      changed_when: false
+      register: nvim_cmd
+      failed_when: false
+
+    - name: Neovim | Register nvim status installed
+      ansible.builtin.set_fact:
+        nvim_is_installed: true
+      when: nvim_cmd.stdout|length > 0
+
+    - name: Neovim | Register nvim status not installed
+      ansible.builtin.set_fact:
+        nvim_is_installed: false
+      when: nvim_cmd.stdout|length == 0
+
 - name: Neovim | Dependencies | {{ ansible_distribution }}
+  when: not nvim_is_installed
   block:
     - name: Neovim | Detecting Installed cmake
       ansible.builtin.command:
@@ -36,7 +56,44 @@
           - gettext
         state: present
 
+- name: Neovim | Check if update needed | {{ ansible_distribution }}
+  when: nvim_is_installed
+  block:
+    - name: Neovim | Download Latest Version JSON
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/neovim/neovim/releases/latest
+      register: neovim_latest_version_json
+      changed_when: false
+
+    - name: Neovim | Registering neovim Latest Release
+      ansible.builtin.set_fact:
+        neovim_latest_release: "{{ neovim_latest_version_json.json.tag_name }}"
+
+    - name: Neovim | Registering neovim Latest Version
+      ansible.builtin.set_fact:
+        neovim_latest_version: "{{ neovim_latest_release.stdout | default('') }}"
+
+    - name: Neovim | Getting version information
+      ansible.builtin.shell:
+        cmd: |
+          set -o pipefail
+          /usr/local/bin/nvim --version | grep -w "NVIM " | awk "NR==1" | tr -d "NVIM "
+      args:
+        executable: /bin/bash
+      register: current_neovim_version
+      changed_when: false
+      failed_when: false
+
+    - name: Neovim | Show current_neovim_version debug
+      ansible.builtin.debug:
+        var: current_neovim_version.stdout
+
+    - name: Neovim | Show neovim_latest_release debug
+      ansible.builtin.debug:
+        var: neovim_latest_release
+
 - name: Neovim | Installation | {{ ansible_distribution }}
+  when: neovim_latest_release != current_neovim_version.stdout
   block:
     - name: Neovim | Clone repo
       ansible.builtin.git:
