@@ -90,7 +90,7 @@
 
     - name: Neovim | Show current_neovim_version debug
       ansible.builtin.debug:
-        var: neovim_current_version
+        var: current_neovim_verson.stdout|default('')
 
     - name: Neovim | Show neovim_latest_release debug
       ansible.builtin.debug:
@@ -107,7 +107,7 @@
       when: neovim_latest_release in neovim_current_version
 
 - name: Neovim | Installation | {{ ansible_distribution }}
-  when: neovim_update
+  when: neovim_latest_release not in current_neovim_version.stdout|default('')
   block:
     - name: Neovim | Clone repo
       ansible.builtin.git:
