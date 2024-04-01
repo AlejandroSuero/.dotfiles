@@ -22,7 +22,7 @@
       ansible.builtin.package:
         name:
           - cmake
-      state: present
+        state: present
       when: not cmake_is_installed
 
     - name: Neovim | Dependencies | Install
