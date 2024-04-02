@@ -18,6 +18,11 @@ return {
         color = "#4e94ce",
         name = "HTTP",
       },
+      astro = {
+        icon = "",
+        color = "#ffffff",
+        name = "Astro",
+      },
     }
   end,
   event = "VeryLazy",
