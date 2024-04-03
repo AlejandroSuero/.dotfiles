@@ -53,6 +53,7 @@ return {
         "jsdoc",
         "http",
         "xml",
+        "templ",
       },
       auto_install = true,
     }

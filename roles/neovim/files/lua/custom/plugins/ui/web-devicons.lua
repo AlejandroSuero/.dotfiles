@@ -35,6 +35,11 @@ return {
         color = "#e77751",
         name = "Yml",
       },
+      templ = {
+        icon = "󰅄",
+        color = "#00ADD8",
+        name = "Templ",
+      },
     }
   end,
   event = "VeryLazy",
