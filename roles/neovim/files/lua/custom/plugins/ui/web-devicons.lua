@@ -1,7 +1,9 @@
 return {
   "nvim-tree/nvim-web-devicons",
   config = function()
-    require("nvim-web-devicons").set_icon {
+    local web_devicons = require "nvim-web-devicons"
+
+    web_devicons.set_icon {
       gql = {
         icon = "",
         color = "#e535ab",
@@ -19,9 +21,19 @@ return {
         name = "HTTP",
       },
       astro = {
-        icon = "",
-        color = "#ffffff",
+        icon = "",
+        color = "#e77751",
         name = "Astro",
+      },
+      yaml = {
+        icon = "󰬠",
+        color = "#e77751",
+        name = "Yaml",
+      },
+      yml = {
+        icon = "󰬠",
+        color = "#e77751",
+        name = "Yml",
       },
     }
   end,

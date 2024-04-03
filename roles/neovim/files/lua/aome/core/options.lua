@@ -76,9 +76,6 @@ local options = {
     loaded_logiPat = 1,
     loaded_rrhelper = 1,
 
-    loaded_netrw = vim.g.aome_netrw_loaded,
-    loaded_netrwPlugin = vim.g.aome_netrw_loaded,
-    loaded_netrwSettings = vim.g.aome_netwr_loaded,
     netrw_banner = false,
     netrw_browse_split = 0,
     netrw_winsize = 25,
