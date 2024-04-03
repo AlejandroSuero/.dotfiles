@@ -117,9 +117,6 @@ local mappings = {
       end,
       "Closes current buffer",
     },
-
-    ["<C-s>"] = { "<cmd>w<cr>", "Saves current file" },
-    ["<C-S>"] = { "<cmd>wa<cr>", "Saves all files" },
   },
   v = { -- visual mode
     ["<leader>s"] = {

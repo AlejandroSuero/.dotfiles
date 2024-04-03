@@ -69,7 +69,7 @@ local client = vim.lsp.start_client {
         },
       },
       i = {
-        ["<C-h>"] = {
+        ["<C-s>"] = {
           vim.lsp.buf.signature_help,
           "LSP show signature",
         },

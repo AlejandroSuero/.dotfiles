@@ -98,7 +98,7 @@ local custom_attach = function(client, bufnr)
   local filetype = vim.api.nvim_buf_get_option(0, "filetype")
 
   buf_inoremap {
-    "<c-h>",
+    "<C-s>",
     vim.lsp.buf.signature_help,
     { desc = "signature [h]elp" },
   }
@@ -246,6 +246,9 @@ local servers = {
     Lua = {
       workspace = {
         checkThirdParty = false,
+      },
+      completion = {
+        callSnippet = "Replace",
       },
     },
   },
