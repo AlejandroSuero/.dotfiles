@@ -1,13 +1,17 @@
 {
-  "name": ".dotfiles",
+  "name": "dotfiles",
   "version": "1.0.0",
-  "description": "",
+  "description": "A cross-platform configuration manager using ansible",
   "main": "",
   "scripts": {
     "prepare": "husky"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "config-manager",
+    "dotfiles",
+    "ansible"
+  ],
+  "author": "AlejandroSuero <asuerome@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@commitlint/cli": "19.2.1",
