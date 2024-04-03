@@ -11,3 +11,4 @@ logs
 node_modules
 pnpm-lock.yaml
 roles/tmux/files/plugins
+bun.lockb
