@@ -28,7 +28,7 @@
 - name: Go-Lang | GOARCH Value
   ansible.builtin.debug:
     # var: goarch
-    msg: "goarch = {{ goarch }}"
+    msg: goarch = {{ goarch }}
 
 - name: Go-Lang | GOOS Value
   ansible.builtin.debug:
