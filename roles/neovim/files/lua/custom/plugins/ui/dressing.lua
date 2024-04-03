@@ -1,6 +1,6 @@
 return {
   "stevearc/dressing.nvim",
-  event = { "BufReadPre", "BufNewFile" },
+  event = "VeryLazy",
   opts = {
     input = {
       relative = "win",
