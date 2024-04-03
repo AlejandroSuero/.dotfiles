@@ -27,9 +27,9 @@ return {
       desc = "[t]est [K]hover",
     },
     {
-      "<leader>to",
+      "<leader>tO",
       "<cmd>lua require('neotest').summary.toggle()<CR>",
-      desc = "[t]est [o]pen summary",
+      desc = "[t]est [O]pen summary",
     },
   },
   event = "VeryLazy",

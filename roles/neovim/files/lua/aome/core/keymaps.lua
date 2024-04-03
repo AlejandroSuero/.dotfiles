@@ -55,11 +55,13 @@ local mappings = {
     ["<C-k>"] = { "<cmd>wincmd k<CR>", "Window Navigate up" },
     ["<C-l>"] = { "<cmd>wincdm l<CR>", "Window Navigate right" },
 
-    ["<leader>sj"] = { "<cmd>split<CR>", "[w]indow [s]plit down" },
-    ["<leader>sl"] = { "<cmd>vsplit<cr>", "[w]indow [s]plit right" },
+    ["<leader>sv"] = { "<C-w>v", "[s]plit [v]ertically" },
+    ["<leader>sh"] = { "<C-w>s", "[s]plit [h]orizontally" },
+    ["<leader>se"] = { "<C-w>=", "[s]plit [e]qual length" },
+    ["<leader>sc"] = { "<cmd>close<CR>", "[s]plit [c]lose" },
 
     -- Tab
-    ["<leader>te"] = { ":tabedit ", "[t]ab [e]dit" },
+    ["<leader>to"] = { "<cmd>tabnew %<CR>", "[t]ab [o]pen" },
     ["<leader>tc"] = { "<cmd>tabclose<CR>", "[t]ab [c]lose" },
     ["<leader>tn"] = { "<cmd>tabnext<CR>", "[t]ab [n]next" },
     ["<leader>tp"] = { "<cmd>tabnext<CR>", "[t]ab [p]revious" },
