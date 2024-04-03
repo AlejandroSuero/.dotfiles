@@ -120,6 +120,13 @@ return {
           end,
         },
       },
+      inactive_winbar = {
+        lualine_z = {
+          function()
+            return get_filename_and_status(false)
+          end,
+        },
+      },
       extensions = { "fugitive", "quickfix" },
     }
   end,
