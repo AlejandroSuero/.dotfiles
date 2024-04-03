@@ -97,7 +97,7 @@ end
 function M.fs()
   local opts = themes.get_ivy {
     cwd = vim.fn.expand "%:h",
-    hidden = false,
+    hidden = true,
     sorting_strategy = "ascending",
   }
   require("telescope.builtin").find_files(opts)
@@ -108,15 +108,11 @@ function M.builtin()
 end
 
 function M.git_files()
-  local path = vim.fn.expand "%:h"
-
   local opts = themes.get_dropdown {
-    winblend = 5,
+    winblend = 0,
     previewer = false,
     shorten_path = false,
     initial_mode = "insert",
-
-    cwd = path,
 
     layout_config = {
       width = 0.8,
@@ -212,7 +208,7 @@ end
 function M.buffer_git_files()
   require("telescope.builtin").git_files(themes.get_dropdown {
     cwd = vim.fn.expand "%:p:h",
-    winblend = 10,
+    winblend = 0,
     border = true,
     previewer = false,
     shorten_path = false,
@@ -221,7 +217,7 @@ end
 
 function M.lsp_code_actions()
   local opts = themes.get_dropdown {
-    winblend = 10,
+    winblend = 0,
     border = true,
     previewer = false,
     shorten_path = false,
@@ -287,7 +283,7 @@ end
 
 function M.curbuf()
   local opts = themes.get_dropdown {
-    winblend = 10,
+    winblend = 0,
     border = true,
     previewer = false,
     shorten_path = false,
@@ -364,7 +360,7 @@ end
 
 function M.git_status()
   local opts = themes.get_dropdown {
-    winblend = 10,
+    winblend = 0,
     border = true,
     previewer = false,
     shorten_path = false,
