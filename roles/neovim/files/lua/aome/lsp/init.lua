@@ -208,6 +208,14 @@ local custom_attach = function(client, bufnr)
   filetype_attach[filetype]()
 end
 
+local get_intelephense_license = function()
+  local f =
+    assert(io.open(os.getenv "HOME" .. "/intelephense/license.txt", "rb"))
+  local content = f:read "*a"
+  f:close()
+  return string.gsub(content, "%s+", "")
+end
+
 local updated_capabilities = vim.lsp.protocol.make_client_capabilities()
 updated_capabilities.textDocument.completion.completionItem.snippetSupport =
   true
@@ -246,6 +254,9 @@ local servers = {
     Lua = {
       workspace = {
         checkThirdParty = false,
+      },
+      diagnostics = {
+        globals = { "vim" },
       },
       completion = {
         callSnippet = "Replace",
@@ -295,6 +306,13 @@ local servers = {
   },
 
   svelte = true,
+
+  intelephense = true,
+  -- intelephense = {
+  --   init_options = {
+  --     licenceKey = get_intelephense_license(),
+  --   },
+  -- },
 
   templ = true,
   gopls = {
