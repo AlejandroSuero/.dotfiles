@@ -21,9 +21,12 @@ local servers = {
   "astro-language-server",
   "json-lsp",
   "eslint-lsp",
+  "eslint_d",
   "marksman",
   "prettier", -- ts/js formatter
+  "prettierd", -- ts/js formatter
   "stylua", -- lua formatter
+  "luacheck",
   "ansible-language-server",
   "ansible-lint",
   "yaml-language-server",
