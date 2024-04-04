@@ -10,9 +10,78 @@ return {
         changedelete = { text = "~" },
         untracked = { text = "┆" },
       },
-      current_line_blame = true,
       numhl = true,
       max_file_length = 10000,
+      on_attach = function(bufnr)
+        local gs = package.loaded.gitsigns
+
+        local mappings = {
+          n = {
+            ["]h"] = {
+              gs.next_hunk,
+              "next [h]unk",
+            },
+            ["[h"] = {
+              gs.prev_hunk,
+              "previous [h]unk",
+            },
+            ["<leader>hb"] = {
+              gs.toggle_current_line_blame,
+              "Line [b]lame",
+            },
+            ["<leader>hs"] = {
+              gs.stage_hunk,
+              "[h]unk [s]tage",
+            },
+            ["<leader>hr"] = {
+              gs.reset_hunk,
+              "[h]unk [r]eset",
+            },
+            ["<leader>hS"] = {
+              gs.stage_buffer,
+              "[h]unk [S]tage buffer",
+            },
+            ["<leader>hR"] = {
+              gs.reset_buffer,
+              "[h]unk [R]eset buffer",
+            },
+            ["<leader>hd"] = {
+              gs.diffthis,
+              "[h]unk [d]iff",
+            },
+            ["<leader>hD"] = {
+              function()
+                gs.diffthis "~"
+              end,
+              "[h]unk [D]iff ~",
+            },
+            ["<leader>hu"] = {
+              gs.undo_stage_hunk,
+              "[h]unk [u]ndo stage",
+            },
+            ["<leader>hp"] = {
+              gs.preview_hunk,
+              "[h]unk [p]review",
+            },
+          },
+          v = {
+            ["<leader>hs"] = {
+              function()
+                gs.stage_hunk { vim.fn.line ".", vim.fn.line "v" }
+              end,
+              "[h]unk [s]tage selected",
+            },
+            ["<leader>hr"] = {
+              function()
+                gs.reset_hunk { vim.fn.line ".", vim.fn.line "v" }
+              end,
+              "[h]unk [r]eset selected",
+            },
+          },
+        }
+
+        require("aome.core.utils").map_keys(mappings, { buffer = bufnr })
+      end,
     },
     event = { "BufReadPre", "BufNewFile" },
   },
