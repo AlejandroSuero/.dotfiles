@@ -32,7 +32,6 @@ return {
       desc = "[t]est [O]pen summary",
     },
   },
-  event = "VeryLazy",
   config = function()
     local neotest = require "neotest"
     ---@diagnostic disable-next-line: missing-fields

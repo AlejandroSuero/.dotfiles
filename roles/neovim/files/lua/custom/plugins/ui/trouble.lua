@@ -1,7 +1,13 @@
 return {
   {
     "folke/trouble.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    keys = {
+      {
+        "<leader>tq",
+        "<cmd>TroubleToggle<CR>",
+        { desc = "[t]rouble [q]uickfix" },
+      },
+    },
     config = function()
       local trouble = require "trouble"
       trouble.setup {
@@ -10,12 +16,6 @@ return {
 
       local mappings = {
         n = {
-          ["<leader>tq"] = {
-            function()
-              trouble.toggle()
-            end,
-            "[t]rouble [q]uickfix",
-          },
           ["]t"] = {
             function()
               trouble.next { skip_groups = true, jump = true }
