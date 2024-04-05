@@ -11,6 +11,7 @@ return {
       astro = { "prettierd" },
       go = { { "goimports-reviser", "golines", "gofumpt" } },
       c = { "clang_format" },
+      markdown = { "prettierd" },
     },
     format_on_save = {
       timeout_ms = 500,
