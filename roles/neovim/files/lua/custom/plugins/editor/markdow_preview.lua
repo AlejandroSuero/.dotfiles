@@ -1,16 +1,21 @@
 return {
-  "iamcco/markdown-preview.nvim",
-  cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-  build = "cd app && npm install",
+  "ellisonleao/glow.nvim",
+  config = function()
+    local glow = require "glow"
+
+    glow.setup {
+      style = "dark",
+      width = vim.o.columns - 20,
+      height = vim.o.lines - 20,
+    }
+  end,
+  cmd = "Glow",
   keys = {
     {
       "<leader>md",
-      "<cmd>MarkdownPreviewToggle<CR>",
+      "<cmd>Glow<CR>",
       desc = "[m]arkdown [p]review toggle",
     },
   },
-  init = function()
-    vim.g.mkdp_filetypes = { "markdown" }
-  end,
   ft = { "markdown" },
 }
