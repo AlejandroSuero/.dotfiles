@@ -314,6 +314,7 @@ local servers = {
   --   },
   -- },
 
+  htmx = true,
   templ = true,
   gopls = {
     settings = {

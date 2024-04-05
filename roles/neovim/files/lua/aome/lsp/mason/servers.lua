@@ -4,6 +4,7 @@ local servers = {
   "typescript-language-server",
   "lua-language-server",
   "html-lsp",
+  "htmx-lsp",
   "css-lsp",
   "tailwindcss-language-server",
   "svelte-language-server",
