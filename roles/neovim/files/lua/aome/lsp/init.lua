@@ -255,9 +255,6 @@ local servers = {
       workspace = {
         checkThirdParty = false,
       },
-      diagnostics = {
-        globals = { "vim" },
-      },
       completion = {
         callSnippet = "Replace",
       },
