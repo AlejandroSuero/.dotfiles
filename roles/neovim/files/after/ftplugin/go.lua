@@ -8,3 +8,6 @@ local mappings = {
 }
 
 require("aome.core.utils").map_keys(mappings, { noremap = true, silent = true })
+
+--- snippets
+require "aome.snippets.ft.go"
