@@ -13,4 +13,15 @@ return {
     name = "rose-pine",
     opts = require(configs .. "rose-pine"),
   },
+  {
+    "ellisonleao/gruvbox.nvim",
+    lazy = false,
+    priority = 1000,
+    config = true,
+    opts = require(configs .. "gruvbox"),
+  },
+  {
+    "tjdevries/colorbuddy.nvim",
+    lazy = false,
+  },
 }
