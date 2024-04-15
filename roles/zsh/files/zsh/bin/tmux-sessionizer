@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/ ~/dev ~/dev/github ~/personal -mindepth 1 -maxdepth 1 -type d | fzf)
+    selected=$(find "$HOME" "$HOME"/dev  "$HOME"/dev/github "$HOME"/dev/nvim_plugins "$HOME"/personal -mindepth 1 -maxdepth 1 -type d | fzf)
 fi
 
 if [[ -z $selected ]]; then
