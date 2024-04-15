@@ -101,10 +101,6 @@ return {
       "LazyGitFilter",
       "LazyGitFilterCurrentFile",
     },
-    -- optional for floating window border decoration
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
     keys = {
       { "<C-g>", "<cmd>LazyGit<CR>", desc = { "Open lazy[g]it" } },
     },
