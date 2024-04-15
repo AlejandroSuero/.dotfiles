@@ -118,8 +118,19 @@ telescope.setup {
     file_browser = {
       hijack_netrw = true,
     },
+    cmdline = {
+      picker = {
+        initial_mode = "insert",
+      },
+      mappings = {
+        complete = "<Tab>",
+        run_selection = "<C-CR>",
+        run_input = "<CR>",
+      },
+    },
   },
 }
 
 pcall(require("telescope").load_extension, "fzf")
 pcall(require("telescope").load_extension, "file_browser")
+pcall(require("telescope").load_extension, "cmdline")

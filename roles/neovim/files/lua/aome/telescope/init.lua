@@ -422,6 +422,10 @@ function M.vim_options()
   }
 end
 
+function M.cmdline()
+  require("telescope").extensions.cmdline.cmdline()
+end
+
 return setmetatable({}, {
   __index = function(_, k)
     reloader()

@@ -3,6 +3,7 @@ return {
   branch = "0.1.x",
   dependencies = {
     "nvim-telescope/telescope-file-browser.nvim",
+    "jonarrien/telescope-cmdline.nvim",
     { -- If encountering errors, see telescope-fzf-native README for install instructions
       "nvim-telescope/telescope-fzf-native.nvim",
 
