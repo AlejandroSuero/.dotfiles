@@ -10,7 +10,7 @@ return {
       n = {
         ["<leader>a"] = {
           function()
-            harpoon:list():append()
+            harpoon:list():add()
           end,
           "[Harpoon] Append current file to list",
         },
