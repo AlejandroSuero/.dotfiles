@@ -21,6 +21,13 @@ return {
     opts = require(configs .. "gruvbox"),
   },
   {
+    "rebelot/kanagawa.nvim",
+    lazy = false,
+    priority = 1000,
+    config = true,
+    opts = require(configs .. "kanagawa"),
+  },
+  {
     "tjdevries/colorbuddy.nvim",
     lazy = false,
   },
