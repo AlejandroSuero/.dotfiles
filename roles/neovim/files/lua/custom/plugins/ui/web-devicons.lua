@@ -20,11 +20,6 @@ return {
         color = "#4e94ce",
         name = "HTTP",
       },
-      astro = {
-        icon = "",
-        color = "#e77751",
-        name = "Astro",
-      },
       yaml = {
         icon = "󰬠",
         color = "#e77751",
