@@ -8,12 +8,7 @@ fi
 
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
-export FZF_DEFAULT_OPTS="
-	--color=fg:#908caa,bg:#232136,hl:#ea9a97
-	--color=fg+:#e0def4,bg+:#393552,hl+:#ea9a97
-	--color=border:#44415a,header:#3e8fb0,gutter:#232136
-	--color=spinner:#f6c177,info:#9ccfd8,separator:#44415a
-	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
+export BAT_THEME="Catppuccin Mocha"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -36,9 +31,7 @@ fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 plugins=(
   gh
   git
-  golang
-  tmux
-  zoxide
+  web-search
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
@@ -63,6 +56,9 @@ if [[ -f "$HOME/.config/zsh/.zsh_private" ]]; then
     source "$HOME/.config/zsh/.zsh_private"
 fi
 
+eval "$(starship init zsh)"
+eval "$(fzf --zsh)"
+
 for file in $HOME/.config/zsh/*.sh; do
   source "$file"
 done
@@ -78,6 +74,10 @@ if [[ "$(uname)" == "Darwin" ]]; then
   addToPathFront "/opt/homebrew/opt/gnu-tar/libexec/gnubin"
 fi
 
-eval "$(starship init zsh)"
-eval "$(fzf --zsh)"
+source ~/fzf-git.sh/fzf-git.sh
 check_nvmrc
+
+eval "$(thefuck --alias)"
+eval "$(thefuck --alias fk)"
+
+eval "$(zoxide init zsh)"
