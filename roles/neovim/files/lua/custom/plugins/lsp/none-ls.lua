@@ -3,7 +3,6 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "nvimtools/none-ls-extras.nvim",
-    "gbprod/none-ls-luacheck.nvim",
   },
   config = function()
     -- import null-ls plugin
@@ -45,8 +44,8 @@ return {
         diagnostics.golangci_lint,
         diagnostics.markdownlint,
         diagnostics.yamllint,
+        diagnostics.selene,
         require "none-ls.diagnostics.eslint_d",
-        require "none-ls-luacheck.diagnostics.luacheck",
       },
       -- configure format on save
       on_attach = function(current_client, bufnr)

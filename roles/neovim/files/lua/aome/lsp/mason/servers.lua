@@ -23,14 +23,16 @@ local servers = {
   "json-lsp",
   "eslint-lsp",
   "eslint_d",
-  "marksman",
+  "markdownlint",
   "prettier", -- ts/js formatter
   "prettierd", -- ts/js formatter
   "stylua", -- lua formatter
-  "luacheck",
+  "selene",
   "ansible-language-server",
   "ansible-lint",
+  "golangci-lint",
   "yaml-language-server",
+  "yamllint",
   "bash-language-server",
   "cmake-language-server",
   "shellcheck",
