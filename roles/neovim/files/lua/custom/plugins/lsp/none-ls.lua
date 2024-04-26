@@ -35,20 +35,17 @@ return {
         formatting.goimports_reviser,
         formatting.golines,
         formatting.clang_format,
-        formatting.prettierd.with { extra_filetypes = { "astro" } },
+        formatting.prettierd,
+        formatting.markdownlint,
         -- code_actions
         code_actions.refactoring,
-        require("none-ls.code_actions.eslint_d").with {
-          extra_filetypes = { "astro" },
-        },
+        require "none-ls.code_actions.eslint_d",
         -- diagnostics
         diagnostics.ansiblelint,
         diagnostics.golangci_lint,
         diagnostics.markdownlint,
         diagnostics.yamllint,
-        require("none-ls.diagnostics.eslint_d").with {
-          extra_filetypes = { "astro" },
-        },
+        require "none-ls.diagnostics.eslint_d",
         require "none-ls-luacheck.diagnostics.luacheck",
       },
       -- configure format on save
