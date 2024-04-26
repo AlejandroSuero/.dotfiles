@@ -16,6 +16,22 @@ return {
     local mason = require "mason"
 
     mason.setup(opts)
+    require("mason-null-ls").setup({
+      ensure_installed = {
+        "shellcheck",
+        "luacheck",
+        "eslint_d",
+        "prettierd",
+        "stylua",
+        "markdownlint",
+        "yamllint",
+        "golines",
+        "gofumpt",
+        "goimports_reviser",
+        "ansiblelint",
+        "golangci_lint"
+      }
+    })
 
     vim.api.nvim_create_user_command("MasonInstallAll", function()
       vim.cmd("MasonInstall " .. table.concat(opts.ensure_installed, " "))
