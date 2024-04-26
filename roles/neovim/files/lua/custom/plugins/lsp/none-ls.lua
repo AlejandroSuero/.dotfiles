@@ -37,12 +37,13 @@ return {
         formatting.prettierd.with({ extra_filetypes = { "astro" } }),
         -- code_actions
         code_actions.refactoring,
+        require("none-ls.code_actions.eslint_d").with({ extra_filetypes = { "astro" } }),
         -- diagnostics
         diagnostics.ansiblelint,
         diagnostics.golangci_lint,
         diagnostics.markdownlint,
         diagnostics.yamllint,
-        diagnostics.eslint_d,
+        require("none-ls.diagnostics.eslint_d").with({ extra_filetypes = { "astro" } }),
       },
       -- configure format on save
       on_attach = function(current_client, bufnr)
