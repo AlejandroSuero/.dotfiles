@@ -1,4 +1,5 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+export XDG_CONFIG=$HOME/.config
 # Path to your oh-my-bash installation.
 export ZSH="$HOME/.oh-my-zsh"
 
