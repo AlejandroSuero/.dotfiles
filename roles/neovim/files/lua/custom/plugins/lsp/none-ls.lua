@@ -3,6 +3,7 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "nvimtools/none-ls-extras.nvim",
+    "gbprod/none-ls-luacheck.nvim",
   },
   config = function()
     -- import null-ls plugin
@@ -24,7 +25,9 @@ return {
         ".null-ls-root",
         "Makefile",
         ".git",
-        "package.json"
+        "package.json",
+        -- "selene.toml",
+        ".luacheck"
       ),
       -- setup formatters & linters
       sources = {
@@ -44,7 +47,8 @@ return {
         diagnostics.golangci_lint,
         diagnostics.markdownlint,
         diagnostics.yamllint,
-        diagnostics.selene,
+        -- diagnostics.selene,
+        require "none-ls-luacheck.diagnostics.luacheck",
         require "none-ls.diagnostics.eslint_d",
       },
       -- configure format on save

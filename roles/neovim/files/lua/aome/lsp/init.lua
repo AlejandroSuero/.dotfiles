@@ -344,10 +344,6 @@ local servers = {
 
   astro = true,
 
-  eslint = {
-    format = false,
-  },
-
   tsserver = {
     init_options = ts_util.init_options,
     cmd = { "typescript-language-server", "--stdio" },
