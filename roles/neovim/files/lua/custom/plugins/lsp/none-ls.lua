@@ -47,8 +47,16 @@ return {
         diagnostics.golangci_lint,
         diagnostics.markdownlint,
         diagnostics.yamllint,
-        -- diagnostics.selene,
-        require "none-ls-luacheck.diagnostics.luacheck",
+        diagnostics.selene.with {
+          condition = function(utils)
+            return utils.root_has_file { "selene.toml" }
+          end,
+        },
+        require("none-ls-luacheck.diagnostics.luacheck").with {
+          condition = function(utils)
+            return utils.root_has_file { ".luacheck" }
+          end,
+        },
         require "none-ls.diagnostics.eslint_d",
       },
       -- configure format on save
