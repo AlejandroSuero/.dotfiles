@@ -36,7 +36,15 @@ local mappings = {
     ["<leader>d"] = { '"_d', "Deletes into the void register" },
 
     ["<leader>fm"] = {
-      vim.lsp.buf.format,
+      function()
+        vim.lsp.buf.format {
+          filter = function(client)
+            --  only use null-ls for formatting instead of lsp server
+            return client.name == "null-ls"
+          end,
+          bufnr = 0,
+        }
+      end,
       "Formats current buffer if lsp available",
     },
 

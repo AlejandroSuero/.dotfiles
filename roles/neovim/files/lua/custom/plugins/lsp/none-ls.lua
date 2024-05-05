@@ -15,9 +15,6 @@ return {
     local diagnostics = null_ls.builtins.diagnostics -- to setup linters
     local code_actions = null_ls.builtins.code_actions
 
-    -- to setup format on save
-    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
     -- configure null_ls
     null_ls.setup {
       -- add package.json as identifier for root (for typescript monorepos)
@@ -26,7 +23,7 @@ return {
         "Makefile",
         ".git",
         "package.json",
-        -- "selene.toml",
+        "selene.toml",
         ".luacheck"
       ),
       -- setup formatters & linters
@@ -59,28 +56,6 @@ return {
         },
         require "none-ls.diagnostics.eslint_d",
       },
-      -- configure format on save
-      on_attach = function(current_client, bufnr)
-        if current_client.supports_method "textDocument/formatting" then
-          vim.api.nvim_clear_autocmds {
-            group = augroup,
-            buffer = bufnr,
-          }
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            group = augroup,
-            buffer = bufnr,
-            callback = function()
-              vim.lsp.buf.format {
-                filter = function(client)
-                  --  only use null-ls for formatting instead of lsp server
-                  return client.name == "null-ls"
-                end,
-                bufnr = bufnr,
-              }
-            end,
-          })
-        end
-      end,
     }
   end,
 }
