@@ -49,6 +49,10 @@ local opts = {
       notify = false,
     },
   },
+  dev = {
+    path = os.getenv "HOME" .. "/dev/nvim_plugins",
+    fallback = true,
+  },
 }
 
 local ok, lazy = pcall(require, "lazy")
