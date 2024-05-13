@@ -3,7 +3,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   PATH=/opt/homebrew/opt/gnu-tar/libexec/gnubin:$PATH
 fi
 
-export GOROOT="$HOME/go"
+export XDG_CONFIG_HOME="$HOME/.config"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
 export BAT_THEME="Catppuccin Mocha"
