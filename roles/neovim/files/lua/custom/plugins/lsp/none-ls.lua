@@ -2,7 +2,7 @@ return {
   "nvimtools/none-ls.nvim", -- configure formatters & linters
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    "nvimtools/none-ls-extras.nvim",
+    { "nvimtools/none-ls-extras.nvim", dev = true },
     "gbprod/none-ls-luacheck.nvim",
   },
   config = function()
@@ -18,13 +18,15 @@ return {
     -- configure null_ls
     null_ls.setup {
       -- add package.json as identifier for root (for typescript monorepos)
+      debug = true,
       root_dir = null_ls_utils.root_pattern(
         ".null-ls-root",
         "Makefile",
         ".git",
         "package.json",
         "selene.toml",
-        ".luacheck"
+        ".luacheck",
+        "ansible.cfg"
       ),
       -- setup formatters & linters
       sources = {
@@ -34,14 +36,37 @@ return {
         formatting.goimports_reviser,
         formatting.golines,
         formatting.clang_format,
-        formatting.prettierd,
+        formatting.biome.with {
+          condition = function(utils)
+            return utils.root_has_file { "biome.json", "biome.jsonc" }
+          end,
+        },
+        formatting.prettier.with {
+          condition = function(utils)
+            return utils.root_has_file { "package-lock.json" } and not utils.root_has_file { "biome.json", "biome.jsonc" }
+          end,
+        },
+        formatting.prettierd.with {
+          condition = function(utils)
+            return utils.root_has_file { "pnpm-lock.yaml" } and not utils.root_has_file { "biome.json", "biome.jsonc" }
+          end,
+        },
         formatting.markdownlint,
         -- code_actions
         code_actions.refactoring,
-        require "none-ls.code_actions.eslint_d",
+        -- require "none-ls.diagnostics.stylua",
+        require("none-ls.code_actions.eslint_d").with {
+          condition = function(utils)
+            return utils.root_has_file { "pnpm-lock.yaml" } and not utils.root_has_file { "biome.json", "biome.jsonc" }
+          end,
+        },
         -- diagnostics
-        diagnostics.ansiblelint,
-        diagnostics.golangci_lint,
+        diagnostics.ansiblelint.with {
+          condition = function(utils)
+            return utils.root_has_file { "ansible.cfg" }
+          end,
+        },
+        -- diagnostics.golangci_lint,
         diagnostics.markdownlint,
         diagnostics.yamllint,
         diagnostics.selene.with {
@@ -49,12 +74,26 @@ return {
             return utils.root_has_file { "selene.toml" }
           end,
         },
+        -- diagnostics.stylua.with {
+        --   condition = function(utils)
+        --     return utils.root_has_file { "stylua.toml", ".stylua.toml" }
+        --   end,
+        -- },
         require("none-ls-luacheck.diagnostics.luacheck").with {
           condition = function(utils)
-            return utils.root_has_file { ".luacheck" }
+            return utils.root_has_file { ".luacheckrc" }
           end,
         },
-        require "none-ls.diagnostics.eslint_d",
+        require("none-ls.diagnostics.eslint").with {
+          condition = function(utils)
+            return utils.root_has_file { "package-lock.json" }
+          end,
+        },
+        require("none-ls.diagnostics.eslint_d").with {
+          condition = function(utils)
+            return utils.root_has_file { "pnpm-lock.yaml" }
+          end,
+        },
       },
     }
   end,

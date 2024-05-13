@@ -248,15 +248,16 @@ local rust_analyzer = {
 }
 
 local servers = {
-  ansiblels = {
-    filetypes = { "yaml", "yaml.ansible" },
-  },
+  ansiblels = true,
   -- Also uses `shellcheck` and `explainshell`
   bashls = true,
   lua_ls = {
     Lua = {
       workspace = {
         checkThirdParty = false,
+      },
+      library = {
+        vim.env.VIMRUNTIME,
       },
       completion = {
         callSnippet = "Replace",
@@ -343,6 +344,8 @@ local servers = {
   cssls = true,
 
   astro = true,
+
+  biome = true,
 
   tsserver = {
     init_options = ts_util.init_options,
