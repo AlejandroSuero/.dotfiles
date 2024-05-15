@@ -1,27 +1,48 @@
 #!/usr/bin/env bash
 
 if [[ $# -eq 1 ]]; then
-    selected=$1
+  selected=$1
 else
-    selected=$(find "$HOME" "$HOME"/dev  "$HOME"/dev/github "$HOME"/dev/nvim_plugins "$HOME"/personal -mindepth 1 -maxdepth 1 -type d | fzf)
+  excluded_paths=( "$HOME/Music" "$HOME/Movies" "$HOME/Pictures" "$HOME/Library" "$HOME/Applications" "$HOME/Documents" "$HOME/Desktop" "$HOME/Public")
+
+  formatted_excluded=""
+  i=1
+
+  for excluded in "${excluded_paths[@]}"; do
+    if [ "$i" == 1 ]; then
+      formatted_excluded+="-path $excluded"
+    else
+      formatted_excluded+=" -o -path $excluded"
+    fi
+    i=$(( i+1 ))
+  done
+
+  included_paths=( "$HOME" "$HOME/dev"  "$HOME/dev/github" "$HOME/dev/nvim_plugins" "$HOME/personal" "$PWD" )
+
+  selected="$(find $(echo "${included_paths[@]}") -mindepth 1 -maxdepth 1 -type d -not \( $(echo "$formatted_excluded") \) | fzf)"
 fi
 
 if [[ -z $selected ]]; then
-    exit 0
+  exit 0
 fi
 
 selected_name=$(basename "$selected" | tr . _)
 tmux_running=$(pgrep tmux)
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s "$selected_name" -c "$selected"
-    exit 0
+  tmux new-session -s "$selected_name" -c "$selected"
+  exit 0
 fi
 
 if ! tmux has-session -t="$selected_name" 2> /dev/null; then
-    tmux new-session -ds "$selected_name" -c "$selected"
+  tmux new-session -ds "$selected_name" -c "$selected"
+  if [[ -n $TMUX ]]; then # only switch clients if inside tmux
+    tmux switch-client -t "$selected_name"
+    exit 0
+  else
+    tmux a
+    exit 0
+  fi
 fi
-
-tmux switch-client -t "$selected_name"
 
 # vi:ft=sh
