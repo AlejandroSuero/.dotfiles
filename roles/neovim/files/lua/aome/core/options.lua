@@ -5,6 +5,9 @@ local options = {
     guicursor = "",
     guifont = "*",
 
+    spell = false,
+    spelllang = "en_gb",
+
     background = "dark",
 
     cmdheight = 1,

@@ -240,6 +240,7 @@ function M.grep_prompt()
   require("telescope.builtin").grep_string {
     path_display = { "shorten" },
     search = vim.fn.input "Grep String > ",
+    cwd = vim.fn.expand "%:p:h",
   }
 end
 
@@ -424,7 +425,7 @@ function M.vim_options()
 end
 
 function M.todo()
-  vim.cmd("TodoTelescope")
+  vim.cmd "TodoTelescope"
 end
 
 return setmetatable({}, {

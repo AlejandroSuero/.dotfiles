@@ -17,5 +17,5 @@ return {
     }
   end,
   ft = { "lua" },
-  event = "VeryLazy",
+  event = { "BufReadPre", "BufNewFile" },
 }

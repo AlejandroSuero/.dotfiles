@@ -68,7 +68,9 @@ return {
           end,
         },
         -- diagnostics
-        diagnostics.codespell,
+        diagnostics.codespell.with {
+          filetypes = { "markdown", "text" },
+        },
         diagnostics.ansiblelint.with {
           condition = function(utils)
             return utils.root_has_file { "ansible.cfg" }

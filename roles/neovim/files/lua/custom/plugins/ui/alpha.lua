@@ -72,7 +72,7 @@ return {
       dashboard.button(
         "SPC ps",
         "  > Find Word",
-        "<cmd>Telescope live_grep<CR>"
+        "<cmd>lua require('aome.telescope').grep_prompt()<CR>"
       ),
       dashboard.button(
         "SPC epp",
@@ -82,6 +82,7 @@ return {
       dashboard.button("q", "  > Quit NVIM", "<cmd>qa<CR>"),
     }
 
+    ---@type string[]
     footer.val = {
       " ",
       info,
