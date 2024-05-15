@@ -17,7 +17,16 @@ else
     i=$(( i+1 ))
   done
 
-  included_paths=( "$HOME" "$HOME/dev"  "$HOME/dev/github" "$HOME/dev/nvim_plugins" "$HOME/personal" "$PWD" )
+  included=( "$HOME" "$HOME/dev"  "$HOME/dev/github" "$HOME/dev/nvim_plugins" "$HOME/personal")
+  included_paths=()
+
+  for include in "${included[@]}"; do
+    if [[ "$include" != "$PWD" ]]; then
+      included_paths+=("$include")
+    else
+      included_paths+=("$PWD")
+    fi
+  done
 
   selected="$(find $(echo "${included_paths[@]}") -mindepth 1 -maxdepth 1 -type d -not \( $(echo "$formatted_excluded") \) | fzf)"
 fi
