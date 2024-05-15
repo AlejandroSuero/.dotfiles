@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined_variable, unscoped_variables
 SHOULD_RELOAD_TELESCOPE = true
 local reloader = function()
   if SHOULD_RELOAD_TELESCOPE then
@@ -422,8 +423,8 @@ function M.vim_options()
   }
 end
 
-function M.cmdline()
-  require("telescope").extensions.cmdline.cmdline()
+function M.todo()
+  vim.cmd("TodoTelescope")
 end
 
 return setmetatable({}, {

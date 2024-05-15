@@ -1,3 +1,4 @@
+local highlights = require "rose-pine.plugins.toggleterm"
 return {
   "akinsho/toggleterm.nvim",
   cmd = { "ToggleTerm" },
@@ -5,6 +6,7 @@ return {
     { "<C-t>", "<cmd>ToggleTerm<CR>", desc = "[t]oggle [t]erminal" },
   },
   opts = {
+    highlights = highlights,
     open_mapping = [[<C-t>]],
     direction = "float",
     insert_mappings = false,

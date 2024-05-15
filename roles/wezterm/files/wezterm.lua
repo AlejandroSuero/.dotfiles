@@ -36,7 +36,7 @@ config.font_size = 10
 -- default is true, has more "native" look
 config.use_fancy_tab_bar = false
 
--- I don't like putting anything at the ege if I can help it.
+-- I don't like putting anything at the edge if I can help it.
 config.enable_scroll_bar = false
 
 config.window_padding = {

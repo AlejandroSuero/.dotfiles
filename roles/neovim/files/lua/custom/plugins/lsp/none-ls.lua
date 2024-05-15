@@ -43,35 +43,51 @@ return {
         },
         formatting.prettier.with {
           condition = function(utils)
-            return utils.root_has_file { "package-lock.json" } and not utils.root_has_file { "biome.json", "biome.jsonc" }
+            return utils.root_has_file { "package-lock.json" }
+              and not utils.root_has_file { "biome.json", "biome.jsonc" }
           end,
         },
         formatting.prettierd.with {
           condition = function(utils)
-            return utils.root_has_file { "pnpm-lock.yaml" } and not utils.root_has_file { "biome.json", "biome.jsonc" }
+            return utils.root_has_file { "pnpm-lock.yaml" }
+              and not utils.root_has_file { "biome.json", "biome.jsonc" }
           end,
         },
-        formatting.markdownlint,
+        diagnostics.markdownlint.with {
+          condition = function(utils)
+            return utils.root_has_file { ".markdownlint.json" }
+          end,
+        },
         -- code_actions
         code_actions.refactoring,
         -- require "none-ls.diagnostics.stylua",
         require("none-ls.code_actions.eslint_d").with {
           condition = function(utils)
-            return utils.root_has_file { "pnpm-lock.yaml" } and not utils.root_has_file { "biome.json", "biome.jsonc" }
+            return utils.root_has_file { "pnpm-lock.yaml" }
+              and not utils.root_has_file { "biome.json", "biome.jsonc" }
           end,
         },
         -- diagnostics
+        diagnostics.codespell,
         diagnostics.ansiblelint.with {
           condition = function(utils)
             return utils.root_has_file { "ansible.cfg" }
           end,
         },
         -- diagnostics.golangci_lint,
-        diagnostics.markdownlint,
-        diagnostics.yamllint,
+        diagnostics.markdownlint.with {
+          condition = function(utils)
+            return utils.root_has_file { ".markdownlint.json" }
+          end,
+        },
+        diagnostics.yamllint.with {
+          condition = function(utils)
+            return utils.root_has_file { ".yamllint.yml", ".yamllint.yaml" }
+          end,
+        },
         diagnostics.selene.with {
           condition = function(utils)
-            return utils.root_has_file { "selene.toml" }
+            return utils.root_has_file { "selene.toml", ".selene.toml" }
           end,
         },
         -- diagnostics.stylua.with {

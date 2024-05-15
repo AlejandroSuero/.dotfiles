@@ -4,21 +4,20 @@ return {
   --   config = true,
   --   opts = {
   --     theme = "rose-pine-moon",
-  --     open = true,
   --     copy = true,
+  --     open = true,
   --   },
-  --   -- dev = true,
+  --   event = "verylazy",
   --   keys = {
-  --     { "<leader>fz", "<cmd>Freeze<cr>", desc = "[f]ree[z]e file" },
+  --     { "<leader>fz", "<cmd>freeze<cr>", desc = "[f]ree[z]e file" },
   --     {
   --       "<leader>fz",
-  --       "<cmd>FreezeLine<cr>",
+  --       "<cmd>freezeline<cr>",
   --       desc = "[f]ree[z]e line",
   --       mode = "v",
   --     },
   --   },
   --   dev = true,
-  -- enable = false,
   -- },
   {
     "AlejandroSuero/freeze-code.nvim",

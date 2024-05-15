@@ -1,5 +1,6 @@
 return {
   "ellisonleao/glow.nvim",
+  dev = true,
   config = function()
     local glow = require "glow"
 
