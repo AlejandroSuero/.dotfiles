@@ -121,13 +121,11 @@ validateYaml() {
 
 check_nvmrc() {
   if [[ "$(command -v nvm)" == "" ]]; then
-    echo -e "${WARNING}${YELLOW}nvm not found${NC}"
+    echo -e "${WARNING}${YELLOW}nvm command not found${NC}"
   else
     if [[ -f "$PWD"/.nvmrc ]]; then
-      local nvmrc_version=$(cat "$PWD"/.nvmrc)
       echo -e "${INFO}${GREEN}nvmrc found${NC}"
       nvm use > /dev/null
-      echo -e "${INFO}${GREEN}using node version ${nvmrc_version}${NC}"
     fi
   fi
 }
