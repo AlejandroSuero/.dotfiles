@@ -118,16 +118,6 @@ telescope.setup {
     file_browser = {
       hijack_netrw = true,
     },
-    cmdline = {
-      picker = {
-        initial_mode = "insert",
-      },
-      mappings = {
-        complete = "<Tab>",
-        run_selection = "<C-CR>",
-        run_input = "<CR>",
-      },
-    },
   },
 }
 
