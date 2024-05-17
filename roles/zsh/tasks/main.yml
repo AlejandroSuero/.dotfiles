@@ -43,6 +43,12 @@
     dest: "{{ ansible_user_dir }}/.zshrc"
     mode: "0755"
 
+- name: ZSH | Copy .zshenv
+  ansible.builtin.copy:
+    src: .zshenv
+    dest: "{{ ansible_user_dir }}/.zshenv"
+    mode: "0755"
+
 - name: ZSH | Copy .zprofile
   ansible.builtin.copy:
     src: .zprofile
