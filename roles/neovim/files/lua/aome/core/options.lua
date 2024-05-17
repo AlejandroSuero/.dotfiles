@@ -107,7 +107,17 @@ end
 set_options(options)
 
 vim.opt.isfname:append "@-@"
-vim.opt.formatoptions:remove "o"
+
+-- Remove the 'o' option from formatoptions for all buffers
+vim.api.nvim_create_autocmd({ "BufEnter", "VimEnter" }, {
+  group = vim.api.nvim_create_augroup("aome-open-file", {}),
+  pattern = "*",
+  callback = function()
+    vim.opt.formatoptions:remove "o"
+    vim.opt_local.formatoptions:remove "o"
+    vim.opt_global.formatoptions:remove "o"
+  end,
+})
 
 -- add binaries installed by mason.nvim to path
 local is_windows = vim.loop.os_uname().version:match "Windows"
