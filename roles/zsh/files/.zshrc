@@ -8,3 +8,15 @@ if [ ! -d "${ZINIT_HOME}" ]; then
 fi
 
 source "${ZINIT_HOME}/zinit.zsh"
+
+printf "\n%s\n" "Loading zinit starship plugin ..."
+zinit ice as "command" from"gh-r" \
+  atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
+  atpull"%atclone" src"init.zsh"
+printf "\n%s\n" "Loading zinit starship ..."
+zinit light starship/starship
+
+if [ "$(command -v starship)" ]; then
+  printf "\n%s\n" "Loading starship ..."
+  eval "$(starship init zsh)"
+fi
