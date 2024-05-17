@@ -1,4 +1,4 @@
-local plugins_path = "~/.config/nvim/lua/aome/lazy.lua"
+local plugins_path = vim.fn.expand "~/.config/nvim/lua/aome/lazy.lua"
 
 local mappings = {
   i = { -- insert mode
@@ -67,12 +67,16 @@ local mappings = {
     ["<leader>sh"] = { "<C-w>s", "[s]plit [h]orizontally" },
     ["<leader>se"] = { "<C-w>=", "[s]plit [e]qual length" },
     ["<leader>sc"] = { "<cmd>close<CR>", "[s]plit [c]lose" },
+    ["<leader>s,"] = { "<c-w>5<", "[s]plit 5 left" },
+    ["<leader>s."] = { "<c-w>5>", "[s]plit 5 right" },
+    ["<leader>s+"] = { "<c-W>+", "[s]plit +top" },
+    ["<leader>s-"] = { "<c-W>-", "[s]plit -top" },
 
     -- Tab
     ["<leader>to"] = { "<cmd>tabnew %<CR>", "[t]ab [o]pen" },
     ["<leader>tc"] = { "<cmd>tabclose<CR>", "[t]ab [c]lose" },
     ["<leader>tn"] = { "<cmd>tabnext<CR>", "[t]ab [n]next" },
-    ["<leader>tp"] = { "<cmd>tabnext<CR>", "[t]ab [p]revious" },
+    ["<leader>tp"] = { "<cmd>tabprevious<CR>", "[t]ab [p]revious" },
 
     -- Utilities
     ["+"] = { "<C-a>", "Increment" },
@@ -86,7 +90,7 @@ local mappings = {
 
     ["<leader>so"] = {
       function()
-        vim.cmd "so"
+        vim.cmd "source %"
       end,
       "Sources current file",
     },
@@ -127,12 +131,6 @@ local mappings = {
     },
   },
   v = { -- visual mode
-    ["<leader>s"] = {
-      function()
-        vim.cmd "w"
-      end,
-      "Replace selected",
-    },
     ["J"] = { ":m '>+1<CR>gv=gv", "Moves code block up" },
     ["K"] = { ":m '<-2<CR>gv=gv", "Moves code block down" },
 
@@ -143,6 +141,22 @@ local mappings = {
     ["<leader>("] = {
       '"hy:s/<C-r>h/(<C-r>h)/',
       "Surrounds with (",
+    },
+    ["<leader>fm"] = {
+      function()
+        vim.lsp.buf.format {
+          filter = function(client)
+            --  only use null-ls for formatting instead of lsp server
+            return client.name == "null-ls"
+          end,
+          bufnr = 0,
+          range = {
+            ["start"] = { vim.fn.line ".", 0 },
+            ["end"] = { vim.fn.line "v", 0 },
+          },
+        }
+      end,
+      "[f]or[m]at in selected range",
     },
   },
   x = { -- x mode

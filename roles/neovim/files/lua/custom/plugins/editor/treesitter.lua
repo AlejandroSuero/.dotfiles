@@ -23,7 +23,7 @@ return {
       autotag = {
         enable = true,
         enable_rename = true,
-        enable_close = true,
+        enable_close = false,
         enable_close_on_slash = true,
       },
       ensure_installed = {
@@ -79,13 +79,13 @@ return {
     }
     local treesitter_parser_config =
       require("nvim-treesitter.parsers").get_parser_configs()
-    treesitter_parser_config = {
-      templ = {
-        install_info = {
-          url = "https://github.com/vrischmann/tree-sitter-templ.git",
-          files = { "src/parser.c", "src/scanner.c" },
-          branch = "master",
-        },
+
+    ---@diagnostic disable-next-line: inject-field
+    treesitter_parser_config.templ = {
+      install_info = {
+        url = "https://github.com/vrischmann/tree-sitter-templ.git",
+        files = { "src/parser.c", "src/scanner.c" },
+        branch = "master",
       },
     }
 

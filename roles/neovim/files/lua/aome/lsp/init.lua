@@ -4,6 +4,7 @@ if neodev then
     override = function(_, library)
       library.enabled = true
       library.plugins = true
+      library.dianostics = false
     end,
     lspconfig = true,
     pathStrict = true,
@@ -12,6 +13,11 @@ end
 
 local lspconfig = vim.F.npcall(require, "lspconfig")
 if not lspconfig then
+  return
+end
+
+local lsputils = vim.F.npcall(require, "lspconfig.util")
+if not lsputils then
   return
 end
 
@@ -253,16 +259,10 @@ local servers = {
   bashls = true,
   lua_ls = {
     Lua = {
-      workspace = {
-        checkThirdParty = false,
-      },
-      library = {
-        vim.env.VIMRUNTIME,
-      },
       completion = {
         callSnippet = "Replace",
       },
-      diagnostics = { globals = { "vim" } },
+      diagnostics = { enable = false },
     },
   },
 

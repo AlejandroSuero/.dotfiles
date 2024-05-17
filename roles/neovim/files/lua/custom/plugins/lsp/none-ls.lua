@@ -76,7 +76,11 @@ return {
             return utils.root_has_file { "ansible.cfg" }
           end,
         },
-        -- diagnostics.golangci_lint,
+        diagnostics.golangci_lint.with {
+          condition = function(utils)
+            return utils.root_has_file { ".golangci.yml", ".golangci.yaml" }
+          end,
+        },
         diagnostics.markdownlint.with {
           condition = function(utils)
             return utils.root_has_file { ".markdownlint.json" }

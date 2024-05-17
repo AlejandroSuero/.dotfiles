@@ -5,6 +5,8 @@ local options = {
     guicursor = "",
     guifont = "*",
 
+    shada = { "'10", "<0", "s10", "h" },
+
     spell = false,
     spelllang = "en_gb",
 
@@ -105,10 +107,12 @@ end
 set_options(options)
 
 vim.opt.isfname:append "@-@"
+vim.opt.formatoptions:remove "o"
 
 -- add binaries installed by mason.nvim to path
-local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
+local is_windows = vim.loop.os_uname().version:match "Windows"
+local sep = is_windows and "\\" or "/"
 vim.env.PATH = vim.env.PATH
   .. (is_windows and ";" or ":")
   .. vim.fn.stdpath "data"
-  .. "/mason/bin"
+  .. table.concat({ "mason", "bin" }, sep)
