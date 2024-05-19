@@ -189,7 +189,7 @@ alias gaa="git add ."
 alias gaA="git add -A"
 
 alias gf="git fetch"
-alias gfp="git fetch --all --prune"
+alias gfa="git fetch --all --prune"
 
 alias gpl="git pull"
 # ======================================
