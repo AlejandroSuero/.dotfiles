@@ -42,7 +42,7 @@ local mappings = {
             --  only use null-ls for formatting instead of lsp server
             return client.name == "null-ls"
           end,
-          bufnr = 0,
+          bufnr = vim.api.nvim_get_current_buf(),
         }
       end,
       "Formats current buffer if lsp available",
@@ -141,22 +141,6 @@ local mappings = {
     ["<leader>("] = {
       '"hy:s/<C-r>h/(<C-r>h)/',
       "Surrounds with (",
-    },
-    ["<leader>fm"] = {
-      function()
-        vim.lsp.buf.format {
-          filter = function(client)
-            --  only use null-ls for formatting instead of lsp server
-            return client.name == "null-ls"
-          end,
-          bufnr = 0,
-          range = {
-            ["start"] = { vim.fn.line ".", 0 },
-            ["end"] = { vim.fn.line "v", 0 },
-          },
-        }
-      end,
-      "[f]or[m]at in selected range",
     },
   },
   x = { -- x mode

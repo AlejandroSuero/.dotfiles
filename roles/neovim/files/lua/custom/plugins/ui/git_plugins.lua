@@ -102,7 +102,7 @@ return {
       "LazyGitFilterCurrentFile",
     },
     keys = {
-      { "<C-g>", "<cmd>LazyGit<CR>", desc = { "Open lazy[g]it" } },
+      { "<C-g>", "<cmd>LazyGit<CR>", desc = "Open lazy[g]it" },
     },
   },
 }

@@ -4,7 +4,7 @@ return {
     "nvim-tree/nvim-web-devicons",
   },
   event = { "VeryLazy" },
-  version = "*",
+  branch = "main",
   opts = {
     options = {
       mode = "tabs",
