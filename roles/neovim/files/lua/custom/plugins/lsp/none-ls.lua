@@ -32,9 +32,9 @@ return {
       sources = {
         -- formatting
         formatting.stylua,
-        formatting.gofumpt,
-        formatting.goimports_reviser,
-        formatting.golines,
+        -- formatting.gofumpt,
+        -- formatting.goimports_reviser,
+        -- formatting.golines,
         formatting.clang_format,
         formatting.biome.with {
           condition = function(utils)
