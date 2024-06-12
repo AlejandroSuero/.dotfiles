@@ -2,9 +2,9 @@
 ---Returns the lsp client attach to the workspace
 ---@return string " lsp_client" Lsp client in the format of " lsp_client"
 local show_lsp = function()
-  local lsp_client = vim.lsp.get_active_clients()[1].config.name
+  local lsp_client = vim.lsp.get_clients()[1].config.name
   if lsp_client == "null-ls" then
-    lsp_client = vim.lsp.get_active_clients()[2].config.name
+    lsp_client = vim.lsp.get_clients()[2].config.name
   end
   if
     string.find(vim.bo.ft, "javascript") or string.find(vim.bo.ft, "typescript")

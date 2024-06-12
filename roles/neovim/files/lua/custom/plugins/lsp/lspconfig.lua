@@ -1,11 +1,3 @@
-local organize_imports = function()
-  local params = {
-    command = "_typescript.organizeImports",
-    arguments = { vim.api.nvim_buf_get_name(0) },
-  }
-  vim.lsp.buf.execute_command(params)
-end
-
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
@@ -28,9 +20,14 @@ return {
         }
       end,
     },
+    { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
     {
-      "folke/neodev.nvim",
-      opts = {},
+      "folke/lazydev.nvim",
+      opts = {
+        library = {
+          "luvit-meta/library",
+        },
+      },
     },
 
     -- Useful status updates for LSP.

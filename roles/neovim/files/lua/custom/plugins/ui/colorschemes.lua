@@ -38,4 +38,11 @@ return {
     "tjdevries/colorbuddy.nvim",
     lazy = false,
   },
+  {
+    "AstroNvim/astrotheme",
+    lazy = false,
+    priority = 1000,
+    config = true,
+    opts = require(configs .. "astrotheme"),
+  },
 }

@@ -1,6 +1,6 @@
 return {
   "nvimtools/none-ls.nvim", -- configure formatters & linters
-  event = { "BufReadPre", "BufNewFile" },
+  event = "VeryLazy",
   dependencies = {
     { "nvimtools/none-ls-extras.nvim", dev = true },
     "gbprod/none-ls-luacheck.nvim",
@@ -35,6 +35,7 @@ return {
         -- formatting.gofumpt,
         -- formatting.goimports_reviser,
         -- formatting.golines,
+        formatting.gofmt,
         formatting.clang_format,
         formatting.biome.with {
           condition = function(utils)

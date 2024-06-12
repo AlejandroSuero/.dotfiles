@@ -27,10 +27,10 @@ local opts = {
   },
   ui = {
     icons = {
-      ft = "",
-      lazy = "󰂠",
-      loaded = "",
-      not_loaded = "",
+      ft = " ",
+      lazy = "󰂠 ",
+      loaded = " ",
+      not_loaded = " ",
     },
   },
   performance = {

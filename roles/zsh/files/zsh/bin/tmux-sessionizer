@@ -17,7 +17,7 @@ else
     i=$(( i+1 ))
   done
 
-  included=( "$HOME" "$HOME/dev"  "$HOME/dev/github" "$HOME/dev/nvim_plugins" "$HOME/personal")
+  included=( "$HOME" "$HOME/dev" "$HOME/dev/c_projects/"  "$HOME/dev/github" "$HOME/dev/nvim_plugins" "$HOME/personal")
   included_paths=()
 
   for include in "${included[@]}"; do

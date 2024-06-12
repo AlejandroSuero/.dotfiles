@@ -7,6 +7,11 @@ local mappings = {
   },
 }
 
+vim.opt.expandtab = false
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.opt.tabstop = 2
+
 require("aome.core.utils").map_keys(mappings, { noremap = true, silent = true })
 
 --- snippets

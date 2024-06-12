@@ -1,16 +1,3 @@
-local neodev = vim.F.npcall(require, "neodev")
-if neodev then
-  neodev.setup {
-    override = function(_, library)
-      library.enabled = true
-      library.plugins = true
-      library.dianostics = false
-    end,
-    lspconfig = true,
-    pathStrict = true,
-  }
-end
-
 local lspconfig = vim.F.npcall(require, "lspconfig")
 if not lspconfig then
   return
@@ -101,7 +88,7 @@ local custom_attach = function(client, bufnr)
     return
   end
 
-  local filetype = vim.api.nvim_buf_get_option(0, "filetype")
+  local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
 
   buf_inoremap {
     "<C-s>",
@@ -217,7 +204,7 @@ local custom_attach = function(client, bufnr)
   filetype_attach[filetype]()
 end
 
-local get_intelephense_license = function()
+local _get_intelephense_license = function()
   local f =
     assert(io.open(os.getenv "HOME" .. "/intelephense/license.txt", "rb"))
   local content = f:read "*a"
@@ -259,6 +246,10 @@ local servers = {
   bashls = true,
   lua_ls = {
     Lua = {
+      library = {
+        [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+        [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+      },
       completion = {
         callSnippet = "Replace",
       },
@@ -304,6 +295,7 @@ local servers = {
     },
     filetypes = {
       "c",
+      "cpp",
     },
   },
 

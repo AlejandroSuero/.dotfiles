@@ -42,6 +42,7 @@ local mappings = {
             --  only use null-ls for formatting instead of lsp server
             return client.name == "null-ls"
           end,
+          timeout_ms = 2000,
           bufnr = vim.api.nvim_get_current_buf(),
         }
       end,

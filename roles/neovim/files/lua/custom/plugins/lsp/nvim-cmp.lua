@@ -14,6 +14,7 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-buffer",
+    "folke/lazydev.nvim",
   },
   config = function()
     vim.opt.completeopt = "menu,menuone,noselect"
@@ -28,6 +29,8 @@ return {
 
     cmp.setup {
       sources = {
+        { name = "lazydev", group_index = 0 },
+        { name = "supermaven" },
         { name = "nvim_lsp" },
         { name = "path" },
         { name = "buffer" }, -- text within current buffer
@@ -38,16 +41,22 @@ return {
         end,
       },
       mapping = {
-        ["<C-p>"] = cmp.mapping.select_prev_item{ behavior = cmp.SelectBehavior.Select }, -- previous suggestion
-        ["<C-n>"] = cmp.mapping.select_next_item{ behavior = cmp.SelectBehavior.Select }, -- next suggestion
-        ["<C-y>"] = cmp.mapping (
+        ["<C-p>"] = cmp.mapping.select_prev_item {
+          behavior = cmp.SelectBehavior.Select,
+        }, -- previous suggestion
+        ["<C-n>"] = cmp.mapping.select_next_item {
+          behavior = cmp.SelectBehavior.Select,
+        }, -- next suggestion
+        ["<C-y>"] = cmp.mapping(
           cmp.mapping.confirm {
             behavior = cmp.ConfirmBehavior.Insert,
             select = true,
           },
           { "i", "c" }
-        )
+        ),
       },
     }
+
+    vim.api.nvim_set_hl(0, "CmpItemKindSupermaven", { fg = "#44bdff" })
   end,
 }

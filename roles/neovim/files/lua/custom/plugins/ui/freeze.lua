@@ -21,13 +21,34 @@ return {
   -- },
   {
     "AlejandroSuero/freeze-code.nvim",
-    event = { "VeryLazy", "BufReadPre", "BufNewFile" },
+    keys = {
+      {
+        "<leader>fz",
+        function()
+          require("freeze-code.utils.api").freeze()
+        end,
+        desc = "[f]ree[z]e file",
+      },
+      {
+        "<leader>fz",
+        function()
+          require("freeze-code.utils.api").freeze(vim.fn.line ".", vim.fn.line "v")
+        end,
+        desc = "[f]ree[z]e line",
+        mode = "v",
+      },
+      {
+        "<leader><leader>fz",
+        function()
+          require("freeze-code.utils.api").freeze_line()
+        end,
+        desc = "[f]ree[z]e current line",
+      },
+    },
     config = function()
       require("freeze-code").setup {
-        copy = true,
         freeze_config = {
-          theme = "rose-pine-moon",
-          config = "full",
+          config = "user",
         },
       }
     end,
