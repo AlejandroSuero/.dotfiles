@@ -2,7 +2,6 @@ return {
   "supermaven-inc/supermaven-nvim",
   -- event = "VeryLazy",
   lazy = false,
-  enable = false,
   config = function()
     require("supermaven-nvim").setup {
       keymaps = {
@@ -35,7 +34,7 @@ return {
         diff = true,
         fugitiveblame = true,
       },
-      -- silence_info = true,
+      log_level = "off",
     }
   end,
   dev = true,

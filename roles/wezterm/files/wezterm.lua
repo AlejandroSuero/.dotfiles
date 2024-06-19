@@ -31,7 +31,7 @@ config.font = wezterm.font_with_fallback {
   "nonicons",
 }
 
-config.font_size = 10
+config.font_size = 16
 
 -- default is true, has more "native" look
 config.use_fancy_tab_bar = false
@@ -49,6 +49,12 @@ config.window_padding = {
 config.window_decorations = "RESIZE"
 
 config.window_background_opacity = 0.8
+local os_target = wezterm.target_triple
+if string.match(os_target, "darwin") then
+  config.macos_window_background_blur = 40
+elseif string.match(os_target, "windows") then
+  config.win32_system_backdrop = "Acrylic"
+end
 
 config.inactive_pane_hsb = {
   saturation = 0.8,

@@ -44,5 +44,13 @@ return {
     priority = 1000,
     config = true,
     opts = require(configs .. "astrotheme"),
+    dev = true,
+  },
+  {
+    "scottmckendry/cyberdream.nvim",
+    lazy = false,
+    priority = 1000,
+    dev = true,
+    opts = require(configs .. "cyberdream"),
   },
 }

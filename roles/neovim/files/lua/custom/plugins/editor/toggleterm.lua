@@ -15,7 +15,7 @@ return {
       title_pos = "center",
       width = math.floor((vim.o.columns / 2) + 50),
       height = vim.o.lines - 10,
-      winblend = 10,
+      winblend = 0,
     },
   },
 }

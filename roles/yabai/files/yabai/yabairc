@@ -35,3 +35,4 @@ yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^DBngin$" manage=off
 yabai -m rule --add app="^Install$" manage=off
 yabai -m rule --add app="^App Store$" manage=off
+yabai -m rule --add app="^Chess$" manage=off

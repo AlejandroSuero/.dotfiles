@@ -1,5 +1,16 @@
 return {
   {
+    "AlejandroSuero/commitizen.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("commitizen").setup({
+        extra_types = { "fixup", "squash" },
+        debug = true,
+      })
+    end,
+    dev = true,
+  },
+  {
     "lewis6991/gitsigns.nvim",
     opts = {
       signs = {
