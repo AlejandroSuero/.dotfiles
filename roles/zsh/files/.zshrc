@@ -151,10 +151,10 @@ alias zshc="$EDITOR ~/.zshrc"
 [[ ! -x "$(command -v ranger)" ]] || alias rr="ranger"
 
 # ===== Directory aliases =======
-if [[ -x "$(command -v exa)" ]]; then
-  alias ls="exa --icons --classify"
-  alias ll="exa -l --icons"
-  alias la="exa -la --icons --classify"
+if [[ -x "$(command -v eza)" ]]; then
+  alias ls="eza --icons --classify"
+  alias ll="eza -l --icons"
+  alias la="eza -la --icons --classify"
 else
   alias ls="ls --color"
   alias ll="ls -l --color"
