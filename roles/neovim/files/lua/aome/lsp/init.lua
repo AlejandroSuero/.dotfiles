@@ -339,7 +339,7 @@ local servers = {
 
   biome = true,
 
-  tsserver = {
+  ts_ls = {
     init_options = ts_util.init_options,
     cmd = { "typescript-language-server", "--stdio" },
     filetypes = {

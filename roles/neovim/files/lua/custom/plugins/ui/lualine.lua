@@ -9,7 +9,7 @@ local show_lsp = function()
   if
     string.find(vim.bo.ft, "javascript") or string.find(vim.bo.ft, "typescript")
   then
-    lsp_client = "tsserver"
+    lsp_client = "ts_ls"
   end
   return string.format("%s %s", "", lsp_client)
 end
