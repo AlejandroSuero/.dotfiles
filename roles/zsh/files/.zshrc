@@ -194,7 +194,7 @@ alias gfa="git fetch --all --prune"
 alias gpl="git pull"
 # ======================================
 
-[[ ! -x "$(command -v fzf)" ]] || eval "$(fzf --zsh)"
+[[ ! -x "$(command -v fzf)" ]] || source <(fzf --zsh)
 [[ ! -x "$(command -v zoxide)" ]] || eval "$(zoxide init --cmd cd zsh)"
 [[ ! -x "$(command -v thefuck)" ]] || eval "$(thefuck --alias)"
 
