@@ -38,6 +38,7 @@ local servers = {
   "shellcheck",
   "templ",
   "intelephense",
+  "editorconfig-checker",
 }
 
 return servers

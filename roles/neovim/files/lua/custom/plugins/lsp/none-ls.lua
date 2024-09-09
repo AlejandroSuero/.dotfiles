@@ -4,6 +4,7 @@ return {
   dependencies = {
     { "nvimtools/none-ls-extras.nvim", dev = true },
     "gbprod/none-ls-luacheck.nvim",
+    "davidmh/cspell.nvim",
   },
   config = function()
     -- import null-ls plugin
@@ -14,6 +15,8 @@ return {
     local formatting = null_ls.builtins.formatting -- to setup formatters
     local diagnostics = null_ls.builtins.diagnostics -- to setup linters
     local code_actions = null_ls.builtins.code_actions
+
+    local cspell = require "cspell"
 
     -- configure null_ls
     null_ls.setup {
@@ -59,6 +62,8 @@ return {
             return utils.root_has_file { ".markdownlint.json" }
           end,
         },
+        diagnostics.editorconfig_checker,
+        cspell.diagnostics,
         -- code_actions
         code_actions.refactoring,
         -- require "none-ls.diagnostics.stylua",
