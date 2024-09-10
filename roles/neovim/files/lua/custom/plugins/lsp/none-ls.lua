@@ -62,8 +62,6 @@ return {
             return utils.root_has_file { ".markdownlint.json" }
           end,
         },
-        diagnostics.editorconfig_checker,
-        cspell.diagnostics,
         -- code_actions
         code_actions.refactoring,
         -- require "none-ls.diagnostics.stylua",
@@ -74,6 +72,12 @@ return {
           end,
         },
         -- diagnostics
+        diagnostics.editorconfig_checker,
+        cspell.diagnostics.with {
+          condition = function(utils)
+            return utils.root_has_file { "cspell.json", ".cspell.json" }
+          end,
+        },
         diagnostics.codespell.with {
           filetypes = { "markdown", "text" },
         },
