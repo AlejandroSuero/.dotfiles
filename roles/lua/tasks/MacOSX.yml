@@ -1,8 +1,41 @@
 ---
+- name: Lua | Install LUA
+  block:
+    - name: Lua | Install lua-5.1
+      ansible.builtin.get_url:
+        url: https://www.lua.org/ftp/lua-5.1.tar.gz
+        dest: /tmp/lua-5.1.tar.gz
+        mode: "0755"
+        force: true
+      notify:
+        - Cleanup lua downloaded tar
+
+    - name: Lua | Extract lua tar file
+      ansible.builtin.unarchive:
+        src: /tmp/lua-5.1.tar.gz
+        dest: /tmp
+        remote_src: true
+
+    - name: Lua | Install lua
+      ansivle.builtin.make:
+        chdir: /tmp/lua-5.1/
+        target: macosx
+
+    - name: Lua | Install lua install
+      ansible.builtin.make:
+        chdir: /tmp/lua-5.1/
+        target: install
+      become: true
+
+    - name: Lua | Ensure clean lua installation
+      ansible.builtin.file:
+        path: /tmp/lua-5.1/
+        state: absent
+      become: true
+
 - name: Lua | {{ ansible_distribution }}
   community.general.homebrew:
     name:
-      - lua
       - luarocks
       - luajit
     state: present
@@ -13,11 +46,10 @@
   changed_when: false
   check_mode: false
 
-- name: Lua | luarocks install vusted
+- name: Lua | luarocks install dependencies
   ansible.builtin.command:
     cmd: luarocks --lua-version=5.1 install {{ item }}
   loop:
     - vusted
-    - luacheck
-    - rest.nvim
+    - plenary.nvim
   changed_when: false
