@@ -17,6 +17,7 @@
       - wget
       - telnet
       - tldr
+      - gpg
     state: present
 
 - name: System | Casks | {{ ansible_distribution }}
