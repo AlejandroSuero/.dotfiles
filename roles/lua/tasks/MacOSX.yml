@@ -17,12 +17,12 @@
         remote_src: true
 
     - name: Lua | Install lua
-      ansivle.builtin.make:
+      community.general.make:
         chdir: /tmp/lua-5.1/
         target: macosx
 
     - name: Lua | Install lua install
-      ansible.builtin.make:
+      community.general.make:
         chdir: /tmp/lua-5.1/
         target: install
       become: true
