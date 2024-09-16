@@ -257,6 +257,10 @@ local servers = {
     },
   },
 
+  csharp_ls = true,
+
+  phpactor = true,
+
   tailwindcss = true,
 
   pyright = true,
