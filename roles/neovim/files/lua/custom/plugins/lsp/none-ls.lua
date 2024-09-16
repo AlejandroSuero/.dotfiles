@@ -47,16 +47,18 @@ return {
         },
         formatting.prettier.with {
           condition = function(utils)
-            return utils.root_has_file { "package-lock.json" }
+            return utils.root_has_file { "package-lock.json", "pnpm-lock.yaml" }
               and not utils.root_has_file { "biome.json", "biome.jsonc" }
           end,
         },
         formatting.prettierd.with {
           condition = function(utils)
-            return utils.root_has_file { "pnpm-lock.yaml" }
+            return utils.root_has_file { "pnpm-lock.yaml", "package-lock.json" }
               and not utils.root_has_file { "biome.json", "biome.jsonc" }
           end,
         },
+        formatting.phpcsfixer,
+
         diagnostics.markdownlint.with {
           condition = function(utils)
             return utils.root_has_file { ".markdownlint.json" }
@@ -108,27 +110,32 @@ return {
         },
         diagnostics.selene.with {
           condition = function(utils)
-            return utils.root_has_file { "selene.toml", ".selene.toml" }
+            return utils.root_has_file { "selene.toml", ".selene.toml" } and not utils.root_has_file { ".luacheckrc" }
           end,
         },
-        -- diagnostics.stylua.with {
-        --   condition = function(utils)
-        --     return utils.root_has_file { "stylua.toml", ".stylua.toml" }
-        --   end,
-        -- },
         require("none-ls-luacheck.diagnostics.luacheck").with {
           condition = function(utils)
-            return utils.root_has_file { ".luacheckrc" }
-          end,
-        },
-        require("none-ls.diagnostics.eslint").with {
-          condition = function(utils)
-            return utils.root_has_file { "package-lock.json" }
+            return utils.root_has_file { ".luacheckrc" } and not utils.root_has_file { "selene.toml", ".selene.toml" }
           end,
         },
         require("none-ls.diagnostics.eslint_d").with {
+          filetypes = {
+            "javascript",
+            "typescript",
+            "javascriptreact",
+            "typescriptreact",
+            "astro",
+          },
           condition = function(utils)
-            return utils.root_has_file { "pnpm-lock.yaml" }
+            return utils.root_has_file {
+              ".eslintrc.js",
+              ".eslintrc.cjs",
+              ".eslintrc.json",
+              "eslint.config.js",
+              "eslint.config.cjs",
+              "eslint.config.json",
+              "eslint.config.cjs",
+            }
           end,
         },
       },

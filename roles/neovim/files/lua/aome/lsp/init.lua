@@ -343,6 +343,8 @@ local servers = {
 
   biome = true,
 
+  eslint = true,
+
   ts_ls = {
     init_options = ts_util.init_options,
     cmd = { "typescript-language-server", "--stdio" },
