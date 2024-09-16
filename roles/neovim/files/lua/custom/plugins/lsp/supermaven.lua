@@ -13,18 +13,16 @@ return {
         suggestion_group = "NonText",
       },
       condition = function()
-        return vim.fn.expand "%:t:r" == "api"
+        local filename = vim.fn.expand "%:t:r"
+        local ignored_filanames = { "local", "private", "cache" }
+        for _, ignored in ipairs(ignored_filanames) do
+          if string.find(filename, ignored) then
+            return true
+          end
+        end
       end,
       dot_repeat = true,
       ignore_filetypes = {
-        "help",
-        "man",
-        "text",
-        "gitrebase",
-        "gitstatus",
-        "diff",
-        "fugitiveblame",
-        "alpha",
         alpha = true,
         man = true,
         help = true,
