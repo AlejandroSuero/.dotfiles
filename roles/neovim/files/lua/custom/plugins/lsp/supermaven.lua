@@ -14,7 +14,7 @@ return {
       },
       condition = function()
         local filename = vim.fn.expand "%:t:r"
-        local ignored_filanames = { "local", "private", "cache" }
+        local ignored_filanames = { "local", "private", "cache", ".env" }
         for _, ignored in ipairs(ignored_filanames) do
           if string.find(filename, ignored) then
             return true
@@ -31,6 +31,7 @@ return {
         gitstatus = true,
         diff = true,
         fugitiveblame = true,
+        env = true,
       },
       log_level = "off",
     }
