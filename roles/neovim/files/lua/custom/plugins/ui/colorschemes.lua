@@ -53,4 +53,11 @@ return {
     dev = true,
     opts = require(configs .. "cyberdream"),
   },
+  {
+    "olivercederborg/poimandres.nvim",
+    lazy = false,
+    priority = 1000,
+    dev = true,
+    opts = require(configs .. "poimandres"),
+  },
 }
