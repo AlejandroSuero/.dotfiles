@@ -38,6 +38,19 @@ local get_date = function()
   return formatted_date
 end
 
+---Gets if the current file is in a ts server component
+---@return boolean is_ts_server_component
+local get_if_ts_server_component = function()
+  local path = vim.fn.expand "%:h"
+  local splitted_path = vim.split(path, "/")
+  for _, route in ipairs(splitted_path) do
+    if string.find(route, "[%[%]]") then
+      return true
+    end
+  end
+  return false
+end
+
 ---Gets the filename and if modified or not
 ---@param reverse boolean
 ---@return string filename_and_status - A modified or not status with the filename
@@ -50,6 +63,13 @@ local get_filename_and_status = function(reverse)
   end
 
   if reverse == true then
+    if vim.bo.ft:find "react" then
+      if get_if_ts_server_component() then
+        return " server component "
+      else
+        return " client component "
+      end
+    end
     return string.format("%s %s", file_status, filename)
   else
     return string.format("%s %s", filename, file_status)
@@ -123,7 +143,7 @@ return {
       inactive_winbar = {
         lualine_z = {
           function()
-            return get_filename_and_status(false)
+            return get_filename_and_status(true)
           end,
         },
       },

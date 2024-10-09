@@ -20,13 +20,15 @@ M.run = function()
 
   local _, lens = next(lenses)
 
-  local client_id = next(vim.lsp.buf_get_clients(bufnr))
+  local client_id = next(vim.lsp.get_clients { bufnr = 0 })
   local client = vim.lsp.get_client_by_id(client_id)
-  client.request("workspace/executeCommand", lens.command, function(...)
-    local result = vim.lsp.handlers["workspace/executeCommand"](...)
-    vim.lsp.codelens.refresh()
-    return result
-  end, bufnr)
+  if client ~= nil then
+    client.request("workspace/executeCommand", lens.command, function(...)
+      local result = vim.lsp.handlers["workspace/executeCommand"](...)
+      vim.lsp.codelens.refresh()
+      return result
+    end, bufnr)
+  end
 end
 
 local virtlines_enabled = true

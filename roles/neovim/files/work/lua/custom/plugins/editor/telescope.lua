@@ -9,10 +9,7 @@ return {
       build = "make",
     },
   },
-  lazy = true,
-  cmd = {
-    "Telescope",
-  },
+  lazy = false,
   config = function()
     require "aome.telescope.setup"
     require "aome.telescope.keys"

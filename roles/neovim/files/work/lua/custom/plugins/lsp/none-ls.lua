@@ -28,18 +28,12 @@ return {
         ".git",
         "package.json",
         "selene.toml",
-        ".luacheck",
-        "ansible.cfg"
+        ".luacheck"
       ),
       -- setup formatters & linters
       sources = {
         -- formatting
         formatting.stylua,
-        -- formatting.gofumpt,
-        -- formatting.goimports_reviser,
-        -- formatting.golines,
-        formatting.gofmt,
-        formatting.clang_format,
         formatting.biome.with {
           condition = function(utils)
             return utils.root_has_file { "biome.json", "biome.jsonc" }
@@ -86,14 +80,6 @@ return {
             }
           end,
         },
-        -- formatting.prettierd.with {
-        --   condition = function(utils)
-        --     return utils.root_has_file { "pnpm-lock.yaml", "package-lock.json" }
-        --       and not utils.root_has_file { "biome.json", "biome.jsonc" }
-        --   end,
-        -- },
-        formatting.phpcsfixer,
-
         diagnostics.markdownlint.with {
           condition = function(utils)
             return utils.root_has_file { ".markdownlint.json" }
@@ -106,7 +92,6 @@ return {
             return utils.root_has_file { "cspell.json", ".cspell.json" }
           end,
         },
-        -- require "none-ls.diagnostics.stylua",
         require("none-ls.code_actions.eslint_d").with {
           condition = function(utils)
             return utils.root_has_file { "pnpm-lock.yaml", "package-lock.json", "yarn.lock" }
@@ -123,16 +108,6 @@ return {
         diagnostics.codespell.with {
           filetypes = { "markdown", "text" },
         },
-        diagnostics.ansiblelint.with {
-          condition = function(utils)
-            return utils.root_has_file { "ansible.cfg" }
-          end,
-        },
-        diagnostics.golangci_lint.with {
-          condition = function(utils)
-            return utils.root_has_file { ".golangci.yml", ".golangci.yaml" }
-          end,
-        },
         diagnostics.markdownlint.with {
           condition = function(utils)
             return utils.root_has_file { ".markdownlint.json" }
@@ -147,12 +122,6 @@ return {
           condition = function(utils)
             return utils.root_has_file { "selene.toml", ".selene.toml" }
               and not utils.root_has_file { ".luacheckrc" }
-          end,
-        },
-        require("none-ls-luacheck.diagnostics.luacheck").with {
-          condition = function(utils)
-            return utils.root_has_file { ".luacheckrc" }
-              and not utils.root_has_file { "selene.toml", ".selene.toml" }
           end,
         },
         require("none-ls.diagnostics.eslint_d").with {

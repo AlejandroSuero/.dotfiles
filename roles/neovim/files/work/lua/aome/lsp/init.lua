@@ -153,8 +153,6 @@ local custom_attach = function(client, bufnr)
     "[w]orkspace [s]ymbols"
   )
 
-  vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
-
   -- Set autocommands conditional on server_capabilities
   if
     client.server_capabilities.documentHighlightProvider
@@ -196,20 +194,8 @@ local custom_attach = function(client, bufnr)
     end
   end
 
-  if filetype == "typescript" or filetype == "lua" then
-    client.server_capabilities.semanticTokensProvider = nil
-  end
-
   -- Attach any filetype specific options to the client
   filetype_attach[filetype]()
-end
-
-local _get_intelephense_license = function()
-  local f =
-    assert(io.open(os.getenv "HOME" .. "/intelephense/license.txt", "rb"))
-  local content = f:read "*a"
-  f:close()
-  return string.gsub(content, "%s+", "")
 end
 
 local updated_capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -228,22 +214,7 @@ updated_capabilities.textDocument.completion.completionItem.insertReplaceSupport
 
 updated_capabilities.textDocument.codeLens = { dynamicRegistration = false }
 
--- local rust_analyzer, rust_analyzer_cmd = nil, { "rustup", "run", "1.73", "rust-analyzer" }
-local rust_analyzer = {
-  cmd = { "rustup", "run", "nightly", "rust-analyzer" },
-  -- settings = {
-  --   ["rust-analyzer"] = {
-  --     checkOnSave = {
-  --       command = "clippy",
-  --     },
-  --   },
-  -- },
-}
-
 local servers = {
-  ansiblels = true,
-  -- Also uses `shellcheck` and `explainshell`
-  bashls = true,
   lua_ls = {
     Lua = {
       library = {
@@ -257,15 +228,14 @@ local servers = {
     },
   },
 
-  csharp_ls = true,
+  emmet_ls = true,
 
-  phpactor = true,
+  tailwindcss = {
+    on_attach = function(_, bufnr)
+      require("tailwindcss-colors").buf_attach(bufnr)
+    end,
+  },
 
-  tailwindcss = true,
-
-  pyright = true,
-
-  graphql = true,
   html = true,
   yamlls = {
     settings = {
@@ -284,59 +254,7 @@ local servers = {
     },
   },
 
-  cmake = (1 == vim.fn.executable "cmake-language-server"),
-
-  clangd = {
-    cmd = {
-      "clangd",
-      "--background-index",
-      "--suggest-missing-includes",
-      "--clang-tidy",
-      "--header-insertion=iwyu",
-    },
-    init_options = {
-      clangdFileStatus = true,
-    },
-    filetypes = {
-      "c",
-      "cpp",
-    },
-  },
-
-  svelte = true,
-
-  intelephense = true,
-  -- intelephense = {
-  --   init_options = {
-  --     licenceKey = get_intelephense_license(),
-  --   },
-  -- },
-
   htmx = true,
-  templ = true,
-  gopls = {
-    settings = {
-      gopls = {
-        codelenses = { test = true },
-        hints = inlays and {
-          assignVariableTypes = true,
-          compositeLiteralFields = true,
-          compositeLiteralTypes = true,
-          constantValues = true,
-          functionTypeParameters = true,
-          parameterNames = true,
-          rangeVariableTypes = true,
-        } or nil,
-      },
-    },
-
-    flags = {
-      debounce_text_changes = 200,
-    },
-  },
-
-  rust_analyzer = rust_analyzer,
-
   cssls = true,
 
   astro = true,
@@ -363,28 +281,23 @@ local servers = {
       ts_util.setup { auto_inlay_hints = false }
       ts_util.setup_client(client)
     end,
+    diagnostics = {
+      virtual_text = function()
+        for _, client in ipairs(vim.lsp.get_clients { bufnr = 0 }) do
+          if client.name == "eslint" then
+            return false
+          end
+        end
+        return true
+      end,
+    },
   },
 }
 
 -- Can remove later if not installed (TODO: enable for not linux)
-if vim.fn.executable "tree-sitter-grammar-lsp-linux" == 1 then
-  vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-    pattern = { "grammar.js", "*/corpus/*.txt" },
-    callback = function()
-      vim.lsp.start {
-        name = "tree-sitter-grammar-lsp",
-        cmd = { "tree-sitter-grammar-lsp-linux" },
-        root_dir = "/",
-        capabilities = updated_capabilities,
-        on_attach = custom_attach,
-      }
-    end,
-  })
-end
-
 require("mason").setup()
 require("mason-lspconfig").setup {
-  ensure_installed = { "lua_ls", "jsonls" },
+  ensure_installed = { "lua_ls", "jsonls", "eslint", "ts_ls", "tailwindcss" },
 }
 
 local setup_server = function(server, config)

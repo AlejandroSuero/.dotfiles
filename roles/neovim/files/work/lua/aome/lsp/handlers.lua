@@ -5,7 +5,7 @@ vim.lsp.handlers["textDocument/definition"] = function(_, result)
     return
   end
 
-  if vim.tbl_islist(result) then
+  if vim.islist(result) then
     vim.lsp.util.jump_to_location(result[1], "utf-8")
   else
     vim.lsp.util.jump_to_location(result, "utf-8")
@@ -15,7 +15,7 @@ end
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
     vim.lsp.with(vim.lsp.handlers["textDocument/publishDiagnostics"], {
       signs = {
-        severity = { min = vim.diagnostic.severity.WARNING },
+        severity = { min = vim.diagnostic.severity.WARN },
       },
       underline = {
         severity = { min = vim.diagnostic.severity.ERROR },
@@ -33,26 +33,10 @@ M.implementation = function()
     "textDocument/implementation",
     params,
     function(err, result, ctx, config)
-      local bufnr = ctx.bufnr
-      local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
-
-      -- In go code, I do not like to see any mocks for impls
-      if ft == "go" then
-        local new_result = vim.tbl_filter(function(v)
-          return not string.find(v.uri, "mock_")
-        end, result)
-
-        if #new_result > 0 then
-          result = new_result
-        end
-      end
-
       vim.lsp.handlers["textDocument/implementation"](err, result, ctx, config)
       vim.cmd [[normal! zz]]
     end
   )
 end
-
--- vim.lsp.codelens.display = require("gl.codelens").display
 
 return M

@@ -1,6 +1,5 @@
 return {
   "supermaven-inc/supermaven-nvim",
-  -- event = "VeryLazy",
   lazy = false,
   config = function()
     require("supermaven-nvim").setup {
@@ -12,16 +11,6 @@ return {
         cterm = vim.api.nvim_get_hl(0, { name = "NonText" }).cterm,
         suggestion_group = "NonText",
       },
-      condition = function()
-        local filename = vim.fn.expand "%:t:r"
-        local ignored_filanames = { "local", "private", "cache", ".env" }
-        for _, ignored in ipairs(ignored_filanames) do
-          if string.find(filename, ignored) then
-            return true
-          end
-        end
-      end,
-      dot_repeat = true,
       ignore_filetypes = {
         alpha = true,
         man = true,
@@ -36,5 +25,4 @@ return {
       log_level = "off",
     }
   end,
-  dev = true,
 }

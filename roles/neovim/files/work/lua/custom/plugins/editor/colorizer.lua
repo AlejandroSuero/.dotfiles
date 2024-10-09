@@ -1,27 +1,8 @@
 return {
-  "NvChad/nvim-colorizer.lua",
-  cmd = "ColorizerToggle",
-  keys = {
-    {
-      "<leader>ct",
-      "<cmd>ColorizerToggle<CR>",
-      desc = "[Colorizer] Toggle colorizer",
-    },
-  },
+  "themaxmarchuk/tailwindcss-colors.nvim",
+  event = { "BufReadPre *.{js,ts,jsx,tsx}", "BufNewFile *.{js,ts,jsx,tsx}" },
+  ft = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
   config = function()
-    local colorizer = require "colorizer"
-
-    colorizer.setup {
-      user_default_options = {
-        RRGGBBAA = true,
-        AARRGGBB = true,
-        tailwind = true,
-        rgb_fn = true,
-        hsl_fn = true,
-        css = true,
-        css_fn = true,
-        names = false,
-      },
-    }
+    require("tailwindcss-colors").setup()
   end,
 }
