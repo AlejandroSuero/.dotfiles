@@ -45,18 +45,53 @@ return {
             return utils.root_has_file { "biome.json", "biome.jsonc" }
           end,
         },
-        formatting.prettier.with {
-          condition = function(utils)
-            return utils.root_has_file { "package-lock.json", "pnpm-lock.yaml" }
-              and not utils.root_has_file { "biome.json", "biome.jsonc" }
-          end,
-        },
         formatting.prettierd.with {
           condition = function(utils)
-            return utils.root_has_file { "pnpm-lock.yaml", "package-lock.json" }
-              and not utils.root_has_file { "biome.json", "biome.jsonc" }
+            return utils.root_has_file {
+              ".prettierrc",
+              ".prettierrc.json",
+              ".prettierrc.yaml",
+              ".prettierrc.yml",
+              ".prettierrc.js",
+              ".prettierrc.cjs",
+              ".prettierrc.toml",
+              ".prettierrc.json5",
+              ".prettierrc.toml",
+              ".prettierrc.mjs",
+            } and not utils.root_has_file {
+              "biome.json",
+              "biome.jsonc",
+            }
           end,
         },
+        require("none-ls.formatting.eslint_d").with {
+          condition = function(utils)
+            return utils.root_has_file {
+              ".eslintrc.js",
+              ".eslintrc.cjs",
+              ".eslintrc.json",
+            } and not utils.root_has_file {
+              "biome.json",
+              "biome.jsonc",
+              ".prettierrc",
+              ".prettierrc.json",
+              ".prettierrc.yaml",
+              ".prettierrc.yml",
+              ".prettierrc.js",
+              ".prettierrc.cjs",
+              ".prettierrc.toml",
+              ".prettierrc.json5",
+              ".prettierrc.toml",
+              ".prettierrc.mjs",
+            }
+          end,
+        },
+        -- formatting.prettierd.with {
+        --   condition = function(utils)
+        --     return utils.root_has_file { "pnpm-lock.yaml", "package-lock.json" }
+        --       and not utils.root_has_file { "biome.json", "biome.jsonc" }
+        --   end,
+        -- },
         formatting.phpcsfixer,
 
         diagnostics.markdownlint.with {
@@ -74,7 +109,7 @@ return {
         -- require "none-ls.diagnostics.stylua",
         require("none-ls.code_actions.eslint_d").with {
           condition = function(utils)
-            return utils.root_has_file { "pnpm-lock.yaml" }
+            return utils.root_has_file { "pnpm-lock.yaml", "package-lock.json", "yarn.lock" }
               and not utils.root_has_file { "biome.json", "biome.jsonc" }
           end,
         },
@@ -110,12 +145,14 @@ return {
         },
         diagnostics.selene.with {
           condition = function(utils)
-            return utils.root_has_file { "selene.toml", ".selene.toml" } and not utils.root_has_file { ".luacheckrc" }
+            return utils.root_has_file { "selene.toml", ".selene.toml" }
+              and not utils.root_has_file { ".luacheckrc" }
           end,
         },
         require("none-ls-luacheck.diagnostics.luacheck").with {
           condition = function(utils)
-            return utils.root_has_file { ".luacheckrc" } and not utils.root_has_file { "selene.toml", ".selene.toml" }
+            return utils.root_has_file { ".luacheckrc" }
+              and not utils.root_has_file { "selene.toml", ".selene.toml" }
           end,
         },
         require("none-ls.diagnostics.eslint_d").with {
@@ -135,6 +172,9 @@ return {
               "eslint.config.cjs",
               "eslint.config.json",
               "eslint.config.cjs",
+            } and not utils.root_has_file {
+              "biome.json",
+              "biome.jsonc",
             }
           end,
         },
