@@ -192,6 +192,8 @@ alias gf="git fetch"
 alias gfa="git fetch --all --prune"
 
 alias gpl="git pull"
+# ======== Work Aliases ================
+alias wnvim='NVIM_APPNAME="nvim.work" nvim'
 # ======================================
 
 [[ ! -x "$(command -v fzf)" ]] || source <(fzf --zsh)
