@@ -1,0 +1,6 @@
+std="vim"
+
+exclude = ["roles/neovim/files/lua/aome/telescope/*.lua"]
+
+[rules]
+mixed_table = "allow"
