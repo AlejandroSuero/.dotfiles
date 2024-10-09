@@ -15,6 +15,17 @@ return {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-buffer",
     "folke/lazydev.nvim",
+    {
+      "Dynge/gitmoji.nvim",
+      opts = {
+        filetypes = { "gitcommit" },
+        completion = {
+          append_space = false,
+          complete_as = "emoji",
+        },
+      },
+      ft = "gitcommit",
+    },
   },
   config = function()
     vim.opt.completeopt = "menu,menuone,noselect"
@@ -30,6 +41,7 @@ return {
     cmp.setup {
       sources = {
         { name = "lazydev", group_index = 0 },
+        { name = "gitmoji" },
         { name = "supermaven" },
         { name = "nvim_lsp" },
         { name = "path" },
