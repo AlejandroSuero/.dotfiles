@@ -22,7 +22,7 @@ local telescope_mapper = require "aome.telescope.mappings"
 local handlers = require "aome.lsp.handlers"
 
 local ts_util = require "nvim-lsp-ts-utils"
-local inlays = require "aome.lsp.inlay"
+-- local inlays = require "aome.lsp.inlay"
 
 local custom_init = function(client)
   client.config.flags = client.config.flags or {}
@@ -34,8 +34,7 @@ local augroup_highlight =
 local augroup_codelens =
   vim.api.nvim_create_augroup("custom-lsp-codelens", { clear = true })
 
-local filetype_attach = setmetatable({
-  ocaml = function()
+local toggle_virtlines = function()
     -- Display type information
     autocmd_clear { group = augroup_codelens, buffer = 0 }
     autocmd {
@@ -51,7 +50,13 @@ local filetype_attach = setmetatable({
       require("aome.codelens").toggle_virtlines,
       { silent = true, desc = "[T]oggle [T]ypes", buffer = 0 }
     )
-  end,
+end
+
+local filetype_attach = setmetatable({
+  typescript = toggle_virtlines,
+  typescriptreact = toggle_virtlines,
+  javascript = toggle_virtlines,
+  javascriptreact = toggle_virtlines,
 
   rust = function()
     telescope_mapper("<space>wrs", "lsp_workspace_symbols", {
@@ -174,26 +179,6 @@ local custom_attach = function(client, bufnr)
   else
     autocmd_clear { group = augroup_highlight, buffer = bufnr }
   end
-
-  if false and client.server_capabilities.codeLensProvider then
-    if filetype ~= "elm" then
-      autocmd_clear { group = augroup_codelens, buffer = bufnr }
-      autocmd {
-        "BufEnter",
-        augroup_codelens,
-        vim.lsp.codelens.refresh,
-        bufnr,
-        once = true,
-      }
-      autocmd {
-        { "BufWritePost", "CursorHold" },
-        augroup_codelens,
-        vim.lsp.codelens.refresh,
-        bufnr,
-      }
-    end
-  end
-
   -- Attach any filetype specific options to the client
   filetype_attach[filetype]()
 end
@@ -294,7 +279,6 @@ local servers = {
   },
 }
 
--- Can remove later if not installed (TODO: enable for not linux)
 require("mason").setup()
 require("mason-lspconfig").setup {
   ensure_installed = { "lua_ls", "jsonls", "eslint", "ts_ls", "tailwindcss" },
