@@ -4,7 +4,6 @@ vault-password.txt
 
 roles/neovim/files/lazy-lock.json
 .DS_Store
-roles/neovim/files/lua/aome/core/aomerc.lua
 roles/karabiner/files/automatic_backups
 logs
 
@@ -13,3 +12,5 @@ pnpm-lock.yaml
 roles/tmux/files/plugins
 bun.lockb
 freeze.png
+roles/neovim/files/personal/lua/aome/core/aomerc.lua
+roles/neovim/files/work/lua/aome/core/aomerc.lua
