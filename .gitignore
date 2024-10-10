@@ -2,7 +2,8 @@
 vault-password.txt
 /callback_plugins/__pycache__
 
-roles/neovim/files/lazy-lock.json
+roles/neovim/files/personal/lazy-lock.json
+roles/neovim/files/work/lazy-lock.json
 .DS_Store
 roles/karabiner/files/automatic_backups
 logs
