@@ -52,9 +52,6 @@ local get_git_branches = function(opts)
   assert(opts ~= nil, "opts must be provided")
   local format = "%(HEAD)"
     .. "%(refname)"
-    .. "%(authorname)"
-    .. "%(upstream:lstrip=2)"
-    .. "%(committerdate:format-local:%Y/%m/%d %H:%M:%S)"
 
   local output = get_git_cmd_output({
     "for-each-ref",
@@ -79,9 +76,6 @@ local get_git_branches = function(opts)
     local entry = {
       head = fields[1],
       refname = unescape_single_quote(fields[2]),
-      authorname = unescape_single_quote(fields[3]),
-      upstream = unescape_single_quote(fields[4]),
-      committerdate = fields[5],
     }
     local prefix
     if vim.startswith(entry.refname, "refs/remotes/") then
@@ -139,13 +133,13 @@ local insert_feature_branch = function(feature, insert_end)
   end
 end
 
----@param type "jira"|"conventional"
+---@param type "Jira"|"conventional-commits"
 ---@param branch string
 local insert_commit_format = function(type, branch)
   local feature = vim.split(branch, "/")[2]
-  if type == "jira" then
+  if type == "Jira" then
     insert_feature_branch(string.format("[%s]", feature))
-  elseif type == "conventional" then
+  elseif type == "conventional-commits" then
     vim.ui.select({
       "feat",
       "fix",
@@ -172,7 +166,7 @@ local insert_commit_format = function(type, branch)
         insert_feature_branch(string.format("%s%s", choice, input), true)
       end)
     end)
-  else
+  elseif type == "none" then
     insert_feature_branch ""
   end
 end
