@@ -50,8 +50,7 @@ end
 ---@param opts? table
 local get_git_branches = function(opts)
   assert(opts ~= nil, "opts must be provided")
-  local format = "%(HEAD)"
-    .. "%(refname)"
+  local format = "%(HEAD)" .. "%(refname)"
 
   local output = get_git_cmd_output({
     "for-each-ref",
@@ -93,7 +92,14 @@ local get_git_branches = function(opts)
       entry.name = string.sub(entry.refname, string.len(prefix) + 1)
     end
 
-    if entry.name ~= nil and entry.name:find "feature/" then
+    if
+      entry.name ~= nil
+      and (
+        entry.name:find "feature/"
+        or entry.name:find "bugfix/"
+        or entry.name:find "develop"
+      )
+    then
       return entry
     else
       return nil
@@ -136,7 +142,12 @@ end
 ---@param type "Jira"|"conventional-commits"
 ---@param branch string
 local insert_commit_format = function(type, branch)
-  local feature = vim.split(branch, "/")[2]
+  local feature = ""
+  if branch == "develop" then
+    feature = branch
+  else
+    feature = vim.split(branch, "/")[2]
+  end
   if type == "Jira" then
     insert_feature_branch(string.format("[%s]", feature))
   elseif type == "conventional-commits" then
@@ -171,7 +182,11 @@ local insert_commit_format = function(type, branch)
   end
 end
 
-if current_branch.name:find "feature/" then
+if
+  current_branch.name:find "feature/"
+  or current_branch.name:find "bugfix/"
+  or current_branch.name:find "develop"
+then
   vim.ui.select({
     "Jira",
     "conventional-commits",

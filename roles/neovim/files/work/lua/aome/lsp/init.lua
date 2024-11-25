@@ -23,6 +23,7 @@ local handlers = require "aome.lsp.handlers"
 
 local ts_util = require "nvim-lsp-ts-utils"
 -- local inlays = require "aome.lsp.inlay"
+local codelens = require "aome.lsp.codelens"
 
 local custom_init = function(client)
   client.config.flags = client.config.flags or {}
@@ -40,14 +41,14 @@ local toggle_virtlines = function()
     autocmd {
       { "BufEnter", "BufWritePost", "CursorHold" },
       augroup_codelens,
-      require("aome.lsp.codelens").refresh_virtlines,
+      codelens.refresh_virtlines,
       0,
     }
 
     vim.keymap.set(
       "n",
       "<space>TT",
-      require("aome.codelens").toggle_virtlines,
+      codelens.toggle_virtlines,
       { silent = true, desc = "[T]oggle [T]ypes", buffer = 0 }
     )
 end
