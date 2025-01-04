@@ -1,99 +1,111 @@
 {
-    "global": { "show_in_menu_bar": false },
-    "profiles": [
+  "global": { "show_in_menu_bar": false },
+  "profiles": [
+    {
+      "complex_modifications": {
+        "rules": [
+          {
+            "manipulators": [
+              {
+                "description": "Open default browser with HYPER + b",
+                "from": {
+                  "key_code": "b",
+                  "modifiers": { "mandatory": ["command", "option", "shift", "control"] }
+                },
+                "to": { "shell_command": "open -b $DEFAULT_BROWSER" },
+                "type": "basic"
+              },
+              {
+                "description": "Open kitty terminal with HYPER + ENTER",
+                "from": {
+                  "key_code": "return_or_enter",
+                  "modifiers": { "mandatory": ["command", "option", "shift", "control"] }
+                },
+                "to": { "shell_command": "open -n -a ghostty.app" },
+                "type": "basic"
+              },
+              {
+                "description": "Restart yabai",
+                "from": {
+                  "key_code": "r",
+                  "modifiers": { "mandatory": ["command", "option", "shift", "control"] }
+                },
+                "to": { "shell_command": "yabai --restart-service" },
+                "type": "basic"
+              },
+              {
+                "description": "CAPS_LOCK to HYPER (SHIFT + CMD + OPTION + CTRL) or ESCAPE (if alone)",
+                "from": {
+                  "key_code": "caps_lock",
+                  "modifiers": { "optional": ["any"] }
+                },
+                "to": [
+                  {
+                    "key_code": "left_shift",
+                    "modifiers": ["left_command", "left_control", "left_option"]
+                  }
+                ],
+                "to_if_alone": [{ "key_code": "escape" }],
+                "type": "basic"
+              },
+              {
+                "description": "Open Screenshot.app with HYPER + p",
+                "from": {
+                  "key_code": "p",
+                  "modifiers": { "mandatory": ["command", "shift", "option", "control"] }
+                },
+                "to": [{ "shell_command": "open -a screenshot.app" }],
+                "type": "basic"
+              },
+              {
+                "description": "Avoid starting sysdiagnose with builtin",
+                "from": {
+                  "key_code": "comma",
+                  "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                },
+                "to": [],
+                "type": "basic"
+              },
+              {
+                "description": "Avoid starting sysdiagnose with builtin",
+                "from": {
+                  "key_code": "period",
+                  "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                },
+                "to": [],
+                "type": "basic"
+              },
+              {
+                "description": "Weird MacOs things",
+                "from": { "key_code": "grave_accent_and_tilde" },
+                "to": [{ "key_code": "non_us_backslash"}],
+                "type": "basic"
+              },
+              {
+                "description": "Weird MacOs things 1",
+                "from": { "key_code": "grave_accent_and_tilde", "modifiers": { "mandatory": ["shift"] }},
+                "to": [{ "key_code": "non_us_backslash", "modifiers": ["shift"] }],
+                "type": "basic"
+              }
+            ]
+          }
+        ]
+      },
+      "devices": [
         {
-            "complex_modifications": {
-                "rules": [
-                    {
-                        "manipulators": [
-                            {
-                                "description": "Open default browser with HYPER + b",
-                                "from": {
-                                    "key_code": "b",
-                                    "modifiers": { "mandatory": ["command", "option", "shift", "control"] }
-                                },
-                                "to": { "shell_command": "open -b $DEFAULT_BROWSER" },
-                                "type": "basic"
-                            },
-                            {
-                                "description": "Open kitty terminal with HYPER + ENTER",
-                                "from": {
-                                    "key_code": "return_or_enter",
-                                    "modifiers": { "mandatory": ["command", "option", "shift", "control"] }
-                                },
-                                "to": { "shell_command": "open -n -a kitty.app" },
-                                "type": "basic"
-                            },
-                            {
-                                "description": "Restart yabai",
-                                "from": {
-                                    "key_code": "r",
-                                    "modifiers": { "mandatory": ["command", "option", "shift", "control"] }
-                                },
-                                "to": { "shell_command": "yabai --restart-service" },
-                                "type": "basic"
-                            },
-                            {
-                                "description": "CAPS_LOCK to HYPER (SHIFT + CMD + OPTION + CTRL) or ESCAPE (if alone)",
-                                "from": {
-                                    "key_code": "caps_lock",
-                                    "modifiers": { "optional": ["any"] }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "left_shift",
-                                        "modifiers": ["left_command", "left_control", "left_option"]
-                                    }
-                                ],
-                                "to_if_alone": [{ "key_code": "escape" }],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "Open Screenshot.app with HYPER + p",
-                                "from": {
-                                    "key_code": "p",
-                                    "modifiers": { "mandatory": ["command", "shift", "option", "control"] }
-                                },
-                                "to": [{ "shell_command": "open -a screenshot.app" }],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "Avoid starting sysdiagnose with builtin",
-                                "from": {
-                                    "key_code": "comma",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
-                                },
-                                "to": [],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "Avoid starting sysdiagnose with builtin",
-                                "from": {
-                                    "key_code": "period",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
-                                },
-                                "to": [],
-                                "type": "basic"
-                            }
-                        ]
-                    }
-                ]
-            },
-            "devices": [
-                {
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "is_pointing_device": true,
-                        "product_id": 6985,
-                        "vendor_id": 6940
-                    },
-                    "ignore": false,
-                    "treat_as_built_in_keyboard": true
-                }
-            ],
-            "name": "aome",
-            "selected": true,
-            "virtual_hid_keyboard": { "keyboard_type_v2": "iso" }
+          "identifiers": {
+            "is_keyboard": true,
+            "is_pointing_device": true,
+            "product_id": 6985,
+            "vendor_id": 6940
+          },
+          "ignore": false,
+          "treat_as_built_in_keyboard": true
         }
-    ]
+      ],
+      "name": "aome",
+      "selected": true,
+      "virtual_hid_keyboard": { "keyboard_type_v2": "iso" }
+    }
+  ]
 }

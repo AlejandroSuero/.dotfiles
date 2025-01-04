@@ -26,6 +26,7 @@ local get_os_cmd_output = function(cmd, cwd)
   assert(cwd ~= nil, "cwd must be provided")
   local command = table.remove(cmd, 1)
   local stderr = {}
+---@diagnostic disable-next-line: missing-fields
   local stdout, ret = Job:new({
     command = command,
     args = cmd,
@@ -92,14 +93,7 @@ local get_git_branches = function(opts)
       entry.name = string.sub(entry.refname, string.len(prefix) + 1)
     end
 
-    if
-      entry.name ~= nil
-      and (
-        entry.name:find "feature/"
-        or entry.name:find "bugfix/"
-        or entry.name:find "develop"
-      )
-    then
+    if entry.name ~= nil then
       return entry
     else
       return nil
@@ -142,10 +136,8 @@ end
 ---@param type "Jira"|"conventional-commits"
 ---@param branch string
 local insert_commit_format = function(type, branch)
-  local feature = ""
-  if branch == "develop" then
-    feature = branch
-  else
+  local feature = branch
+  if branch:find "feature/" then
     feature = vim.split(branch, "/")[2]
   end
   if type == "Jira" then
@@ -183,9 +175,7 @@ local insert_commit_format = function(type, branch)
 end
 
 if
-  current_branch.name:find "feature/"
-  or current_branch.name:find "bugfix/"
-  or current_branch.name:find "develop"
+  current_branch.name ~= nil
 then
   vim.ui.select({
     "Jira",

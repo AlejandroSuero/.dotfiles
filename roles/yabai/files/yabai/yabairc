@@ -22,6 +22,9 @@ yabai -m config left_padding 10
 
 # change mouse focus to focussing window
 yabai -m config mouse_follows_focus on
+yabai -m config mouse_modifier alt
+yabai -m config mouse_action1 move
+yabai -m config mouse_action2 resize
 
 # Disabled apps
 yabai -m rule --add app="^.*Settings*$" manage=off
@@ -38,3 +41,6 @@ yabai -m rule --add app="^App Store$" manage=off
 yabai -m rule --add app="^Chess$" manage=off
 yabai -m rule --add app="^osu!$" manage=off
 yabai -m rule --add app="^iCUE$" manage=off
+yabai -m rule --add app="^League of Legends$" manage=off
+yabai -m rule --add app="^Riot Games$" manage=off
+yabai -m rule --add app="^Riot Client$" manage=off
