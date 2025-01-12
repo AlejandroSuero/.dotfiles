@@ -1,14 +1,3 @@
-# ======================================
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ ! -x "$(command -v starship)" ]]; then
-  if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-  fi
-fi
-
-
 if [[ -f "$XDG_CONFIG_HOME/zsh/.zsh_private" ]]; then
   source "$XDG_CONFIG_HOME/zsh/.zsh_private"
 fi
@@ -21,10 +10,11 @@ fi
 
 source "${ZINIT_HOME}/zinit.zsh"
 
-# ======================================
-# Load powerlevel10k theme
-zinit ice depth"1" # git clone depth
-[[ ! -x "$(command -v starship)" ]] && zinit light romkatv/powerlevel10k
+if [[ ! -x "$(command -v starship)" ]]; then
+  zinit light romkatv/powerlevel10k
+else
+  eval "$(starship init zsh)"
+fi
 
 # Load zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
@@ -35,8 +25,6 @@ zinit light Aloxaf/fzf-tab
 # Add snippets
 zinit snippet OMZP::sudo
 zinit snippet OMZP::aws
-zinit snippet OMZP::kubectl
-zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
 
 # Load completions
@@ -45,28 +33,6 @@ autoload -U +X compinit && compinit
 
 zinit cdreplay -q
 
-# ======================================
-# Load p10k prompt if it's installed
-if [[ ! -x "$(command -v starship)" ]]; then
-  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-else
-  eval "$(starship init zsh)"
-fi
-# ======================================
-
-# ======================================
-# Key bindings
-bindkey -v # Enable vi mode
-bindkey "^y" autosuggest-accept # Accept autosuggestion
-bindkey "^p" history-search-backward # Search history backward
-bindkey "^n" history-search-forward # Search history forward
-bindkey -s ^f "tmux-sessionizer\n"
-bindkey -s ^g "lazygit\n"
-bindkey -s ^b "_open_default_browser\n"
-bindkey -s ^e "ranger\n"
-# ======================================
-
-# ======================================
 # History
 setopt appendhistory
 setopt sharehistory
@@ -87,7 +53,6 @@ _fzf_comprun() {
   shift
 
   case "$command" in
-    cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
     export|unset) fzf --preview "eval 'echo $'{}"         "$@" ;;
     ssh)          fzf --preview 'dig {}'                   "$@" ;;
     *)            fzf --preview "bat -n --color=always --line-range :500 {}" "$@" ;;
