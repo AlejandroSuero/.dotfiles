@@ -7,57 +7,6 @@
           {
             "manipulators": [
               {
-                "description": "Open default browser with HYPER + b",
-                "from": {
-                  "key_code": "b",
-                  "modifiers": { "mandatory": ["command", "option", "shift", "control"] }
-                },
-                "to": { "shell_command": "open -b $DEFAULT_BROWSER" },
-                "type": "basic"
-              },
-              {
-                "description": "Open kitty terminal with HYPER + ENTER",
-                "from": {
-                  "key_code": "return_or_enter",
-                  "modifiers": { "mandatory": ["command", "option", "shift", "control"] }
-                },
-                "to": { "shell_command": "open -n -a ghostty.app" },
-                "type": "basic"
-              },
-              {
-                "description": "Restart yabai",
-                "from": {
-                  "key_code": "r",
-                  "modifiers": { "mandatory": ["command", "option", "shift", "control"] }
-                },
-                "to": { "shell_command": "yabai --restart-service" },
-                "type": "basic"
-              },
-              {
-                "description": "CAPS_LOCK to HYPER (SHIFT + CMD + OPTION + CTRL) or ESCAPE (if alone)",
-                "from": {
-                  "key_code": "caps_lock",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [
-                  {
-                    "key_code": "left_shift",
-                    "modifiers": ["left_command", "left_control", "left_option"]
-                  }
-                ],
-                "to_if_alone": [{ "key_code": "escape" }],
-                "type": "basic"
-              },
-              {
-                "description": "Open Screenshot.app with HYPER + p",
-                "from": {
-                  "key_code": "p",
-                  "modifiers": { "mandatory": ["command", "shift", "option", "control"] }
-                },
-                "to": [{ "shell_command": "open -a screenshot.app" }],
-                "type": "basic"
-              },
-              {
                 "description": "Avoid starting sysdiagnose with builtin",
                 "from": {
                   "key_code": "comma",
