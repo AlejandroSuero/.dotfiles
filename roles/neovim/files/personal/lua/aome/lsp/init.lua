@@ -265,6 +265,8 @@ local servers = {
 
   pyright = true,
 
+  ols = true,
+
   graphql = true,
   html = true,
   yamlls = {

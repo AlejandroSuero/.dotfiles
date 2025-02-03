@@ -41,9 +41,8 @@ return {
     cmp.setup {
       sources = {
         { name = "lazydev", group_index = 0 },
-        { name = "gitmoji" },
-        { name = "supermaven" },
         { name = "nvim_lsp" },
+        { name = "gitmoji" },
         { name = "path" },
         { name = "buffer" }, -- text within current buffer
       },
