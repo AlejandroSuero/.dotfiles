@@ -60,4 +60,10 @@ return {
     dev = true,
     opts = require(configs .. "poimandres"),
   },
+  {
+    "dgox16/oldworld.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = require(configs .. "oldworld"),
+  },
 }

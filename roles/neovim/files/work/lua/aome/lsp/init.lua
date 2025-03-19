@@ -36,21 +36,21 @@ local augroup_codelens =
   vim.api.nvim_create_augroup("custom-lsp-codelens", { clear = true })
 
 local toggle_virtlines = function()
-    -- Display type information
-    autocmd_clear { group = augroup_codelens, buffer = 0 }
-    autocmd {
-      { "BufEnter", "BufWritePost", "CursorHold" },
-      augroup_codelens,
-      codelens.refresh_virtlines,
-      0,
-    }
+  -- Display type information
+  autocmd_clear { group = augroup_codelens, buffer = 0 }
+  autocmd {
+    { "BufEnter", "BufWritePost", "CursorHold" },
+    augroup_codelens,
+    codelens.refresh_virtlines,
+    0,
+  }
 
-    vim.keymap.set(
-      "n",
-      "<space>TT",
-      codelens.toggle_virtlines,
-      { silent = true, desc = "[T]oggle [T]ypes", buffer = 0 }
-    )
+  vim.keymap.set(
+    "n",
+    "<space>TT",
+    codelens.toggle_virtlines,
+    { silent = true, desc = "[T]oggle [T]ypes", buffer = 0 }
+  )
 end
 
 local filetype_attach = setmetatable({
@@ -214,15 +214,38 @@ local servers = {
     },
   },
 
-  emmet_ls = true,
+  emmet_ls = {
+    filetypes = {
+      "typescriptreact",
+      "javascriptreact",
+      "html",
+      "astro",
+    },
+  },
 
   tailwindcss = {
     on_attach = function(_, bufnr)
       require("tailwindcss-colors").buf_attach(bufnr)
     end,
+    filetypes = {
+      "html",
+      "typescriptreact",
+      "javascriptreact",
+      "javascript.jsx",
+      "typescript.tsx",
+      "astro",
+    },
   },
 
-  html = true,
+  html = {
+    filetypes = {
+      "html",
+      "typescriptreact",
+      "javascriptreact",
+      "javascript.jsx",
+      "typescript.tsx",
+    },
+  },
   yamlls = {
     settings = {
       schemas = require("schemastore").yaml.schemas(),
@@ -240,14 +263,42 @@ local servers = {
     },
   },
 
-  htmx = true,
-  cssls = true,
+  htmx = { filetypes = { "html" } },
+  cssls = {
+    filetypes = {
+      "css",
+      "html",
+      "astro",
+    },
+  },
 
   astro = true,
 
-  biome = true,
+  biome = {
+    filetypes = {
+      "typescript",
+      "javascript",
+      "typescriptreact",
+      "javascriptreact",
+      "javascript.jsx",
+      "typescript.tsx",
+      "astro",
+    },
+  },
 
-  eslint = true,
+  eslint = {
+    filetypes = {
+      "typescript",
+      "javascript",
+      "typescriptreact",
+      "javascriptreact",
+      "javascript.jsx",
+      "typescript.tsx",
+      "astro",
+    },
+  },
+
+  gopls = true,
 
   ts_ls = {
     init_options = ts_util.init_options,
@@ -259,6 +310,7 @@ local servers = {
       "typescript",
       "typescriptreact",
       "typescript.tsx",
+      "astro",
     },
 
     on_attach = function(client)
@@ -282,7 +334,8 @@ local servers = {
 
 require("mason").setup()
 require("mason-lspconfig").setup {
-  ensure_installed = { "lua_ls", "jsonls", "eslint", "ts_ls", "tailwindcss" },
+  ensure_installed = { "lua_ls", "jsonls", "eslint", "ts_ls", "tailwindcss", "gopls" },
+  automatic_installation = false
 }
 
 local setup_server = function(server, config)

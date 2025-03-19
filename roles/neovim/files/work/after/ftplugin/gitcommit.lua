@@ -162,11 +162,11 @@ local insert_commit_format = function(type, branch)
         prompt = "Enter the scope (empty for feature/<feature>)",
       }, function(input)
         if input == nil or input == "" then
-          input = string.format("(%s):", feature)
+          input = string.format("%s/", feature)
         else
-          input = string.format("(%s):", input)
+          input = string.format("%s/", input)
         end
-        insert_feature_branch(string.format("%s%s", choice, input), true)
+        insert_feature_branch(string.format("%s%s:", input, choice), true)
       end)
     end)
   elseif type == "none" then
