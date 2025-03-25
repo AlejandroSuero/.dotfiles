@@ -10,12 +10,6 @@ fi
 
 source "${ZINIT_HOME}/zinit.zsh"
 
-if [[ ! -x "$(command -v starship)" ]]; then
-  zinit light romkatv/powerlevel10k
-else
-  eval "$(starship init zsh)"
-fi
-
 # Load zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions

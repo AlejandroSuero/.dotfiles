@@ -78,21 +78,3 @@ bindkey -s ^f "tmux-sessionizer\n"
 bindkey -s ^g "lazygit\n"
 bindkey -s ^b "_open_default_browser\n"
 bindkey -s ^e "ranger\n"
-# ======================================
-
-# ======================================
-# ======================================
-
-# ======================================
-# Key bindings
-bindkey -v # Enable vi mode
-bindkey "^y" autosuggest-accept # Accept autosuggestion
-bindkey "^p" history-search-backward # Search history backward
-bindkey "^n" history-search-forward # Search history forward
-bindkey -s ^f "tmux-sessionizer\n"
-bindkey -s ^g "lazygit\n"
-bindkey -s ^b "_open_default_browser\n"
-bindkey -s ^e "ranger\n"
-# ======================================
-
-# ======================================
