@@ -10,6 +10,12 @@ fi
 
 source "${ZINIT_HOME}/zinit.zsh"
 
+if [[ ! -x "$(command -v starship)" ]]; then
+  zinit light romkatv/powerlevel10k
+else
+  eval "$(starship init zsh)"
+fi
+
 # Load zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
@@ -18,12 +24,7 @@ zinit light Aloxaf/fzf-tab
 
 # Add snippets
 zinit snippet OMZP::sudo
-zinit snippet OMZP::aws
 zinit snippet OMZP::command-not-found
-
-# Load completions
-autoload -U +X bashcompinit && bashcompinit
-autoload -U +X compinit && compinit
 
 zinit cdreplay -q
 
