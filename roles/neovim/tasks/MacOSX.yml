@@ -61,7 +61,7 @@
   block:
     - name: Neovim | Download Latest Version JSON
       ansible.builtin.uri:
-        url: https://api.github.com/repos/neovim/neovim/releases/latest
+        url: https://api.github.com/repos/neovim/neovim/releases/nightly
       register: neovim_latest_version_json
       changed_when: false
 
@@ -71,7 +71,8 @@
 
     - name: Neovim | Registering neovim Latest Version
       ansible.builtin.set_fact:
-        neovim_latest_version: "{{ neovim_latest_release.stdout | default('') }}"
+        neovim_latest_version: |
+          "{{ neovim_latest_release.stdout | default('') }}"
 
     - name: Neovim | Getting version information
       ansible.builtin.shell:
