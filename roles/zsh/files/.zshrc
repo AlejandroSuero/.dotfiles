@@ -152,6 +152,8 @@ alias gf="git fetch"
 alias gfa="git fetch --all --prune"
 
 alias gpl="git pull"
+
+alias gm="git merge --no-commit --no-ff"
 # ======== Work Aliases ================
 alias wnvim='NVIM_APPNAME="nvim.work" nvim'
 alias knvim='NVIM_APPNAME="nvim.kickstart" nvim'
