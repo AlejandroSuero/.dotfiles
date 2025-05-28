@@ -79,22 +79,6 @@ validateYaml() {
     python3 -c 'import yaml,sys;yaml.safe_load(sys.stdin)' < $1
 }
 
-check_nvmrc() {
-  if [[ "$(command -v nvm)" == "" ]]; then
-    echo -e "${WARNING}${YELLOW}nvm command not found${NC}"
-  else
-    if [[ -f "$PWD"/.nvmrc ]]; then
-      echo -e "${INFO}${GREEN}nvmrc found${NC}"
-      nvm use > /dev/null
-    fi
-  fi
-}
-
-cd() {
-  builtin cd "$@"
-  check_nvmrc
-}
-
 # ======= OS specific functions ========
 source "$XDG_CONFIG_HOME/zsh/os_functions.sh"
 # ======================================
@@ -160,7 +144,94 @@ alias knvim='NVIM_APPNAME="nvim.kickstart" nvim'
 # ======================================
 
 [[ ! -x "$(command -v fzf)" ]] || source <(fzf --zsh)
-[[ ! -x "$(command -v zoxide)" ]] || eval "$(zoxide init --cmd cd zsh)"
 [[ ! -x "$(command -v thefuck)" ]] || eval "$(thefuck --alias)"
+[[ ! -x "$(command -v zoxide)" ]] || eval "$(zoxide init zsh)"
 
-[[ ! -f "$PWD/.nvmrc" ]] || check_nvmrc
+# --- NVMRC Auto Check Start ---
+# Automatically check for .nvmrc file on directory change and run nvm use.
+INSTALL_MARKER="# NVMRC_AUTOCHECK_INSTALL_MARKER_V1" # Keep this marker for identification
+
+# Define colors and symbols (only if not already defined or customize as needed)
+if [ -z "$RED" ]; then export RED='[00;31m'; fi
+if [ -z "$YELLOW" ]; then export YELLOW='[00;33m'; fi
+if [ -z "$GREEN" ]; then export GREEN='[00;32m'; fi
+if [ -z "$NC" ]; then export NC='[0m'; fi # No Color
+WARNING="${RED}🚨${NC}"
+CHECK_MARK="${GREEN}✔${NC}"
+
+check_nvmrc() {
+  # Check if nvm command exists
+  if ! command -v nvm &> /dev/null; then
+    # Only print warning if function is called interactively (e.g. not during shell startup)
+    # Check for Zsh interactive shell: [[ -o INTERACTIVE ]]
+    # Check for Bash interactive shell: [[ $- == *i* ]]
+    if { [ -n "$ZSH_VERSION" ] && [[ -o INTERACTIVE ]]; } || { [ -n "$BASH_VERSION" ] && [[ $- == *i* ]]; }; then
+        echo -e "${WARNING}${YELLOW} nvm command not found. Cannot check for .nvmrc.${NC}"
+    fi
+    return 1 # Indicate nvm is not available
+  fi
+
+  # Check if .nvmrc exists in the current directory
+  # Using -e to check for file existence, including symlinks
+  if [[ -e "$PWD"/.nvmrc ]]; then
+    # Check if the current Node version matches .nvmrc already
+    # nvm current prints the version, nvm version-remote reads .nvmrc
+    local current_version=$(nvm current)
+    local required_version=$(nvm which --silent) # Use --silent to avoid extra output
+
+    # Compare versions only if nvm version-remote succeeded
+    if [ -n "$required_version" ] && [ "$current_version" != "$required_version" ]; then
+        echo -e "${CHECK_MARK}${GREEN} Found .nvmrc. Switching Node version...${NC}"
+        # Run nvm use. Redirect output only if necessary.
+        # Let nvm output its messages (e.g., version switching info, errors)
+        nvm use --silent
+    elif [ -n "$required_version" ]; then
+        # Optional: uncomment the line below if you want confirmation even if version matches
+        # echo -e "${CHECK_MARK}${GREEN}Found .nvmrc. Node version ($current_version) already matches.${NC}"
+        : # Do nothing, version already matches
+    else
+        echo -e "${WARNING}${YELLOW} Found .nvmrc, but could not determine required version.${NC}"
+    fi
+  fi
+}
+
+# Store the original cd command if not already done
+if [ -z "$__orig_cd_defined" ]; then
+  # Check if 'cd' is already an alias or function to avoid potential issues
+  if type cd | grep -q 'function' || type cd | grep -q 'alias'; then
+      echo -e "${YELLOW} Warning: 'cd' is already a function or alias. Overriding might cause issues.${NC}"
+      # Consider adding logic here to attempt to preserve existing overrides if necessary
+  fi
+  # For Bash/Zsh, 'builtin cd' ensures we call the actual cd command
+  export __orig_cd_defined=1
+fi
+__orig_cd() { builtin cd "$@"; }
+
+
+# Override the cd command
+cd() {
+  __orig_cd "$@" # Call the original cd command first
+  local cd_exit_status=$? # Capture exit status of cd
+  # Proceed only if cd was successful (exit status 0)
+  if [ $cd_exit_status -eq 0 ]; then
+      check_nvmrc # Then run the nvmrc check
+  fi
+  return $cd_exit_status # Return the original exit status of cd
+}
+
+# Add check_nvmrc to Zsh's chpwd_functions array if using Zsh
+# This is an alternative/complement to overriding cd, runs whenever directory changes.
+# It might be preferred in Zsh as it avoids potential conflicts with cd overrides.
+# Uncomment the following lines if you prefer this Zsh-specific method instead of/alongside cd override.
+# if [ -n "$ZSH_VERSION" ]; then
+#   if [[ -z "${chpwd_functions[(r)check_nvmrc]}" ]]; then
+#     chpwd_functions+=(check_nvmrc)
+#   fi
+# fi
+
+# Optional: Run check_nvmrc once when the shell starts
+check_nvmrc
+# Optional: Add `cd` as a zoxide alias
+# [[ ! -x "$(command -v zoxide)" ]] || eval "$(zoxide init --cmd cd zsh)"
+
+# --- NVMRC Auto Check End ---
