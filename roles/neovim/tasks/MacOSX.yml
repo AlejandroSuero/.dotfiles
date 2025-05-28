@@ -61,7 +61,7 @@
   block:
     - name: Neovim | Download Latest Version JSON
       ansible.builtin.uri:
-        url: https://api.github.com/repos/neovim/neovim/releases/tags/nightly
+        url: https://api.github.com/repos/neovim/neovim/releases/latest
       register: neovim_latest_version_json
       changed_when: false
 
