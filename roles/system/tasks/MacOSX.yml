@@ -1,17 +1,11 @@
 ---
-- name: System | Tap | {{ ansible_distribution }}
-  community.general.homebrew_tap:
-    name:
-      - homebrew/cask-versions
-    state: present
-
 - name: System | Formulaes | {{ ansible_distribution }}
   community.general.homebrew:
     name:
       - jq
       - xclip
       - gnu-tar
-      - exa
+      - eza
       - ffmpeg
       - imagemagick
       - wget
@@ -25,18 +19,9 @@
     name:
       - alt-tab
       - hiddenbar
-      - raycast
       - stats
       - time-out
-      - firefox
-      - android-platform-tools
-      - homebrew/cask-versions/firefox-developer-edition
-      - homebrew/cask-versions/google-chrome-dev
-      - homebrew/cask-versions/google-chrome-canary
-      - android-file-transfer
       - vlc
-      - figma
-      - keka
-      - kap
       - keepingyouawake
     state: present
+

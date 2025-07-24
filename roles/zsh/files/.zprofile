@@ -36,6 +36,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   PATH=/opt/homebrew/opt/gnu-tar/libexec/gnubin:$PATH
 fi
 
+autoload -U +X bashcompinit && bashcompinit
+autoload -U +X compinit && compinit
+
 export XDG_CONFIG_HOME="$HOME/.config"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
@@ -49,7 +52,6 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 source "$XDG_CONFIG_HOME/zsh/path_functions.sh"
 source "$XDG_CONFIG_HOME/zsh/path_vars.sh"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [[ ! -d "$HOME/fzf-git.sh" ]] || source ~/fzf-git.sh/fzf-git.sh
 

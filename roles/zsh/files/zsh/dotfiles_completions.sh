@@ -11,6 +11,4 @@ _complete_tags() {
     COMPREPLY=($(compgen -W "${tags_list}" -- "${cur_word}"))
 }
 
-# Register the completion function for the -t flag
-# This isn't perfect, as -t and --skip-tags show up in the completion list
-complete -F _complete_tags -o nospace -W "-t --skip-tags" dotfiles
+complete -F _complete_tags -o nospace -W "-t --skip-tags" complete
